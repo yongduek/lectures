@@ -1,4 +1,4 @@
-# lectures
+# future plan of lectures
 
 1. image processing and computer vision with python
 2. image generation and computer graphics with python
