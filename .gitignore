@@ -2,6 +2,10 @@
 bayesian/.ipynb_checkpoints/MontyHall-checkpoint.ipynb
 ipcv/.ipynb_checkpoints/doc_analysis_1-checkpoint.ipynb
 bayesian/.ipynb_checkpoints/EuroCoin+betaDistribtion-checkpoint.ipynb
+<<<<<<< HEAD
+.Rproj.user
+bayesian/.ipynb_checkpoints/EuroCoin-Mackay-checkpoint.ipynb
+=======
 bayesian/.ipynb_checkpoints/showcases.2011-checkpoint.csv
 bayesian/.ipynb_checkpoints/6.Decision Analysis-checkpoint.ipynb
 igcg/.ipynb_checkpoints/opengl-cube-checkpoint.ipynb
@@ -13,5 +17,11 @@ ipcv/bookdown/.Rproj.user/79F12156/console06/INDEX001
 ipcv/.ipynb_checkpoints/pixel_operations-checkpoint.ipynb
 ipcv/bookdown/.Rproj.user/79F12156/sources/per/t/1C742B77-contents
 ipcv/bookdown/.Rproj.user/79F12156/sources/per/t/1C742B77
+<<<<<<< HEAD
 ipcv/.ipynb_checkpoints/r_pca-checkpoint.py
 ipcv/__pycache__/r_pca.cpython-36.pyc
+=======
+>>>>>>> d7d6cc93dce1b55740adef03d8f41e7d7981e310
+mldm/.ipynb_checkpoints/pytorch-1-checkpoint.ipynb
+mldm/.ipynb_checkpoints/pytorch-2-checkpoint.ipynb
+>>>>>>> 9eea3fcb729bd73cd4d510571536199edda50525
