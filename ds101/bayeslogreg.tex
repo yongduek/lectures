@@ -1,0 +1,111 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{amssymb}
+
+\renewcommand{\baselinestretch}{1.2}
+
+\title{Bayesian, Logistic Regression, Naive Bayesian}
+\author{yongduek.seo@gmail.com}
+\date{September 2018}
+
+\begin{document}
+
+\maketitle
+
+Bayesian Formula:
+\begin{equation}
+    P(l | d) = \frac{P(d|l)P(l)}{P(d)} = \frac{P(d|l)P(l)}{\sum_i P(d|l_i) P(l_i)}
+\end{equation}
+
+\section{Two Classes}
+For a two class problem, the posterior probability for class $L_1$ given data $d$ can be written as 
+\begin{eqnarray} 
+    P(L_1 | d) 
+    & = & \frac{P(d | L_1) P(L_1) }{ P(d|L_1)P(L_1) + P(d|L_2)P(L_2)} \\
+    & = & \frac{1}{  1 + \frac{P(d|L_2)P(L_2)}{P(d|L_1)P(L_1)} } \\
+    & = & \frac{1 }{ 1 + \exp\left( -\ln \frac{P(d|L_1)P(L_1)}{P(d|L_2)P(L_2)} \right) }
+\end{eqnarray}
+Let's define the {\bf logistic sigmoid} function $\sigma(z)$ by
+\begin{equation}
+    \sigma(z) = \frac{1}{1 + \exp (-z) }
+\end{equation}
+The inverse of the logistic sigmoid, known as the {\bf logit} function is given by
+\begin{equation}
+    z = \ln \left(\frac{\sigma}{1-\sigma}\right)
+\end{equation}
+which represents the log of the ratio of probabilities $\ln(P(L_1|d)/P(L_2|d))$ for the two classes. This is known as the {\bf log odds}.
+
+Now, let's make a linear model for the log odds:
+\begin{equation}
+    z = \ln \frac{P(d|L_1)P(L_1)}{P(d|L_2)P(L_2)} = \sum_i w_i f_i + w_0 = \boldsymbol{w}^\top\boldsymbol{f}
+\end{equation}
+where $f_i$ is $i$-th feature value of the data $d$, $w_i$ and $w_0$ are parameters for linear modeling. This model is known as {\bf logistic regression} in the terminology of statistics.
+
+\subsection{Problem Solving}
+    For a data set $\{ d_n, y_n \}$ where $ y_n \in \{0, 1\} $, and $n=1,...,N$. The likelihood function can be written
+    \begin{equation}
+        P(y_1,...,y_n | w_0, ..., w_n) = \prod_{n=1}^N p_n^{y_n} (1-p_n)^{1-y_n}
+    \end{equation}
+    where $p_n = P(L_1|d_n)$.
+    
+    As usual, we can define an error function by taking the negative logarithm of the likelihood, which gives the {\bf cross-entropy} error function in the form
+    \begin{equation}
+        E(\boldsymbol{w})
+        = -\ln P(\boldsymbol{y} | \boldsymbol{w})
+        = -\sum_{n=1}^N \big\{ 
+                y_n \ln p_n + (1-y_n)\ln(1-p_n)
+                \big\}
+    \end{equation}
+    where $p_n = P(L_1|d_n) = \sigma(z_n)$ and 
+    $z_n = \boldsymbol{w}^\top \boldsymbol{f}$.
+    
+\section{Naive Bayes}
+{\bf Conditional independence} property:
+\begin{equation}
+    p(f_1, f_2 | L) = p(f_1 | L) p(f_2 | L)
+\end{equation}
+Then the posterior probability is given by
+\begin{align}
+    p(L_k | f_1, f_2) & = \frac{ p(f_1, f_2 | L_k) p(L_k) }{\sum_i p(f_1,f_2|L_i)p(L_i)}  \\
+      & \propto p(f_1, f_2 | L_k) p(L_k) \\
+      & \propto p(f_1 | L_k) p(f_2 | L_k) p(L_k) 
+\end{align}
+This is utilized for Naive Bayes Models.
+That is, the posterior distribution over the class variable $L$ under the conditional independence assumption is given by
+\begin{equation}
+    p(L_k | f_1, ..., f_n) = \frac{1}{Z} p(L_k) \prod_{i=1}^n p(f_i | L_k)
+\end{equation}
+where $Z$ is the {\bf evidence}
+\begin{equation}
+    Z = p(f_1, ..., f_n) = \sum_i p(L_i) p(f_1,...,f_n|L_i)
+\end{equation}
+which is a scaling factor dependent only on $f_1, ..., f_n$. Note that $Z$ is a constant if the values of the feature variables $f_i$ are known and fixed.
+
+\subsection{Problem solving}
+\begin{equation}
+    \hat L = \underset{k\in\{1,...,K\}}{\arg\max} \quad p(L_k) \prod_{i=1}^n p(f_i | L_k)
+\end{equation}
+The class probability $L_k$ can be estimated from the data population, and the feature likelihood $p(f|L_k) $ is modeled based on the characteristics of the features.
+
+\begin{itemize}
+    \item Gaussian naive Bayes
+        \begin{equation}
+            p(f = f | L_k) = \frac{1}{(2\pi\sigma^2)^{1/2}} \exp\left[ -\frac{ (f-\mu_k)^2}{2\sigma_k^2}\right]
+        \end{equation}
+        
+    \item Bernoulli naive Bayes
+        \begin{equation}
+            p(f_1,...,f_n) = \prod_{i=1}^n p^{f_i}_{ki} (1-p_{ki})^{(1-f_i)}
+        \end{equation}
+        where $f_i$ is a boolean variable expressing the occurrence or absence of the $i$-th feature from the feature vocabulary, and $p_{ki}$ is the probability of class $L_k$ generating the feature $f_i$. The probability $p_{ki}$ must be learned before inference.
+    \item Multinomial naive Bayes. 
+\end{itemize}
+
+\section*{Bibliography}
+\begin{verbatim}
+https://en.wikipedia.org/wiki/Naive_Bayes_classifier
+
+Bishop, Pattern Recognition and Machine Learning, Springer 2006.
+\end{verbatim}
+\end{document}
