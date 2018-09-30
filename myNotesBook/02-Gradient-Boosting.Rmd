@@ -79,7 +79,7 @@ library(ggplot2)
 knitr::kable(df, caption='data table')
 ```
 
-where row $i$ is an observation with one-dimensional feature vector $\mathbf x_i$ (bold $\mathbf x$) and target scalar value $y_i$. Matrix $\mathbf X = [\mathbf x_1, \mathbf x_2, ..., \mathbf x_n]$ holds all feature vectors and $\mathbf y$ is the entire rent vector $\mathbf y = [y_1, ..., y_n]$.  $F_m(\mathbf x_i) yields a predicted value but  $F_m(\mathbf X)$ yields a predicted target vector, one value for each $\mathbf x_i$.
+where row $i$ is an observation with one-dimensional feature vector $\mathbf x_i$ (bold $\mathbf x$) and target scalar value $y_i$. Matrix $\mathbf X = [\mathbf x_1, \mathbf x_2, ..., \mathbf x_n]$ holds all feature vectors and $\mathbf y$ is the entire rent vector $\mathbf y = [y_1, ..., y_n]$.  $F_m(\mathbf x_i)$ yields a predicted value but  $F_m(\mathbf X)$ yields a predicted target vector, one value for each $\mathbf x_i$.
 
 From this data, we'd like to build a GBM to predict rent price given square footage. To move towards $\mathbf y$ from any $\hat{\mathbf y}$, we need a direction vector. Let's start with $\mathbf y - \hat{\mathbf y}$ and then, in Heading in the right direction, we'll see how GBM works for $sign(\mathbf y - \hat{\mathbf y})$.
 
@@ -209,24 +209,3 @@ Both are good at reducing variance and provide higher stability…
 … but only Boosting tries to reduce bias. On the other hand, Bagging may solve the over-fitting problem, while Boosting can increase it.
 
 
-# Introduction {#intro}
-
-You can label chapter and section titles using `{#label}` after them, e.g., we can reference Chapter \@ref(intro). If you do not manually label them, there will be automatic labels anyway, e.g., Chapter \@ref(methods).
-
-Figures and tables with captions will be placed in `figure` and `table` environments, respectively.
-
-```{r nice-fig, fig.cap='Here is a nice figure!', out.width='80%', fig.asp=.75, fig.align='center'}
-par(mar = c(4, 4, .1, .1))
-plot(pressure, type = 'b', pch = 19)
-```
-
-Reference a figure by its code chunk label with the `fig:` prefix, e.g., see Figure \@ref(fig:nice-fig). Similarly, you can reference tables generated from `knitr::kable()`, e.g., see Table \@ref(tab:nice-tab).
-
-```{r nice-tab, tidy=FALSE}
-knitr::kable(
-  head(iris, 20), caption = 'Here is a nice table!',
-  booktabs = TRUE
-)
-```
-
-You can write citations, too. For example, we are using the **bookdown** package [@R-bookdown] in this sample book, which was built on top of R Markdown and **knitr** [@xie2015].

@@ -10,15 +10,23 @@ link-citations: yes
 description: "I want to make notes to share with collegues."
 ---
 
-# Prerequisites
+# Let's go
 
-Read linear algebra, probability and statistics, computer programming to do data science.
+The $99.9%$ of this notebooks' contents are simply copied from other sources. The copy right belongs to each source of them.
+
+
+Study
+
+- linear algebra
+- probability and statistics
+- computer programming
+- machine learning
+
+to do data science.
 
 
 
 ```{r include=FALSE}
 # automatically create a bib database for R packages
-knitr::write_bib(c(
-  .packages(), 'bookdown', 'knitr', 'rmarkdown'
-), 'packages.bib')
+knitr::write_bib(c(.packages(), 'bookdown', 'knitr', 'rmarkdown'), 'packages.bib')
 ```
