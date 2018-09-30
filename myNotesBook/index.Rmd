@@ -1,6 +1,6 @@
 --- 
 title: "Notes on Various Topics"
-author: "Yongduek Seo yndk@sogang.ac.kr"
+author: "서용덕 Yongduek Seo yndk@sogang.ac.kr"
 date: "`r Sys.Date()`"
 site: bookdown::bookdown_site
 documentclass: book
