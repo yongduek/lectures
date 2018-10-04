@@ -1,0 +1,87 @@
+--- 
+title: "A Practical Guide to Deep Learning with Pytorch"
+author: "서용덕 Yongduek Seo yndk@sogang.ac.kr"
+date: "`r Sys.Date()`"
+site: bookdown::bookdown_site
+documentclass: book
+bibliography: [book.bib, packages.bib]
+biblio-style: apalike
+link-citations: yes
+description: "Pytorch practice and deep learning."
+---
+
+# Prerequisites
+
+1. Install `pytorch`, `python 3.x`, `anaconda`
+1. `numpy` and `torch.Tensor`
+1. Simple linear regression 
+    - a line fitting for a data set of almost no noise: $y = w x + b$
+    - random number generation for training and test
+1. Simple two class classification
+    - random number generation: uniform and Gaussian
+    - feature and label - random data generation
+    
+1. Simple linear regression & classification with `DataLoader` & `DataSet`
+    - Using `torch.nn` for the two simple problems: 
+    - `class myNetwork(torch.nn)`
+    - `optim` package
+    
+1. Sobel Operater Learning with Convolutional Neural Network
+    - Single data example
+    - Sobel ?
+    - convoltuion ?
+    - single channel (gray scale) and multi-channel (RGB)
+    
+1. MNIST image classification
+    1. With Fully connected network
+        - `numpy.ravel()`
+    1. With Convolutional Neural Network
+
+1. Dogs and Cats with Transfer Learning
+    - ResNet, DensetNet, VggNet, etc
+    - Transfer Learning: Use a trained network for classification of not-trained sources.
+    
+1. Dogs Breed Classification
+    - Kaggle interface
+    - Transfer Learning
+  
+1. Direct Font Style Transfer
+    - Using `PIL` to draw characters on the image bitmap
+    - `numpy` as image data container
+
+
+
+This is a _sample_ book written in **Markdown**. You can use anything that Pandoc's Markdown supports, e.g., a math equation $a^2 + b^2 = c^2$.
+
+The **bookdown** package can be installed from CRAN or Github:
+
+```{r eval=FALSE}
+install.packages("bookdown")
+# or the development version
+# devtools::install_github("rstudio/bookdown")
+```
+
+Remember each Rmd file contains one and only one chapter, and a chapter is defined by the first-level heading `#`.
+
+To compile this example to PDF, you need XeLaTeX. You are recommended to install TinyTeX (which includes XeLaTeX): <https://yihui.name/tinytex/>.
+
+```{r include=FALSE}
+# automatically create a bib database for R packages
+knitr::write_bib(c(
+  .packages(), 'bookdown', 'knitr', 'rmarkdown'
+), 'packages.bib')
+```
+
+Python 언어를 사용하는 방법은 ... 쉽다.
+```{python}
+import sys
+x = 'Hello python'
+print (x.split(' '), '파이선 버전=', sys.version)
+```
+
+Pandas  패키지 사용하는 것도 간단하다.
+``` {python}
+import pandas as pd
+df = pd.read_csv ('../bayesian/showcases.2012.csv')
+print (df.head())
+```
