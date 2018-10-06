@@ -1,5 +1,7 @@
 # Data Loading & Pre-Processing
 
+Have a look at [`torch.utils.data`](https://pytorch.org/docs/stable/data.html) for a full listing of classes for data manipulation.
+
 - `torch.utils.data.DataSet`
 - `torch.utils.data.DataLoader`
 
@@ -40,9 +42,10 @@ Let's define a class that provides a standard access to the 100 data points $(x_
 from torch.utils.data import Dataset
 
 class myDataSet (Dataset):
-    def __init__ (self, x, y):
+    def __init__ (self, x, y, transform=None):
         self.x = x
         self.y = y
+        self.transform = transform
         self.size = x.shape[0]
     def __len__ (self): 
         return self.size
@@ -54,6 +57,11 @@ Then our custom dataset is creaed:
 ```{python}
 dataset = myDataSet (x, y)
 ```
+
+```{python}
+print ('> length of dataset is ', len(dataset))
+```
+
 As defined in the `__getitem__()`, we can access the data element one by one:
 ```{python}
 for i, (xi, yi) in enumerate (dataset):
@@ -64,7 +72,7 @@ Note that `x` is a matrix of shape `(100,1)`, and `xi` has shape `(1,)`. So is f
 
 
 
-## DataLoader
+## DataLoader to iterat through the dataset
 
 ```{python}
 from torch.utils.data import DataLoader
@@ -149,6 +157,7 @@ Q. Build an example model of two dimensional linear model: `y = w1 x1 + w2 x2 + 
 
 ## `nn.Sequential` & Learning
 
+NN  모델을 `torch.nn.Sequential`로 만드는 경우에는 파라메터 값들을 살펴보는 방법이 달라지게된다. 
 
 ```{python}
 model = torch.nn.Sequential(
@@ -157,11 +166,14 @@ model = torch.nn.Sequential(
 print ('myModel: ', model)
 ```
 
+이 모델의 파라메터 값들은 아래와 같이 `model.parameters()`를 사용해서 하나씩 접근하는 것이 가능하다.
+
 ```{python}
 for i, param in enumerate(model.parameters()):
   print (' model: {}-th = {}'.format(i, param))
 ```
 We see the actual values of the two parameters (the weight and bias) which were randomly assigned for the `Linear` module.
+
 
 ```{python}
 loss_ft = torch.nn.MSELoss (reduction='sum')
@@ -205,8 +217,80 @@ for param in model.parameters():
     print ('param.data.item(): ', param.data.item())
 ```
 
+## Transforms for data augmentation on sampling
+
+When our customized dataset `myDataset` is declared, the argument `transform=None` appeared but not explained. It is to apply a transform to the original data for data augmentation.
+
+Let's define three classes for data transformation
+```{python}
+class add_num (object):
+    """ add a constant number to the input data """
+    def __init__(self, num):
+        self.num = num
+    
+    def __call__(self, sample):
+        return sample + self.num
+#
+class add_2 (object):
+    """ simply add 2 to the object """
+    def __call__(self, sample):
+        return sample + 2
+#
+class ToTensor(object):
+    def __call__(self, sample):
+        return torch.from_numpy (sample)
+#
+```
+
+The derived class is now defined. It uses the provided transform when an element is accessed.
+```{python}
+from torch.utils.data import Dataset
+
+class myDataSet (Dataset):
+    def __init__ (self, x, y, transform=None):
+        self.x = x
+        self.y = y
+        self.transform = transform
+        self.size = x.shape[0]
+    def __len__ (self): 
+        return self.size
+    def __getitem__ (self, idx):
+        xi = x[idx]
+        yi = y[idx]
+        if self.transform:
+            yi = self.transform (yi)
+        return xi, yi
+```
+
+
+Now we make a dataset in which the composition of the transformations will be applied automatically when an element of the dataset is retrieved. 
+```{python}
+import torchvision
+composed = torchvision.transforms.Compose([add_num(3), add_2(), ToTensor()])
+dataset = myDataSet (x, y, composed)
+```
+* Don't forget to put `()` in `Compose`.
+
+The first `add(3)` adds 3 to each element of y, then `add_2()`, and finally `ToTensor()`. So the returned sample should be equal to `y + 3 + 2`. Let's make a visual of the two data sets.
+```{python}
+z = []
+for xi, zi in dataset:
+    z.append (zi.item())
+
+fig,ax = plt.subplots()
+ax.scatter (x, y, label='original')
+ax.scatter (x, z, label='transformed')
+ax.legend(loc='best')
+ax.set_title ('data original vs transformed')
+plt.show()
+```
 
 ## Conclusion
 
+There are some useful transformation already defined in `torchvision`.
+
+*  See the tutorial in [Data Loading and Processing Tutorial](https://pytorch.org/tutorials/beginner/data_loading_tutorial.html)
+
+* See `torchvision` official document for `transforms`. [torchvision.transforms](https://pytorch.org/docs/stable/torchvision/transforms.html)
 
 EOC.
