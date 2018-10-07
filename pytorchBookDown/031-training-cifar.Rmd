@@ -70,7 +70,7 @@ trainloader = torch.utils.data.DataLoader(trainset, batch_size=4,
 testset = torchvision.datasets.CIFAR10(root='./data', train=False,
                                        download=True, transform=transform)
 testloader = torch.utils.data.DataLoader(testset, batch_size=4,
-                                         shuffle=False, num_workers=2)
+                                         shuffle=False)
 
 classes = ('plane', 'car', 'bird', 'cat', 'deer', 'dog', 'frog', 'horse', 'ship', 'truck')
 ```
@@ -94,14 +94,17 @@ print ('> output of dataiter.next():\n',
     'images: ', type(images), images.shape, '\n', 'labels: ', type(labels), 'labels={}'.format(labels))
 
 # show images
-fig, axes = plt.subplots(1,4)
-for i, ax in enumerate(axes):
-    npimg = images[i].numpy().transpose((1,2,0)) / 2 + 0.5
-    ax.imshow(npimg)
-    ax.set_title (classes[labels[i]])
-    print ('type(img) = ', type(images[i]), images[i].shape, '-->', npimg.shape)
-
-plt.show()
+def imshow (images, labels):
+    fig, axes = plt.subplots(1,4)
+    for i, ax in enumerate(axes):
+        npimg = images[i].numpy().transpose((1,2,0)) / 2 + 0.5
+        ax.imshow(npimg)
+        ax.set_title (classes[labels[i]])
+        #print ('type(img) = ', type(images[i]), images[i].shape, '-->', npimg.shape)
+    
+    plt.show()
+#
+imshow (images, labels) ## display the minibatch
 ```
 
 * The mini-batch of images returned by `dataiter.next()` has 4 images.
@@ -116,6 +119,7 @@ plt.show()
 
 ```{python}
 import torch.nn as nn
+import torch.nn.functional as F
 
 class myNet(nn.Module):
     def __init__(self):
@@ -144,18 +148,117 @@ net = myNet()
 print (net)
 ```
 
-What is this netowrk? What are the modules used in `myNet`? They will be explained at the very late sections. For now, let's just remember that the input is a mini-batch of images of size `4x3x32x32` and the output is an integer number indicating the class label.
+What is this netowrk? What are the modules used in `myNet`? They will be explained at the very late sections. 
+For now, let's just remember that 
+
+- the input is a mini-batch of images of size `4x3x32x32` and 
+- the output is a vector of 10 integer numbers, each of which indicates a possibility of the image being the class label.
+
+* You may want to put `softmax` at the end of the network. Then you will have 10 probabilities. With python, we don't have to. Below, we use `torch.nn.CrossEntropyLoss` as the loss function, and it combines `nn.LogSoftmax` and `nn.NLLLoss` in one single class. 
+* See [`torch.nn.CrossEntropyLoss`](https://pytorch.org/docs/stable/nn.html#crossentropyloss), which says: 
+    - It is useful when training a classification problem with C classes. 
+    - The **input** is expected to contain scores for each class.
+    - The **input** has to be a Tensor of size `(minibatch,C)`
+    - This criterion expects a class index `(0 to C-1)` (an integer number) as the target for each value of a 1D tensor of size `minibatch`.
+
+
+Let's have a look at what the output of the model looks like.
+```{python}
+with torch.no_grad():
+    for data in trainloader:
+        images, labels = data
+        outputs = net (images)
+        print (outputs)
+        break
+```
+As we expected, the `outputs` is the tensor of size `4x10`. That is, 4 outputs, each of which is of dimension 10. Then the loss function `torch.nn.CrossEntropyLoss` will take care of the rest for learning the multi-label classification problem.
+
 
 ## Define a loss function
+
+```{python}
+import torch.optim as optim
+
+criterion = nn.CrossEntropyLoss()
+optimizer = optim.SGD(net.parameters(), lr=0.001, momentum=0.9)
+```
+
+* Here we use `nn.CrossEntropyLoss()`. What is this?
 
 
 ## Train the network on the training data
 
+for epoch in range(2):  # loop over the dataset multiple times
+
+```{python}
+def learning_loop (nepochs):
+    for epoch in range(nepochs):  # loop over the dataset multiple times
+        running_loss = 0.0
+        for i, data in enumerate(trainloader, 0):
+            # get the inputs
+            inputs, labels = data
+    
+            # zero the parameter gradients
+            optimizer.zero_grad()
+    
+            # forward + backward + optimize
+            outputs = net(inputs)
+            loss = criterion(outputs, labels)
+            loss.backward()
+            optimizer.step()
+    
+            # print statistics
+            running_loss += loss.item()
+            if i % 2000 == 1999:    # print every 2000 mini-batches
+                print('[%d, %5d] loss: %.3f' %
+                      (epoch + 1, i + 1, running_loss / 2000))
+                running_loss = 0.0
+    
+    print('Finished Training')
+#
+
+learning_loop (2) # 
+```
+
+
+
+
+
 
 ## Test the network on the test data
 
+We have trained the network for 2 passes over the training dataset. But we need to check if the network has learnt anything at all.
+
+We will check this by predicting the class label that the neural network outputs, and checking it against the ground-truth. If the prediction is correct, we add the sample to the list of correct predictions.
+
+Okay, first step. Let us display an image from the test set to get familiar.
+
+```{python}
+dataiter = iter(testloader)
+images, labels = dataiter.next()
+
+# print images
+imshow(images, labels)
+```
+Okay, now let us see what the neural network thinks these images above are:
+```{python}
+outputs = net(images)
+```
+The outputs are energies for the 10 classes. The higher the energy for a class, the more the network thinks that the image is of the particular class. So, let’s get the index of the highest energy:
+
+```{python}
+_, predicted = torch.max(outputs, 1)
+
+print(' Ground Truth: ', ' '.join('%5s' % classes[labels[j]] for j in range(4)),
+    '\n', 'Predicted   : ', ' '.join('%5s' % classes[predicted[j]] for j in range(4)))
+```
+
+Q. What do you think of the result?
+
+
 
 ## `torch.nn` modules used in `myNet`
+
 ### `Conv2d`: a convolutional Neural Netowrk for 2d image data
 ### `ReLU`: an activation function
 ### `MaxPool2d`
@@ -164,5 +267,6 @@ What is this netowrk? What are the modules used in `myNet`? They will be explain
 
 ## Conclusion
 
+https://github.com/yunjey/pytorch-tutorial
 
 EOC
