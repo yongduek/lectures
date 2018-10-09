@@ -11,13 +11,6 @@ description: "Pytorch practice and deep learning. There are many tutorials in py
 ---
 
 
-<!--  Mac OS X --
-``` {r, eval=FALSE}
-knitr::opts_chunk$set(engine.path = list(
-  python = '/Library/Frameworks/Python.framework/Versions/3.7/bin/python3'
-))
-```
----->
 
 - MacOS: python 3.7 install `https://docs.python.org/3/using/mac.html`
 - MacOS:`matplotlib` backend problem can be solved by 
@@ -25,6 +18,7 @@ knitr::opts_chunk$set(engine.path = list(
 
 
 # Prerequisites
+
 
 1. Install `pytorch`, `python 3.x`, `anaconda`
 1. `numpy` and `torch.Tensor`
@@ -88,15 +82,19 @@ knitr::write_bib(c(
 
 Python 언어를 사용하는 방법은 ... 쉽다.
 
-```{python}
-import sys
-x = 'Hello python'
-print (x.split(' '), '파이선 버전=', sys.version)
+```{bash}
+which python
 ```
 
-Pandas  패키지 사용하는 것도 간단하다.
-``` {python}
-import pandas as pd
-df = pd.read_csv ('../bayesian/showcases.2012.csv')
-print (df.head())
+<!--  Mac OS X -->
+``` {r}
+knitr::opts_chunk$set(engine.path = list(
+  python = '/Library/Frameworks/Python.framework/Versions/3.7/bin/python3'
+))
 ```
+
+```{python}
+import sys
+print (sys.version)
+```
+
