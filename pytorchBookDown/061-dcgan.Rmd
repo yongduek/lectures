@@ -1,17 +1,12 @@
----
-output:
-  pdf_document: default
-  html_document: default
-  word_document: default
----
 
-# [DC-GAN](https://pytorch.org/tutorials/beginner/dcgan_faces_tutorial.html)
+# DC-GAN
+
+The code is from [DC-GAN](https://pytorch.org/tutorials/beginner/dcgan_faces_tutorial.html)
 
 - It is always good to read the original paper
     - [Goodfellow](https://papers.nips.cc/paper/5423-generative-adversarial-nets.pdf)
     - [DCGAN ](https://arxiv.org/pdf/1511.06434.pdf)
     
-## Generative Adversarial Netowrk (GAN) 생산적 적대 신경망
 
 ```{r, echo=FALSE, out.width='80%', fig.align='center', fig.cap='Illustration of GAN with ConvNets.'}
 knitr::include_graphics('figures/gan.png')
@@ -27,3 +22,8 @@ $$
     V(D,G) = \mathbb{E}_{x\sim p_\mathrm{data}(x)} \log[ D(x) ] \quad 
         + \quad \mathbb{E}_{z\sim p_z(z)} \log [1-D(G(z))]
 $$
+
+
+## Q. Use 2D convolutional network for MNIST
+
+- `Conv2DTranspose`
