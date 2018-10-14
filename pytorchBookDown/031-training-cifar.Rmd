@@ -216,7 +216,10 @@ def learning_loop (nepochs):
     
     print('Finished Training')
 #
+```
 
+Run the following and report the result of your own.
+```
 learning_loop (2) # 
 ```
 
