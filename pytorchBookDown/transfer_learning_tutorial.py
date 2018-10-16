@@ -100,7 +100,7 @@ dataset_sizes = {x: len(image_datasets[x]) for x in ['train', 'val']}
 class_names = image_datasets['train'].classes
 
 #device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
-device = torch.device("cpu") # for simple test
+device = torch.device("cpu") # for simple note-writing. Use cuda:0 if you have one.
 
 ######################################################################
 # Visualize a few images
@@ -114,7 +114,7 @@ def imshow(inp, title=None):
     mean = np.array([0.485, 0.456, 0.406])
     std = np.array([0.229, 0.224, 0.225])
     inp = std * inp + mean
-    inp = np.clip(inp, 0, 1)
+    inp = np.clip(inp, 0, 1) # constrain values to [0,1]
     plt.imshow(inp)
     if title is not None:
         plt.title(title)

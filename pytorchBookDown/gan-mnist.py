@@ -209,7 +209,7 @@ latent_size = 64
 hidden_size = 256
 image_size = 784
 batch_size = 100
-sample_dir = './data/gan-mnist'
+sample_dir = './data/mnist/gan-mnist-samples'
 
 # Create a directory if not exists
 if not os.path.exists(sample_dir):
@@ -222,7 +222,7 @@ transform = transforms.Compose([
                                      std=(0.5, 0.5, 0.5))])
 
 # MNIST dataset
-mnist = torchvision.datasets.MNIST(root='./data/',
+mnist = torchvision.datasets.MNIST(root='./data/mnist',
                                    train=True,
                                    transform=transform,
                                    download=True)

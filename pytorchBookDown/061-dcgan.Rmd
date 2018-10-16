@@ -1,29 +1,9 @@
 
-# DC-GAN
+## DC-GAN
 
 The code is from [DC-GAN](https://pytorch.org/tutorials/beginner/dcgan_faces_tutorial.html)
 
-- It is always good to read the original paper
-    - [Goodfellow](https://papers.nips.cc/paper/5423-generative-adversarial-nets.pdf)
-    - [DCGAN ](https://arxiv.org/pdf/1511.06434.pdf)
-    
 
-```{r, echo=FALSE, out.width='80%', fig.align='center', fig.cap='Illustration of GAN with ConvNets.'}
-knitr::include_graphics('figures/gan.png')
-```
-
-The meaning of the loss function $V(D,G)$:
-
-- $\log(D(x))$ : this term must be maximized so that $D$'s discrimination power is big and produces probability $1$ whenever the input is from real.
-- $\log(D(G(z)))$: Th generator $G$ tries to produce realistic outputs so that $D$ cannot discriminate and therefore produce a probability close to $1$. Therefore, the loss $\log(D(G(z)))$ should be maximized **on behalf of $G$**. Conversely, $\log(1-D(G(z)))$ must be minimized to fulfill the same purpose.
-- Therefore, the problem is called a minimax game in which $D$ tries to maximize and $G$ tries to minimize the loss function $V(D,G)$:
-
-$$
-    V(D,G) = \mathbb{E}_{x\sim p_\mathrm{data}(x)} \log[ D(x) ] \quad 
-        + \quad \mathbb{E}_{z\sim p_z(z)} \log [1-D(G(z))]
-$$
-
-
-## Q. Use 2D convolutional network for MNIST
+### Q. Use 2D convolutional network for MNIST
 
 - `Conv2DTranspose`

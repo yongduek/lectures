@@ -1,6 +1,39 @@
 
 # Generative Adversarial Network
 
+- GAN Applications are well summarized in [here](https://github.com/nashory/gans-awesome-applications)
+
+- A tutorial on GAN, pix2pix, CycleGAN is in [microsoft blob](https://www.microsoft.com/developerblog/2017/06/12/learning-image-image-translation-cyclegans/)
+
+- A fancy article about pix2pix is [here](https://affinelayer.com/pix2pix/)
+
+
+
+It is always good to read the original paper
+- [Goodfellow](https://papers.nips.cc/paper/5423-generative-adversarial-nets.pdf)
+- [DCGAN ](https://arxiv.org/pdf/1511.06434.pdf)
+
+```{r, echo=FALSE, out.width='80%', fig.align='center', fig.cap='Illustration of GAN with ConvNets.'}
+knitr::include_graphics('figures/gan.png')
+```
+
+The meaning of the loss function $V(D,G)$:
+
+- $\log(D(x))$ : this term must be maximized so that $D$'s discrimination power is big and produces probability $1$ whenever the input is from real.
+- $\log(D(G(z)))$: Th generator $G$ tries to produce realistic outputs so that $D$ cannot discriminate and therefore produce a probability close to $1$. Therefore, the loss $\log(D(G(z)))$ should be maximized **on behalf of $G$**. Conversely, $\log(1-D(G(z)))$ must be minimized to fulfill the same purpose.
+- Therefore, the problem is called a minimax game in which $D$ tries to maximize and $G$ tries to minimize the loss function $V(D,G)$:
+
+$$
+    V(D,G) = \mathbb{E}_{x\sim p_\mathrm{data}(x)} \log[ D(x) ] \quad 
+        + \quad \mathbb{E}_{z\sim p_z(z)} \log [1-D(G(z))]
+$$
+
+
+
+
+
+## GAN with Fully Connected Network
+
 The source code is from ['github/yunjey/pytorch-tutorial'](https://raw.githubusercontent.com/yunjey/pytorch-tutorial/master/tutorials/03-advanced/generative_adversarial_network/main.py).
 
 
@@ -173,11 +206,6 @@ def train_loop (num_epochs):
             reset_grad()
             g_loss.backward()
             g_optimizer.step()
-
-            if (i+1) % 200 == 0:
-                print('Epoch [{}/{}], Step [{}/{}], d_loss: {:.4f}, g_loss: {:.4f}, D(x): {:.2f}, D(G(z)): {:.2f}' 
-                      .format(epoch, num_epochs, i+1, total_step, d_loss.item(), g_loss.item(), 
-                              real_score.mean().item(), fake_score.mean().item()))
 
         # Save real images
         if (epoch+1) == 1:
