@@ -1,0 +1,159 @@
+
+
+
+``` {r}
+knitr::opts_chunk$set(engine.path = list(
+  python='/usr/local/bin/python3'
+))
+```
+
+
+# Text Processing & NLP
+
+Sources of the codes
+
+* [Deep learning for NLP with Pytorch](https://pytorch.org/tutorials/beginner/deep_learning_nlp_tutorial.html)
+
+
+## Warming Up
+
+
+```{python}
+import torch
+import torch.functional as F
+```
+
+Here we will develop a classfier that chooses one between Spanish & English.
+
+Following is the datset for our toy example.
+```{python}
+data = [("me gusta comer en la cafeteria".split(), "SPANISH"),
+        ("Give it to me".split(), "ENGLISH"),
+        ("No creo que sea una buena idea".split(), "SPANISH"),
+        ("No it is not a good idea to get lost at sea".split(), "ENGLISH")]
+
+test_data = [("Yo creo que si".split(), "SPANISH"),
+             ("it is lost on me".split(), "ENGLISH")]
+```
+
+Let's have a look at the first data element in the train data set `data`.
+```{python}
+print (data[0])
+```
+
+We need to make a feature vector for each sentensce, and the feature we use here is the **bag of words** vector, which is actually a histogram counting the number of appearances of the words in all of the data set, both training and testing.
+
+## Bag of Words & Classification
+
+First, we make a word-to-index map.
+We do not use `0` as an index for the words.
+```{python}
+word_to_ix = {}
+windex = 1 # the index starts from 1
+for sent, _ in data + test_data:
+    for word in sent:
+        if word not in word_to_ix:
+            word_to_ix[word] = windex
+            windex += 1
+print(word_to_ix)
+```
+So, for example, the index of the word 'cafeteria' is obtained easily by:
+```{python}
+print ('index for cafeteria = ', word_to_ix['cafeteria'])
+```
+
+The size of the vaocabulary is equal to the length of the python dictionary `word_to_ix`, and the number of classes is `2` since we have english and spanish.
+
+```{python}
+VOCAB_SIZE = len(word_to_ix)
+NUM_LABELS = 2
+```
+
+Our neural network classifier will take as input a vector of size `VOCAB_SIZE` and spit out a vector of size `NUM_LABELS`.
+
+Let's have a look at how the input vector looks like.
+
+```{python}
+def make_bow_tensor(sentence, word_to_ix):
+    vec = torch.zeros(len(word_to_ix))
+    for word in sentence:
+        vec[word_to_ix[word]] += 1
+    return vec.view(1, -1)
+```
+
+Note that the returned vector is actually not a vector, but a 2D matrix having the row vector as the first row. This is because any torch model accepts inputs in this format to allow multiple input vectors.
+
+For example, we feed in the word list of the first data `data[0]` to the function `make_bow_tensor()` to get the corresponding bow feature vector.
+
+```{python}
+wordlist, target = data[0]
+bow_vec = make_bow_tensor (wordlist, word_to_ix)
+#
+print ('{}:: bow_vec={}'.format(target, bow_vec))
+```
+
+Let's make a map for label-to-index: `label_to_ix`
+```{python}
+label_to_ix = {'SPANISH': 0, 'ENGLISH': 1}
+#
+print (label_to_ix)
+```
+
+We hand-made the map because it has only two simple labels. You can make it automatically.
+
+```{python}
+label_to_ix = {}
+count = 0
+for d in data:
+    sentence, label = d
+    if label not in label_to_ix:
+        label_to_ix[label] = count
+        count += 1
+    #
+#
+print (label_to_ix)
+```
+
+Notice that the label index starts with 0.
+
+
+Now we design a neural network model of the classifier.
+```{python}
+import torch.nn as nn
+class BoWClassifier(nn.Module):  # inheriting from nn.Module!
+
+    def __init__(self, num_labels, vocab_size):
+        super(BoWClassifier, self).__init__()
+        self.linear = nn.Linear(vocab_size, num_labels)
+        self.lsm = nn.LogSoftmax(dim=1)
+
+    def forward(self, bow_vec):
+        return self.lsm(self.linear(bow_vec))
+#
+model = BoWClassifier (NUM_LABELS, VOCAB_SIZE)
+#
+print ('@ model = \n', model)
+```
+
+We can see the values of the model's parameters inside the model:
+```{python}
+for param in model.parameters():
+  print (param)
+```
+Since we designed to use a linear layer of size $26\times2$, we have two sets of 26 parameters. The othertwo sets of 2 parameters are the biases, which are implicitly defined extra parameters; it is 2 because `out_features=2`.
+
+
+Let us supporse for now that the model had been trained. Then, we can pass in  a BoW vector to the model to get the output of the model indicating the predicted class where the BoW vector belongs to.
+
+```{python}
+with torch.no_grad():
+    sentence_data, label = data[0]
+    bow_vec = make_bow_tensor(sentence_data, word_to_ix)
+    log_prob_vec = model (bow_vec)
+    print ('log_prob=', log_prob_vec)
+    print ('prob    =', torch.exp(log_prob_vec))
+#
+```
+The output says that the probability of being class-0 is 0.6061 and class-1 is 0.3939. Interesting, but the result is meaningless. I just wanted to show you how to compute the probability for each class.
+
+
