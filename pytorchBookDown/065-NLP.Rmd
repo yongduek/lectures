@@ -185,11 +185,7 @@ with torch.no_grad():
 ```
 
 
-```{python}
-#Print the matrix column corresponding to "creo"
-print(next(model.parameters())[:, word_to_ix["creo"]])
-```
-
+Now training comes.
 
 ```{python}
 import torch.optim as optim
@@ -227,18 +223,33 @@ for epoch in range(100):
 print (ll)
 ```
 
+The plot of loss against epoch is given below. We can see that the loss decreases for the training error. In reallity we have to watch the loss for validation data (not for training data), but this toy example does not consider it.
+
 ```{python}
 import matplotlib.pyplot as plt
 plt.plot (ll)
 plt.title ('loss against epoch')
+plt.xlabel ('epoch')
+plt.ylabel ('loss')
 plt.show()
 ```
 
+The prediction capability of the neural network model should be better than before the training.
 ```{python}
 with torch.no_grad():
     for instance, label in test_data:
         bow_vec = make_bow_tensor(instance, word_to_ix)
-        log_probs = model(bow_vec)
-        print(log_probs)
+        probs = torch.exp (model(bow_vec))
+        print('predicted probability: ', probs, 'target: ', label)
 #
 ```
+
+## Summary
+
+- BoW feature vector is useful for the language classification.
+- Text is a variable length data, but it can be transformed to a fixed length data through BoW.
+- Pytorch can be used for the modeling of a classifier.
+
+- The size of vocabulary will become enormous when a set of general text data is used.
+
+- `Dataset` and `Dataloader` in `pytorch` should be used instead of direct data feeding in the training loop.
