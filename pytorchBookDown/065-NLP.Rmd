@@ -15,7 +15,7 @@ Sources of the codes
 * [Deep learning for NLP with Pytorch](https://pytorch.org/tutorials/beginner/deep_learning_nlp_tutorial.html)
 
 
-## Warming Up
+## Text Data
 
 
 ```{python}
@@ -46,10 +46,9 @@ We need to make a feature vector for each sentensce, and the feature we use here
 ## Bag of Words & Classification
 
 First, we make a word-to-index map.
-We do not use `0` as an index for the words.
 ```{python}
 word_to_ix = {}
-windex = 1 # the index starts from 1
+windex = 0 # the index starts from 1
 for sent, _ in data + test_data:
     for word in sent:
         if word not in word_to_ix:
@@ -57,7 +56,9 @@ for sent, _ in data + test_data:
             windex += 1
 print(word_to_ix)
 ```
-So, for example, the index of the word 'cafeteria' is obtained easily by:
+Here the index starts from 0. Sometimes, the 0 index is used for a special case where a given word is not in a dictionary. This toy example does not consider such case.
+
+For example, the index of the word 'cafeteria' is obtained easily by:
 ```{python}
 print ('index for cafeteria = ', word_to_ix['cafeteria'])
 ```
@@ -74,10 +75,16 @@ Our neural network classifier will take as input a vector of size `VOCAB_SIZE` a
 Let's have a look at how the input vector looks like.
 
 ```{python}
-def make_bow_tensor(sentence, word_to_ix):
+def make_bow_tensor(sentence, word_to_ix, flag=False):
     vec = torch.zeros(len(word_to_ix))
+    if flag:
+        print ('word_to_ix[] = ', word_to_ix)
     for word in sentence:
-        vec[word_to_ix[word]] += 1
+        #print ('{}: {}'.format(word, word_to_ix[word]))
+        if flag:
+            print ('word: ', word)
+        else:
+            vec[word_to_ix[word]] += 1
     return vec.view(1, -1)
 ```
 
@@ -96,7 +103,11 @@ Let's make a map for label-to-index: `label_to_ix`
 ```{python}
 label_to_ix = {'SPANISH': 0, 'ENGLISH': 1}
 #
+def make_target(label, label_to_ix):
+    return torch.LongTensor([label_to_ix[label]])
+#
 print (label_to_ix)
+print (make_target('SPANISH', label_to_ix))
 ```
 
 We hand-made the map because it has only two simple labels. You can make it automatically.
@@ -142,6 +153,8 @@ for param in model.parameters():
 ```
 Since we designed to use a linear layer of size $26\times2$, we have two sets of 26 parameters. The othertwo sets of 2 parameters are the biases, which are implicitly defined extra parameters; it is 2 because `out_features=2`.
 
+Q. Draw a diagram that reprents this network architecture and parmaeters.
+
 
 Let us supporse for now that the model had been trained. Then, we can pass in  a BoW vector to the model to get the output of the model indicating the predicted class where the BoW vector belongs to.
 
@@ -157,3 +170,75 @@ with torch.no_grad():
 The output says that the probability of being class-0 is 0.6061 and class-1 is 0.3939. Interesting, but the result is meaningless. I just wanted to show you how to compute the probability for each class.
 
 
+Now let's run the inference for the test data so that we may compare it after training the network (or the classifier model).
+
+```{python}
+print (test_data)
+with torch.no_grad():
+  for td in test_data:
+    sent, lbl = td
+    print ('text: ', sent, '  target: ', lbl, label_to_ix[lbl])
+    bow_vec = make_bow_tensor (sent, word_to_ix)
+    log_probs = model (bow_vec)
+    probs = torch.exp (log_probs)
+    print ('prob = ', probs)
+```
+
+
+```{python}
+#Print the matrix column corresponding to "creo"
+print(next(model.parameters())[:, word_to_ix["creo"]])
+```
+
+
+```{python}
+import torch.optim as optim
+loss_function = nn.NLLLoss()
+optimizer = optim.SGD(model.parameters(), lr=0.1)
+
+# Usually you want to pass over the training data several times.
+# 100 is much bigger than on a real data set, but real datasets have more than
+# two instances.  Usually, somewhere between 5 and 30 epochs is reasonable.
+ll = []
+for epoch in range(100):
+    for instance, label in data:
+        # Step 1. Remember that PyTorch accumulates gradients.
+        # We need to clear them out before each instance
+        model.zero_grad()
+
+        # Step 2. Make our BOW vector and also we must wrap the target in a
+        # Tensor as an integer. For example, if the target is SPANISH, then
+        # we wrap the integer 0. The loss function then knows that the 0th
+        # element of the log probabilities is the log probability
+        # corresponding to SPANISH
+        bow_vec = make_bow_tensor(instance, word_to_ix)
+        target = make_target(label, label_to_ix)
+
+        # Step 3. Run our forward pass.
+        log_probs = model(bow_vec)
+
+        # Step 4. Compute the loss, gradients, and update the parameters by
+        # calling optimizer.step()
+        loss = loss_function(log_probs, target)
+        ll.append (loss.item())
+        loss.backward()
+        optimizer.step()
+#
+print (ll)
+```
+
+```{python}
+import matplotlib.pyplot as plt
+plt.plot (ll)
+plt.title ('loss against epoch')
+plt.show()
+```
+
+```{python}
+with torch.no_grad():
+    for instance, label in test_data:
+        bow_vec = make_bow_tensor(instance, word_to_ix)
+        log_probs = model(bow_vec)
+        print(log_probs)
+#
+```
