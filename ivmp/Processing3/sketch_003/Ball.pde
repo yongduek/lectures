@@ -11,8 +11,11 @@ class Ball {
   }
   void move() {
     y = y + vy + 0.5 * g;
+    vy = vy + g;
   }
   void draw() {
+    noStroke();
+    fill (c);
     ellipseMode (CENTER);
     ellipse (x,y, diam, diam);
   }

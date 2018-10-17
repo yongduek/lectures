@@ -2,10 +2,12 @@
 # Bouncing Balls {#ball}
 
 You must have heard of Newton's physics of a falling body. Then an object falls with gravity acceleration $g$, with initial velocity $v_0$, then its position $y$ after some time elapse $t$ is given by
-$$
-    y(t) = y_0 + v_0 t + \frac{1}{2} g t^2 \\
-    v(t) = v_0 t + g t
-$$
+
+\begin{align}
+    y(t) & = y_0 + v_0 t + \frac{1}{2} g t^2 \\
+    v(t) & = v_0 t + g t
+\end{align}
+
 
     전혀 들어본적도 없다구요? 상관없습니다. 요즘이 어떤 시대인데 이런 걸 이해gk려고 노력할까요. 그냥 가져다 씁시다.
     

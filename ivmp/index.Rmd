@@ -16,4 +16,4 @@ description: "This is course material of Introduction to Visual Media Programmin
 
 - The order of presentation is arbitrary.
 
-- Language stuff will be explained time to time.
+- Language stuff will be explained time to time. It is Java, but I will discuss how to make drawings without heavily resorting to basic Java language grammar. So understanding simple level programming sturcutre is enough to participate in this course.

@@ -155,10 +155,13 @@ The Processing window looked like this. Note that the system variables were show
 knitr::include_graphics('figs/2-2.png')
 ```
 
-Now the second car `car2` moves according to the motion of my mouse pointer. Let's move it then.
+Now the second car `car2` moves according to the motion of my mouse pointer. 
+Let's move it then.
+
 ```{r, echo=FALSE, fig.align='center', fig.cap='The car moves with mouse motion.'}
 knitr::include_graphics('figs/2-3.png')
 ```
+
 Q. If I don't want to see the overlap of car2's. What should be done?
 
 Q. Can you set the color of the car when you allocate it in `setup()`? What do you need to change for such initialization in addition to computer memory allocation?
