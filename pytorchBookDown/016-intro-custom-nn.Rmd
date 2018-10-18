@@ -1,4 +1,8 @@
 
+```{bash}
+which python
+```
+
 ## With Custom `nn` Modules
 
 Sometimes you will want to specify models that are more complex than a sequence of existing Modules; for these cases you can define your own Modules by subclassing `torch.nn.Module` and defining a `forward` which receives input Tensors and produces output Tensors using other modules or other autograd operations on Tensors.
