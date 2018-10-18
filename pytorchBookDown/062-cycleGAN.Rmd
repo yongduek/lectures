@@ -34,3 +34,8 @@ knitr::include_graphics('figures/cyclegan.png')
 * The small size cycleGAN in [here](https://github.com/yunjey/mnist-svhn-transfer) is good to follow to get an idea how to it should be programmed. The code there is a little bit out of date due to `pytorch` version up. 
 
 * Then move to the inventor's `pytorch`.
+
+
+## Small Scale cycleGAN
+
+
