@@ -1,16 +1,14 @@
-Firework f;
+Firework f; // declare an instance name f
 Boolean stop = false;
 
 void setup() {
-  size (300, 700);
-  f = new Firework(width, height);
+  size (1300, 700);
+  f = new Firework(width, height); // allocate & init
 }
 
 void draw() {
-  if (!stop) {
-      background (1);
-      f.draw();
-  }
+    background (1);
+    if (!stop) { f.draw(); }
 }
 
 
