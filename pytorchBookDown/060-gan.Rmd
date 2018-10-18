@@ -7,7 +7,8 @@
 
 - A fancy article about pix2pix is [here](https://affinelayer.com/pix2pix/)
 
-
+- A youtube talk by one of the authors of cycleGAN in Korean [here](https://www.youtube.com/watch?v=Fkqf3dS9Cqw&t=2401s)
+    - and its [summary](http://www.kwangsiklee.com/2018/03/cyclegan%EC%9D%B4-%EB%AC%B4%EC%97%87%EC%9D%B8%EC%A7%80-%EC%95%8C%EC%95%84%EB%B3%B4%EC%9E%90/)
 
 It is always good to read the original paper
 - [Goodfellow](https://papers.nips.cc/paper/5423-generative-adversarial-nets.pdf)
