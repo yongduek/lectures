@@ -1,0 +1,23 @@
+--- 
+title: "Exploratory & Statistical Data Analysis"
+author: "서 용 덕 Seo Yongduek  yndk@sogang.ac.kr"
+date: "`r Sys.Date()`"
+site: bookdown::bookdown_site
+documentclass: book
+bibliography: [book.bib, packages.bib]
+biblio-style: apalike
+link-citations: yes
+description: "Data science 101. First step basic level principles of data science. Less mathematics, more python. Less mathematics, more figures, drawings, diagrams, and stories."
+---
+
+# Prerequisites
+
+1. Python 3.x
+    - it will be explained when necessary or asked.
+2. Highschool math
+
+
+- `numpy`, `torch`, `pandas`
+- `matplotlib`, `seaborne`
+- [Think Stats: Exploratory Data Analysis with Python](https://greenteapress.com/wp/think-stats-2e)
+- [Python Data Science Handbook](https://github.com/jakevdp/PythonDataScienceHandbook)
