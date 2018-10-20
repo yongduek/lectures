@@ -10,14 +10,35 @@ link-citations: yes
 description: "Data science 101. First step basic level principles of data science. Less mathematics, more python. Less mathematics, more figures, drawings, diagrams, and stories."
 ---
 
-# Prerequisites
+# Begin
+
+## What you are expected to have learned.
 
 1. Python 3.x
     - it will be explained when necessary or asked.
 2. Highschool math
 
 
+## What you can expect to be seeing
+
 - `numpy`, `torch`, `pandas`
 - `matplotlib`, `seaborne`
+
+## Data Sources/Repositories
+
+1. [data.go.kr, 공공데이터포털](https://www.data.go.kr/)
+    1. How to use 오픈API
+    1. [국가장학금 통계 정보](https://www.data.go.kr/dataset/3060496/fileData.do)
+
+1. [국가공간정보포털 National Spatial Data Infrastructure Portal](http://data.nsdi.go.kr)
+
+1. [국가통계포털 KOSIS: KOrean Statistical Information Service](http://kosis.kr/index/index.do)
+
+1. [기상청 국가기후데이터센터](http://sts.kma.go.kr/jsp/home/contents/main/main.do)
+
+1. [Micro Data Integrated Service](http://mdis.kostat.go.kr/pageLink.do?link=content/SISMN030100&curMenuNo=UI_POR_P1043)
+    
+## References 
+
 - [Think Stats: Exploratory Data Analysis with Python](https://greenteapress.com/wp/think-stats-2e)
 - [Python Data Science Handbook](https://github.com/jakevdp/PythonDataScienceHandbook)
