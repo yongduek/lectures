@@ -455,4 +455,3 @@ print ('word = {}, index = {},\n embedding vector = {}'.format(ix2word[1], 1, ve
 
 
     
-    

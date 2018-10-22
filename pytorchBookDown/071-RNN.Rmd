@@ -1,2 +1,117 @@
 
-# RNN (Recursive Neural Network)
+
+``` {r}
+knitr::opts_chunk$set(engine.path = list(
+  python='/usr/local/bin/python3'
+))
+```
+
+# RNN (Recurrent Neural Network)
+
+Recurrent neural network has a feedback loop. It is a kind of for loop to calculate an accumulation given a list of inputs.
+
+```{r, echo=FALSE, fig.align='center', fig.cap='RNN and its unrolled version'}
+knitr::include_graphics('figures/RNN-unrolled.png')
+```
+
+- We will use LSTM mainly.
+
+## LSTM
+
+A good illustraiton and explation about LSTM is [here](http://colah.github.io/posts/2015-08-Understanding-LSTMs/), where the following figure comes from.
+
+```{r, echo=FALSE, fig.align='center', fig.cap='LSTM Illustration'}
+knitr::include_graphics('figures/LSTM3-var-GRU.png')
+```
+
+### LSTM Intro
+
+- How to use `nn.LSTM` layer.
+```{python}
+import torch
+import torch.nn as nn
+import torch.nn.functional as F
+import torch.optim as optim
+
+torch.manual_seed(1)
+```
+
+```{python}
+seq_len = 5
+batchsize = 2
+feature_dim = 3
+
+lstm=nn.LSTM(input_size=feature_dim, hidden_size=4)
+inp = torch.randn(seq_len, batchsize, feature_dim)
+```
+
+Remember the `shape` of input data. It is a sequence of mini-batches of features.
+```{python}
+print ('input data shape (seq_len, batch, feature) = ', inp.shape)
+print (inp)
+```
+
+Like all other layers in `torch.nn`, `torch.nn.LSTM` is used as a function, and returns two.
+```{python}
+out, h = lstm (inp)
+```
+
+One is the output of `LSTM` and the other is the hidden state that follows the output sequence.
+```{python}
+print ('output shape (seq_len, batch, hidden_size)', out.shape)
+```
+```{python}
+print ('output:\n', out.data)
+```
+
+The second output retruned from `LSTM`, named `hidden`, has two components
+```{python}
+print ('len(h) = ', len(h), ' h[0] = ', h[0].shape, ' h[1] = ', h[1].shape)
+```
+This output `h` corresponds to the output of `lstm` for the last item of the input sequence.
+```{python}
+print ('@ h[0] =\n', h[0], '\n@ h[1] =\n', h[1])
+```
+The first `h[0]` is the same as the last batch of `out` (you should check it), and `h[1]` is a tensor used inside lstem.
+
+The output `out` was provided from `lstm` after 5 iterations. Why 5? The length of the input seqnece `inp` is of length 5.
+
+We can also iterate this recurrent neural network one by one using a for loop to obtain the same output sequence.
+
+Let's extract one batch of the input sequence.
+```{python}
+in0 = inp[0]
+print (in0, in0.shape)
+```
+You can see that the dimension of tensor `in0` has one less then `inp`, of course. However, `lstem` expects its input to have 3 dimensions `(seq, batch, feature)`. Since `in0` is a sequence of length 1, we can chage its shape.
+```{python}
+in00 = in0.reshape(1, *in0.shape)
+print (in00, in00.shape)
+```
+See that the `shape` has one more dimension for time index. The `*` sign is to give all numbers of `in0.shape` to the function `reshape`; so it is equivalent to `reshape(1, in0.shape[0], in0.shape[1])
+
+```{python}
+out0, h = lstm (in00);
+print (out0, out0.shape)
+```
+You can compare this output with the first batch shown above. The numbers should all the same. Let's check
+```{python}
+print (out0[0] - out[0])
+```
+
+Next iteration of this RNN requires for you to put `h` as the second argument when you call `lstm`. This is very important!
+
+```{python}
+in11 = inp[1].reshape(1, *inp[1].shape)
+out1, h = lstm (in11, h);
+print (out1[0] - out[1])
+```
+Note that the output `out1` is all the same as the 1st data contained in `out[1]`. You can repeat this to get the output one by one, or in practice you can change your input to lstm at every time step.
+
+### LSTM Usage
+
+* You feed a sequence data to `LSTM` (initial `h` is 0 by default) then you get a feature vecotor.
+* The input sequence's length can be arbitrary.
+* The sequence can be a text sentence such as "I am going to" of 4 words. Then `LSTM` may produce `cinema` as its output. If the input is 'the flower in the garden is very much', then the output can be 'beautiful'. The output of LSTM depends wholy on the training texts.
+* The input/output of LSTM is not a sequence of words. So, we use instead the sequence of index numbers based on the vocabulary we make before training.
+* We might try a random value for initial `h` to cause a small variation. How would it be?

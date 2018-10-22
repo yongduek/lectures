@@ -79,7 +79,7 @@ If the label for the sample data is $y = 0$,
         P(L = 0 | d, \boldsymbol{w}) = 1 - P(y = 1 | d, \boldsymbol{w}) = 1 - \mathrm{sigmoid}(\boldsymbol{w}^\top\boldsymbol{f}) = 0
 \end{align}
 
-For a data set $\{ d_i, y_i \}$ where $ y_i \in \{0, 1\} $ and $i=1,...,N$. The likelihood function can be written
+For a data set $\{ d_i, y_i \}$ where $y_i \in \{0, 1\}$ and $i=1,...,N$. The likelihood function can be written
 \begin{equation}
         P(y_1,...,y_n | w_0, ..., w_n) = \prod_{i=1}^N p_i^{y_i} (1-p_i)^{1-y_i}
 \end{equation}

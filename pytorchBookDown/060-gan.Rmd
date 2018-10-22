@@ -1,3 +1,8 @@
+---
+output:
+  pdf_document: default
+  html_document: default
+---
 
 # Generative Adversarial Network
 
@@ -24,10 +29,9 @@ The meaning of the loss function $V(D,G)$:
 - $\log(D(G(z)))$: Th generator $G$ tries to produce realistic outputs so that $D$ cannot discriminate and therefore produce a probability close to $1$. Therefore, the loss $\log(D(G(z)))$ should be maximized **on behalf of $G$**. Conversely, $\log(1-D(G(z)))$ must be minimized to fulfill the same purpose.
 - Therefore, the problem is called a minimax game in which $D$ tries to maximize and $G$ tries to minimize the loss function $V(D,G)$:
 
-$$
-    V(D,G) = \mathbb{E}_{x\sim p_\mathrm{data}(x)} \log[ D(x) ] \quad 
-        + \quad \mathbb{E}_{z\sim p_z(z)} \log [1-D(G(z))]
-$$
+\begin{equation}
+    V(D,G) = \mathbb{E}_{x\sim p_\mathrm{data}(x)} \log[ D(x) ] \quad + \quad \mathbb{E}_{z\sim p_z(z)} \log [1-D(G(z))]
+\end{equation}
 
 
 
@@ -259,7 +263,7 @@ $$
 The `BCE_Loss()` function computes the binary cross-entropy loss defined as follows.
 
 $$
-    \mathrm{BCE\_Loss}(x,y) = - y * \log(D(x)) - (1-y) * \log(1 - D(x))
+    \mathrm{BCELoss}(x,y) = - y * \log(D(x)) - (1-y) * \log(1 - D(x))
 $$
 
 Note that
@@ -268,11 +272,11 @@ Note that
     1. the first term of the loss is always zero for `fake_labels == 0`.
 
 In other words, the following code will maximize
-$$
+
 \begin{equation}
     \log(D(x)) + \log (  1 - D(G(z)) )
 \end{equation}
-$$
+
 with respect to the parameters of `D`. The first term is due to images of `real_labels` and the second due to the images of `fake_labels`.
 ```
             # BCE_Loss using the real images
