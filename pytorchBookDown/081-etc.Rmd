@@ -1,5 +1,138 @@
 
-# Scribles on Probability Theory
+# Some from Probability Theory
+
+## Poisson RV & Distribution 
+
+- An event can occur 0,1,2, ..., $k$, ..., times in an interval (in a fixed interval).
+- The average number of events in an interval is designated $\lambda$.
+    - $\lambda$ is called event rate or the rate parameter.
+    - $\lambda$ is the average number of events per interval
+- The probability of observing $k$ events in the interval is given by the PMF function defined by the following equation:
+
+\begin{equation}
+P(k {\text{ events in the interval}})=e^{-\lambda } {\frac {\lambda ^{k}}{k!}}
+\end{equation}
+
+
+PMF of Poisson distribution
+```{r PoissonPMF, echo=FALSE, fig.align='center', fig.cap='The horizontal axis is the index $k$, the number of occurrences. λ is the expected number of occurrences, which need not be an integer. The vertical axis is the probability of k occurrences given λ. The function is defined only at integer values of k. The connecting lines are only guides for the eye.'}
+knitr::include_graphics('figures/650px-Poisson_pmf.svg.png')
+```
+
+CDF of Poisson Distribution
+```{r PoissonCDF, echo=FALSE, fig.align='center', fig.cap='The horizontal axis is the index k, the number of occurrences. The CDF is discontinuous at the integers of k and flat everywhere else because a variable that is Poisson distributed takes on only integer values.'}
+knitr::include_graphics('figures/650px-Poisson_cdf.svg.png')
+```
+
+
+We can draw samples from the distribution [scipy.org](https://docs.scipy.org/doc/numpy-1.15.1/reference/generated/numpy.random.poisson.html):
+
+```{python}
+import numpy as np
+s = np.random.poisson (lam=5, size=10000)
+#
+import matplotlib.pyplot as plt
+count, bins, ignored = plt.hist (s, 14, density=True)
+plt.show()
+```
+
+
+The synthetic data generated in the book.
+```{python}
+import numpy as np
+rnd = np.random.RandomState (0)
+X_org = rnd.normal (size=(1000,3))
+w = rnd.normal (size=3)
+#
+X = rnd.poisson (10 * np.exp(X_org))
+y = np.dot (X_org, w)
+print ('X = ', X[:5, 0])
+```
+
+Let's see a scatter plot of this data.
+```{python}
+fig,axscatter = plt.subplots()
+axscatter.scatter (X[:,0], y)
+plt.show()
+```
+
+It shows a dense population around the low values of $X$. Its histogram will show the distribution better.
+
+```{python}
+bins = np.bincount(X[:,0])
+index = np.arange (len(bins))
+fig, ax = plt.subplots()
+ax.bar (index, bins)
+ax.set_ylabel ('number of appearances/events')
+ax.set_xlabel ('value')
+plt.show()
+```
+
+The scatter plot of the log-transformed data.
+```{python}
+Xlog = np.log (X + 1)
+#
+fig, ax = plt.subplots ()
+ax.scatter (Xlog[:,0], y)
+plt.show()
+```
+
+This extends the range of $X$. Its histogram should show this extended domain.
+
+```{python}
+fig, ax = plt.subplots()
+ax.hist (Xlog[:,0], bins=50)
+ax.set_ylabel ('number of appearances/events in log-scale')
+ax.set_xlabel ('Range of X in log scale')
+plt.show()
+```
+
+
+## p-value & Hypothesis Test
+
+## F-test
+
+- see [here](https://en.wikipedia.org/wiki/F-test)
+- the test statistic has an F-distribution under the null hypothesis.
+- Mostly used when comparing statistical models that have been fitted to a data set, in order to identify the model that best fits the population from which the data were sampled.
+- A test using the variance ratio, as initially developed by Fisher in 1920s.
+
+**Common examples of F-tests**
+
+- The hypothesis that the means of a given set of normally distributed populations are equal (assuming the same std.) This plays an important role in ANOVA.
+- The hypothesis that a proposed regression model fits the data well.
+- The hypothesis that a data set in a regression analysis follows the simpler of two proposed linear models that are nested within each other.
+
+
+**Formula & Calculation**
+
+Regression problems
+
+Consider two models, 1 and 2, where model 1 is 'nested' within model 2. Model 1 is the restricted model, and Model 2 is the unrestricted one. That is, model 1 has p1 parameters, and model 2 has p2 parameters, where p2 > p1, and for any choice of parameters in model 1, the same regression curve can be achieved by some choice of the parameters of model 2.
+
+If there are $n$ data points to estimate parameters of both models from, then one can calculate the $F$ statistic, given by
+
+\begin{equation}
+F ={\frac  {\left({\frac  {{\text{RSS}}_{1}-{\text{RSS}}_{2}}{p_{2}-p_{1}}}\right)}{\left({\frac  {{\text{RSS}}_{2}}{n-p_{2}}}\right)}},
+\end{equation}
+where $\text{RSS}_i$ is the residual sum of squares of model $i$. If the regression model has been calculated with weights, then replace $\text{RSS}_i$ with χ2, the weighted sum of squared residuals. 
+
+- Under the null hypothesis that model 2 does not provide a significantly better fit than model 1, $F$ will have an $F$-distribution, with $(p2−p1, n−p2)$ degrees of freedom. 
+- The null hypothesis is rejected if the $F$ calculated from the data is greater than the critical value of the $F$-distribution for some desired false-rejection probability (e.g. 0.05). The F-test is a Wald test.
+
+
+## Feature Selection Methods
+
+-- Good blog [here](https://blog.datadive.net/selecting-good-features-part-i-univariate-selection/)
+
+
+### ANOVA, Univariate Statistics
+
+
+
+
+
+## Two Classes
 
 Bayse Theorem:
 
@@ -15,8 +148,6 @@ Bayse Theorem:
 \begin{equation}
     P(l | d) = \frac{P(d|l)P(l)}{P(d)} = \frac{P(d|l)P(l)}{\sum_i P(d|l_i) P(l_i)}
 \end{equation}
-
-## Two Classes
 
 In this case, we have only to classes whose labels are denoted by $L_1$ and $L_2$.
 
