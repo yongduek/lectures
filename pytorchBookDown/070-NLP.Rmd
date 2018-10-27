@@ -1,0 +1,457 @@
+
+
+
+``` {r}
+knitr::opts_chunk$set(engine.path = list(
+  python='/usr/local/bin/python3'
+))
+```
+
+
+# Text Processing & NLP
+
+Sources of the codes
+
+* [Deep learning for NLP with Pytorch](https://pytorch.org/tutorials/beginner/deep_learning_nlp_tutorial.html)
+
+* [Stanford NLP with Deep Learning](http://web.stanford.edu/class/cs224n/syllabus.html)
+
+
+
+## Text Data
+
+
+```{python}
+import torch
+import torch.functional as F
+```
+
+Here we will develop a classfier that chooses one between Spanish & English.
+
+Following is the datset for our toy example.
+```{python}
+data = [("me gusta comer en la cafeteria".split(), "SPANISH"),
+        ("Give it to me".split(), "ENGLISH"),
+        ("No creo que sea una buena idea".split(), "SPANISH"),
+        ("No it is not a good idea to get lost at sea".split(), "ENGLISH")]
+
+test_data = [("Yo creo que si".split(), "SPANISH"),
+             ("it is lost on me".split(), "ENGLISH")]
+```
+
+Let's have a look at the first data element in the train data set `data`.
+```{python}
+print (data[0])
+```
+
+We need to make a feature vector for each sentensce, and the feature we use here is the **bag of words** vector, which is actually a histogram counting the number of appearances of the words in all of the data set, both training and testing.
+
+## Bag of Words & Classification
+
+First, we make a word-to-index map.
+```{python}
+word_to_ix = {}
+windex = 0 # the index starts from 1
+for sent, _ in data + test_data:
+    for word in sent:
+        if word not in word_to_ix:
+            word_to_ix[word] = windex
+            windex += 1
+print(word_to_ix)
+```
+Here the index starts from 0. Sometimes, the 0 index is used for a special case where a given word is not in a dictionary. This toy example does not consider such case.
+
+For example, the index of the word 'cafeteria' is obtained easily by:
+```{python}
+print ('index for cafeteria = ', word_to_ix['cafeteria'])
+```
+
+The size of the vaocabulary is equal to the length of the python dictionary `word_to_ix`, and the number of classes is `2` since we have english and spanish.
+
+```{python}
+VOCAB_SIZE = len(word_to_ix)
+NUM_LABELS = 2
+```
+
+Our neural network classifier will take as input a vector of size `VOCAB_SIZE` and spit out a vector of size `NUM_LABELS`.
+
+Let's have a look at how the input vector looks like.
+
+```{python}
+def make_bow_tensor(sentence, word_to_ix, flag=False):
+    vec = torch.zeros(len(word_to_ix))
+    if flag:
+        print ('word_to_ix[] = ', word_to_ix)
+    for word in sentence:
+        #print ('{}: {}'.format(word, word_to_ix[word]))
+        if flag:
+            print ('word: ', word)
+        else:
+            vec[word_to_ix[word]] += 1
+    return vec.view(1, -1)
+```
+
+Note that the returned vector is actually not a vector, but a 2D matrix having the row vector as the first row. This is because any torch model accepts inputs in this format to allow multiple input vectors.
+
+For example, we feed in the word list of the first data `data[0]` to the function `make_bow_tensor()` to get the corresponding bow feature vector.
+
+```{python}
+wordlist, target = data[0]
+bow_vec = make_bow_tensor (wordlist, word_to_ix)
+#
+print ('{}:: bow_vec={}'.format(target, bow_vec))
+```
+
+Let's make a map for label-to-index: `label_to_ix`
+```{python}
+label_to_ix = {'SPANISH': 0, 'ENGLISH': 1}
+#
+def make_target(label, label_to_ix):
+    return torch.LongTensor([label_to_ix[label]])
+#
+print (label_to_ix)
+print (make_target('SPANISH', label_to_ix))
+```
+
+We hand-made the map because it has only two simple labels. You can make it automatically.
+
+```{python}
+label_to_ix = {}
+count = 0
+for d in data:
+    sentence, label = d
+    if label not in label_to_ix:
+        label_to_ix[label] = count
+        count += 1
+    #
+#
+print (label_to_ix)
+```
+
+Notice that the label index starts with 0.
+
+
+Now we design a neural network model of the classifier.
+```{python}
+import torch.nn as nn
+class BoWClassifier(nn.Module):  # inheriting from nn.Module!
+
+    def __init__(self, num_labels, vocab_size):
+        super(BoWClassifier, self).__init__()
+        self.linear = nn.Linear(vocab_size, num_labels)
+        self.lsm = nn.LogSoftmax(dim=1)
+
+    def forward(self, bow_vec):
+        return self.lsm(self.linear(bow_vec))
+#
+model = BoWClassifier (NUM_LABELS, VOCAB_SIZE)
+#
+print ('@ model = \n', model)
+```
+
+We can see the values of the model's parameters inside the model:
+```{python}
+for param in model.parameters():
+  print (param)
+```
+Since we designed to use a linear layer of size $26\times2$, we have two sets of 26 parameters. The othertwo sets of 2 parameters are the biases, which are implicitly defined extra parameters; it is 2 because `out_features=2`.
+
+Q. Draw a diagram that reprents this network architecture and parmaeters.
+
+
+Let us supporse for now that the model had been trained. Then, we can pass in  a BoW vector to the model to get the output of the model indicating the predicted class where the BoW vector belongs to.
+
+```{python}
+with torch.no_grad():
+    sentence_data, label = data[0]
+    bow_vec = make_bow_tensor(sentence_data, word_to_ix)
+    log_prob_vec = model (bow_vec)
+    print ('log_prob=', log_prob_vec)
+    print ('prob    =', torch.exp(log_prob_vec))
+#
+```
+The output says that the probability of being class-0 is 0.6061 and class-1 is 0.3939. Interesting, but the result is meaningless. I just wanted to show you how to compute the probability for each class.
+
+
+Now let's run the inference for the test data so that we may compare it after training the network (or the classifier model).
+
+```{python}
+print (test_data)
+with torch.no_grad():
+  for td in test_data:
+    sent, lbl = td
+    print ('text: ', sent, '  target: ', lbl, label_to_ix[lbl])
+    bow_vec = make_bow_tensor (sent, word_to_ix)
+    log_probs = model (bow_vec)
+    probs = torch.exp (log_probs)
+    print ('prob = ', probs)
+```
+
+
+Now training comes.
+
+```{python}
+import torch.optim as optim
+loss_function = nn.NLLLoss()
+optimizer = optim.SGD(model.parameters(), lr=0.1)
+
+# Usually you want to pass over the training data several times.
+# 100 is much bigger than on a real data set, but real datasets have more than
+# two instances.  Usually, somewhere between 5 and 30 epochs is reasonable.
+ll = []
+for epoch in range(100):
+    for instance, label in data:
+        # Step 1. Remember that PyTorch accumulates gradients.
+        # We need to clear them out before each instance
+        model.zero_grad()
+
+        # Step 2. Make our BOW vector and also we must wrap the target in a
+        # Tensor as an integer. For example, if the target is SPANISH, then
+        # we wrap the integer 0. The loss function then knows that the 0th
+        # element of the log probabilities is the log probability
+        # corresponding to SPANISH
+        bow_vec = make_bow_tensor(instance, word_to_ix)
+        target = make_target(label, label_to_ix)
+
+        # Step 3. Run our forward pass.
+        log_probs = model(bow_vec)
+
+        # Step 4. Compute the loss, gradients, and update the parameters by
+        # calling optimizer.step()
+        loss = loss_function(log_probs, target)
+        ll.append (loss.item())
+        loss.backward()
+        optimizer.step()
+#
+print (ll)
+```
+
+The plot of loss against epoch is given below. We can see that the loss decreases for the training error. In reallity we have to watch the loss for validation data (not for training data), but this toy example does not consider it.
+
+```{python}
+import matplotlib.pyplot as plt
+plt.plot (ll)
+plt.title ('loss against epoch')
+plt.xlabel ('epoch')
+plt.ylabel ('loss')
+plt.show()
+```
+
+The prediction capability of the neural network model should be better than before the training.
+```{python}
+with torch.no_grad():
+    for instance, label in test_data:
+        bow_vec = make_bow_tensor(instance, word_to_ix)
+        probs = torch.exp (model(bow_vec))
+        print('predicted probability: ', probs, 'target: ', label)
+#
+```
+
+### Summary
+
+- BoW feature vector is useful for the language classification.
+- Text is a variable length data, but it can be transformed to a fixed length data through BoW.
+- Pytorch can be used for the modeling of a classifier.
+
+- The size of vocabulary will become enormous when a set of general text data is used.
+
+- `Dataset` and `Dataloader` in `pytorch` should be used instead of direct data feeding in the training loop.
+
+
+
+
+
+
+
+
+
+
+
+
+
+## Word Embedding
+
+- Each word is assigned a vector of dimension $N$. The dimension $N$ is chosen by you.
+- The number of vectors is the same as the number of words in the vocabulary.
+- During the training, the parameters of the vectors are also updated.
+- Afterwards, we can measure the distance of the two vectors as a metric between two corresponding words.
+- Embedding in `torch` is simple: `torch.nn.Embedding (N_VOC, N_Embed)`.
+
+
+### Embedding test
+
+```{python}
+import torch
+import torch.nn as nn
+import torch.nn.functional as F
+import torch.optim as optim
+#
+word_to_ix = {'hello': 0, 'world': 1}
+dim_embedding = 5
+embeds = nn.Embedding(len(word_to_ix), dim_embedding)
+word_index = word_to_ix['hello']
+x = torch.tensor ( [word_index], dtype=torch.long)
+emb_x = embeds (x)
+#
+with torch.no_grad(): # we don't need gradient here
+    print ('tensor ({}) = {}'.format(word_index, x))
+    print ('Embedded vector for {} is : \n{}'.format(word_index, emb_x))
+```
+
+## N-Gram Language Modeling
+
+In an n-gram language model, given a sequence of words, we want to compute
+$$
+    P(w_i | w_{i-1}, w_{i-2}, ..., w_{i-n+1})
+$$
+where $w_i$ is the $i$-th word of the sequence.
+
+
+```{python}
+CONTEXT_SIZE = 2
+EMBEDDING_DIM = 10
+# We will use Shakespeare Sonnet 2
+test_sentence = """When forty winters shall besiege thy brow,
+And dig deep trenches in thy beauty's field,
+Thy youth's proud livery so gazed on now,
+Will be a totter'd weed of small worth held:
+Then being asked, where all thy beauty lies,
+Where all the treasure of thy lusty days;
+To say, within thine own deep sunken eyes,
+Were an all-eating shame, and thriftless praise.
+How much more praise deserv'd thy beauty's use,
+If thou couldst answer 'This fair child of mine
+Shall sum my count, and make my old excuse,'
+Proving his beauty by succession thine!
+This were to be new made when thou art old,
+And see thy blood warm when thou feel'st it cold.""".split()
+
+# we should tokenize the input, but we will ignore that for now
+# build a list of tuples.  Each tuple is ([ word_i-2, word_i-1 ], target word)
+trigrams = [([test_sentence[i], test_sentence[i + 1]], test_sentence[i + 2])
+            for i in range(len(test_sentence) - 2)]
+
+# print the first 3, just so you can see what they look like
+print(trigrams[:3])
+
+vocab = set(test_sentence)
+word_to_ix = {word: i for i, word in enumerate(vocab)}
+#
+```
+```{python}
+class NGramLanguageModeler(nn.Module):
+
+    def __init__(self, vocab_size, embedding_dim, context_size):
+        super(NGramLanguageModeler, self).__init__()
+        self.embeddings = nn.Embedding(vocab_size, embedding_dim)
+        self.linear1 = nn.Linear(context_size * embedding_dim, 128)
+        self.linear2 = nn.Linear(128, vocab_size)
+
+    def forward(self, inputs):
+        embeds = self.embeddings(inputs).view((1, -1))
+        out = F.relu(self.linear1(embeds))
+        out = self.linear2(out)
+        log_probs = F.log_softmax(out, dim=1)
+        return log_probs
+#
+```
+The class defines a simple n-gram modeler, using an FC network to produce the probability for each of the words.
+
+- Look at the last layer of the network  
+    `self.linear2 = nn.Linear(128, vocab_size)`
+    Its output dimension is the same as `vocab_size`. That is, given a sequence of input (length $n$), the output is the probability of a possible output word, one out of the vocabulary.
+
+
+```{python}
+losses = []
+loss_function = nn.NLLLoss()
+model = NGramLanguageModeler(len(vocab), EMBEDDING_DIM, CONTEXT_SIZE)
+optimizer = optim.SGD(model.parameters(), lr=0.01)
+
+for epoch in range(50):
+    total_loss = 0
+    for context, target in trigrams:
+
+        # Step 1. Prepare the inputs to be passed to the model (i.e, turn the words
+        # into integer indices and wrap them in tensors)
+        context_idxs = torch.tensor([word_to_ix[w] for w in context], dtype=torch.long)
+
+        # Step 2. Recall that torch *accumulates* gradients. Before passing in a
+        # new instance, you need to zero out the gradients from the old
+        # instance
+        model.zero_grad()
+
+        # Step 3. Run the forward pass, getting log probabilities over next
+        # words
+        log_probs = model(context_idxs)
+
+        # Step 4. Compute your loss function. (Again, Torch wants the target
+        # word wrapped in a tensor)
+        loss = loss_function(log_probs, torch.tensor([word_to_ix[target]], dtype=torch.long))
+
+        # Step 5. Do the backward pass and update the gradient
+        loss.backward()
+        optimizer.step()
+
+        # Get the Python number from a 1-element Tensor by calling tensor.item()
+        total_loss += loss.item()
+    losses.append(total_loss)
+print(losses)  # The loss decreased every iteration over the training data!
+```
+
+
+```{python}
+import matplotlib.pyplot as plt
+fig, ax = plt.subplots()
+ax.plot (losses)
+ax.set_title ('loss against epoch')
+ax.set_xlabel ('epoch')
+ax.set_ylabel ('loss')
+plt.show()
+```
+
+    Q. Change the learning rate & the number of epochs, and fully train the network.
+    Well, you would need much more data.
+    
+
+After enough training, the embedding layer will have the vectors trained. Maybe apply t-SNE to visualize the space in 2D domain.
+
+Q. How can we get the embedding for words in the vacab?
+
+```{python}
+print (model)
+```
+We can access the named layers by the name.
+```{python}
+emb = model.embeddings
+print (emb)
+```
+
+```{python}
+input = torch.tensor( [0, 1, 2] )
+vec = emb (input)
+print (vec)
+```
+
+We can get the data in tensor `vec` in the format of `numpy` array.
+
+```{python}
+ix2word = {v:k for k,v in word_to_ix.items()}
+print (ix2word[1])
+#
+vec = vec.data.numpy()
+print (vec)
+print ('word = {}, index = {},\n embedding vector = {}'.format(ix2word[1], 1, vec[1]))
+```
+
+    Q. Apply any algorithm for dimensionality reduction and appreciate the view.
+
+
+
+
+## Continuous Bag of Words
+
+* Read [seriously](https://cs224d.stanford.edu/lecture_notes/notes1.pdf) when you want some knowledge. This notebook is to learn how to use `pytorch` not to learn mathematics behind the theory.
+
+
+    

@@ -1,0 +1,296 @@
+# Data Loading & Pre-Processing
+
+Have a look at [`torch.utils.data`](https://pytorch.org/docs/stable/data.html) for a full listing of classes for data manipulation.
+
+- `torch.utils.data.DataSet`
+- `torch.utils.data.DataLoader`
+
+
+```{python}
+import numpy as np
+import torch
+from matplotlib import pyplot as plt
+```
+
+Let's generate 100 points in 2D.
+```{python}
+ndata = 100
+x = np.random.rand(ndata,1).astype(np.float32)
+y = 3 * x + 5 + np.random.randn(ndata,1).astype(np.float32)*0.5
+print ('data generated: ', x.shape, y.shape)
+```
+The data of `y` generated are on the 2D line:
+```
+  y = 3 * x + 5
+```
+and perturbed by Gaussian noise of zero mean and standard deviation 0.5.
+```
+  np.random.randn(ndata,1).astype(np.float32)*0.5
+```
+```{python}
+plt.scatter(x,y)
+plt.show()
+```
+
+Our goal is to find a line model using the data. More specifically, the goal is to compute the two numbers 3 and 5 for the 2D line: `y=3x+5`.
+
+## Dataset
+
+Let's define a class that provides a standard access to the 100 data points $(x_i, y_i)$, which is a derived class of `torch.utils.data.Dataset`. Two member functions `__init__()` and `__getitem__()` must be implemented.
+
+```{python}
+from torch.utils.data import Dataset
+
+class myDataSet (Dataset):
+    def __init__ (self, x, y, transform=None):
+        self.x = x
+        self.y = y
+        self.transform = transform
+        self.size = x.shape[0]
+    def __len__ (self): 
+        return self.size
+    def __getitem__ (self, idx):
+        return x[idx], y[idx]
+```
+
+Then our custom dataset is creaed:
+```{python}
+dataset = myDataSet (x, y)
+```
+
+```{python}
+print ('> length of dataset is ', len(dataset))
+```
+
+As defined in the `__getitem__()`, we can access the data element one by one:
+```{python}
+for i, (xi, yi) in enumerate (dataset):
+    print (i, xi, yi, xi.shape, yi.shape)
+    if i > 3: break
+```
+Note that `x` is a matrix of shape `(100,1)`, and `xi` has shape `(1,)`. So is for `y`.
+
+
+
+## DataLoader to iterat through the dataset
+
+```{python}
+from torch.utils.data import DataLoader
+dl = DataLoader (dataset, batch_size=3)
+#
+data_item = next(iter(dl))
+print ('type(data_item) is ', type(data_item), ' of len ', len(data_item))
+for i in range(len(data_item)): 
+    print ('{}-th data: {}'.format(i, data_item[i]), type(data_item[i]))
+```
+
+The `data_item` has `3` data elements because we specified `batch_size=3`. In other words, `data_item` is a mini-batch of size 3.
+
+The `DataLoader` class instance `dl` provides a way to access a mini-batch every time through iteration for learning.
+
+
+
+## Neural Network Model & Learning
+
+See [`torch.nn.Linear`](https://pytorch.org/docs/stable/nn.html#linear-layers) to see the reference manual for the `Linear` module:
+```
+class torch.nn.Linear(in_features, out_features, bias=True)
+```
+
+We make a model for input dimension 1 and output dimension 1 which fits our data format.
+
+```{python}
+model = torch.nn.Linear (in_features=1, out_features=1)
+print ('myModel: ', model)
+print ('weight: ', model.weight)
+print ('bias  : ', model.bias)
+```
+We can see the actual values of the parameters the weight and bias which were randomly assigned when `Linear` module was called. After a learning, we want then converge closely to `weight=3` and `bias=5`, which will not happend actually due to the random noise.
+
+
+```{python}
+loss_ft = torch.nn.MSELoss (reduction='sum')
+optimizer = torch.optim.SGD(model.parameters(), lr = 0.01)
+nepochs = 7
+res = []
+for epoch in range (1,nepochs+1):
+    res_epoch = []
+    for i, mini_batch_data in enumerate(dl):
+        xi, yi = mini_batch_data
+
+        yi_pred = model (xi)
+
+        loss = loss_ft (yi_pred, yi)
+        res_epoch.append (loss.item())
+        optimizer.zero_grad ()
+        loss.backward ()
+        optimizer.step ()
+    #
+    res.append (np.array(res_epoch).sum())
+    #print (epoch, np.array(res_epoch).sum())
+#
+```
+
+Let's see how the MSE error has changed through the learning iteration.
+
+```{python}
+import matplotlib.pyplot as plt
+fig, ax = plt.subplots()
+ax.plot (range(1,nepochs+1), res, '-o')
+ax.set_ylabel ('MSE error')
+plt.show ()
+```
+
+In this example, after `nepochs=3` iterations of learning, the parameter values were updated to:
+
+```{python}
+print ('weight = {}\nbias = {}'.format(model.weight, model.bias))
+```
+
+
+Q. Build an example model of two dimensional linear model: `y = w1 x1 + w2 x2 + b`. You need to set `in_features=2` for `torch.nn.Linear`.
+
+
+
+
+
+
+## `nn.Sequential` & Learning
+
+NN  모델을 `torch.nn.Sequential`로 만드는 경우에는 파라메터 값들을 살펴보는 방법이 달라지게된다. 
+
+```{python}
+model = torch.nn.Sequential(
+  torch.nn.Linear (in_features=1, out_features=1)
+)
+print ('myModel: ', model)
+```
+
+이 모델의 파라메터 값들은 아래와 같이 `model.parameters()`를 사용해서 하나씩 접근하는 것이 가능하다.
+
+```{python}
+for i, param in enumerate(model.parameters()):
+  print (' model: {}-th = {}'.format(i, param))
+```
+We see the actual values of the two parameters (the weight and bias) which were randomly assigned for the `Linear` module.
+
+
+```{python}
+loss_ft = torch.nn.MSELoss (reduction='sum')
+lr = 0.001
+optimizer = torch.optim.SGD(model.parameters(), lr=lr) 
+nepochs = 20
+res = []
+for epoch in range (1,nepochs+1):
+    res_epoch = []
+    for i, mini_batch_data in enumerate(dl):
+        xi, yi = mini_batch_data
+
+        yi_pred = model (xi)
+
+        loss = loss_ft (yi_pred, yi)
+        res_epoch.append (loss.item())
+        optimizer.zero_grad ()
+        loss.backward ()
+        optimizer.step ()
+    #
+    res.append (np.array(res_epoch).sum())
+    #print (epoch, np.array(res_epoch).sum())
+#
+```
+
+Let's see how the MSE error has changed through the learning iteration.
+
+```{python}
+import matplotlib.pyplot as plt
+fig, ax = plt.subplots()
+ax.plot (range(1,nepochs+1), res, '-o')
+fig.suptitle ('MSE error: lr={} '.format(lr))
+plt.show ()
+```
+
+The learned model has parameters updated:
+```{python}
+for param in model.parameters():
+    print ('param: ', param)
+    print ('param.data: ', param.data)
+    print ('param.data.item(): ', param.data.item())
+```
+
+## Transforms for data augmentation on sampling
+
+When our customized dataset `myDataset` is declared, the argument `transform=None` appeared but not explained. It is to apply a transform to the original data for data augmentation.
+
+Let's define three classes for data transformation
+```{python}
+class add_num (object):
+    """ add a constant number to the input data """
+    def __init__(self, num):
+        self.num = num
+    
+    def __call__(self, sample):
+        return sample + self.num
+#
+class add_2 (object):
+    """ simply add 2 to the object """
+    def __call__(self, sample):
+        return sample + 2
+#
+class ToTensor(object):
+    def __call__(self, sample):
+        return torch.from_numpy (sample)
+#
+```
+
+The derived class is now defined. It uses the provided transform when an element is accessed.
+```{python}
+from torch.utils.data import Dataset
+
+class myDataSet (Dataset):
+    def __init__ (self, x, y, transform=None):
+        self.x = x
+        self.y = y
+        self.transform = transform
+        self.size = x.shape[0]
+    def __len__ (self): 
+        return self.size
+    def __getitem__ (self, idx):
+        xi = x[idx]
+        yi = y[idx]
+        if self.transform:
+            yi = self.transform (yi)
+        return xi, yi
+```
+
+
+Now we make a dataset in which the composition of the transformations will be applied automatically when an element of the dataset is retrieved. 
+```{python}
+import torchvision
+composed = torchvision.transforms.Compose([add_num(3), add_2(), ToTensor()])
+dataset = myDataSet (x, y, composed)
+```
+* Don't forget to put `()` in `Compose`.
+
+The first `add(3)` adds 3 to each element of y, then `add_2()`, and finally `ToTensor()`. So the returned sample should be equal to `y + 3 + 2`. Let's make a visual of the two data sets.
+```{python}
+z = []
+for xi, zi in dataset:
+    z.append (zi.item())
+
+fig,ax = plt.subplots()
+ax.scatter (x, y, label='original')
+ax.scatter (x, z, label='transformed')
+ax.legend(loc='best')
+ax.set_title ('data original vs transformed')
+plt.show()
+```
+
+## Conclusion
+
+There are some useful transformation already defined in `torchvision`.
+
+*  See the tutorial in [Data Loading and Processing Tutorial](https://pytorch.org/tutorials/beginner/data_loading_tutorial.html)
+
+* See `torchvision` official document for `transforms`. [torchvision.transforms](https://pytorch.org/docs/stable/torchvision/transforms.html)
+
+EOC.

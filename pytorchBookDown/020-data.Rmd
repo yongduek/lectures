@@ -1,0 +1,12 @@
+
+# Datasets
+
+Data collection over the internet. Easy to find in `Kaggle`, `torchvision`, `torchtext`.
+
+Needed is a dataset in 한글.
+
+## Image Data
+
+## Text Data
+
+## Others

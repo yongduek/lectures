@@ -6,8 +6,6 @@ Simply speaking, **Tensor = Numpy Arry**
 To run the code, you must have `pytorch` installed.
 
 ```{python}
-import matplotlib.pyplot as plt
-
 import torch
 
 dtype = torch.float   # data type
@@ -54,13 +52,15 @@ for t in range(epochs):
 #    
 print ('loss = {} after epochs {}'.format(loss, epochs))
 
-plt.plot (range(1,1+epochs), res, '-o')
+import matplotlib.pyplot as plt
+fig, ax = plt.subplots();
+ax.plot (range(1,1+epochs), res, '-o')
 plt.show()
 ```
 
 The package we use for the implementation of deep learning algorithm is `pytorch` with version greater than 4.0. In python, we import `torch` which is the original name of it.
 
-```{python, eval=FALSE}
+```
 import torch
 ```
 
@@ -79,7 +79,7 @@ device = torch.device("cpu") # which device to run the code
 
 
 We used `np.randn()` and now we use `torch.randn()` with two more options.
-```{python, eval=FALSE}
+```
 # Create random input and output data
 x = torch.randn(N, D_in, device=device, dtype=dtype)
 y = torch.randn(N, D_out, device=device, dtype=dtype)
@@ -92,6 +92,10 @@ w2 = torch.randn(H, D_out, device=device, dtype=dtype)
 Let's see the dimension of $x$ and $y$:
 ```{python}
 print (x.shape, y.shape)
+```
+
+```{python}
+print (x)
 ```
 
 Q: What is the role of `mm()` function below?

@@ -1,5 +1,5 @@
 --- 
-title: "A Practical Guide to Deep Learning with Pytorch"
+title: "Deep Learning with Pytorch: Explained Tutorials"
 author: "서용덕 Yongduek Seo yndk@sogang.ac.kr"
 date: "`r Sys.Date()`"
 site: bookdown::bookdown_site
@@ -7,21 +7,18 @@ documentclass: book
 bibliography: [book.bib, packages.bib]
 biblio-style: apalike
 link-citations: yes
-description: "Pytorch practice and deep learning."
+description: "Pytorch practice and deep learning. There are many tutorials in pytorch.org. Explanations are attached to learn it."
 ---
 
 
-``` {r}
-knitr::opts_chunk$set(engine.path = list(
-  python = '/Library/Frameworks/Python.framework/Versions/3.7/bin/python3'
-))
-```
 
-MacOS: python 3.7 install `https://docs.python.org/3/using/mac.html`
-MacOS:`matplotlib` backend problem can be solved by 
+- MacOS: python 3.7 install `https://docs.python.org/3/using/mac.html`
+- MacOS:`matplotlib` backend problem can be solved by 
     - Create a file `~/.matplotlib/matplotlibrc` there and add the following code: `backend: TkAgg`
 
+
 # Prerequisites
+
 
 1. Install `pytorch`, `python 3.x`, `anaconda`
 1. `numpy` and `torch.Tensor`
@@ -85,15 +82,22 @@ knitr::write_bib(c(
 
 Python 언어를 사용하는 방법은 ... 쉽다.
 
-```{python}
-import sys
-x = 'Hello python'
-print (x.split(' '), '파이선 버전=', sys.version)
+```{bash}
+which python
 ```
 
-Pandas  패키지 사용하는 것도 간단하다.
-``` {python}
-import pandas as pd
-df = pd.read_csv ('../bayesian/showcases.2012.csv')
-print (df.head())
+<!--  Mac OS X -->
+``` {r}
+knitr::opts_chunk$set(engine.path = list(
+  python='/usr/local/bin/python3'
+))
 ```
+```{bash}
+which python
+```
+
+```{python}
+import sys
+print (sys.version)
+```
+
