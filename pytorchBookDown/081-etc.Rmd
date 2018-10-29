@@ -1,5 +1,69 @@
 
-# Some from Probability Theory
+# Keywords from Probability Theory
+
+## Binomial Distribution
+
+- Read [wikipedia](https://en.wikipedia.org/wiki/Binomial_distribution)
+
+- The binomial distribution with parameters $n$ and $p$ is the discrete probability distribution of the number of successes in a sequence of $n$ independent experiments, each asking a yes–no question, and each with its own boolean-valued outcome
+
+- The binomial distribution is frequently used to model the number of successes in a sample of size n drawn with replacement from a population of size N. If the sampling is carried out without replacement, the draws are not independent and so the resulting distribution is a hypergeometric distribution, not a binomial one. However, for N much larger than n, the binomial distribution remains a good approximation, and is widely used.
+
+- When $n=1$, it is also called a Bernoulli distribution.
+
+- The binomial distribution is the basis for the popular binomial test of [statistical significance](https://en.wikipedia.org/wiki/Statistical_significance).
+
+- mean: $\mu = n p$
+- std: $\sigma = \sqrt{n p (1-p)}$
+
+### Probability Mass Function (PMF)
+
+- If the random variable $X$ follows the binomial distribution with parameters $n\in N$ and $p\in [0,1]$, we write $X \sim B(n, p)$. 
+
+- The probability of getting exactly $k$ successes in $n$ trials is given by the probability mass function
+$$
+ Pr(X=k | n, p) = {\binom{n}{k}} p^{k}(1-p)^{n-k} 
+$$
+for $k = 0, 1, 2, …, n,$ where
+\begin{equation}
+    {\binom {n}{k}}={\frac {n!}{k!(n-k)!}}
+\end{equation}
+
+
+- When $n$ is large, the distribution looks very similar to Gaussian.
+
+```{r figBinomialPMF, echo=FALSE, fig.align='center', fig.cap='PMFs of Binomial Distributions'}
+knitr::include_graphics('figures/Binomial_distribution_pdf.png')
+```
+
+Q. Plot and compare. Draw a binomial (n=20, p = 0.5) PMF and a Gaussian $N(\mu, \sigma)$ to examine the similarity.
+
+Q. When is binomial distribution used in real life? Give an example.
+
+
+### Game prediction
+How many games Arsenal will win in a season? [cite](https://www.quora.com/What-are-some-examples-of-the-binomial-distribution-in-real-life)
+
+- We have a boolean outcome - win or lose.
+- The number of Trials $N$ is fixed - 38 games per season.
+- The probability $p$ of Arsenal winning a particular game .... we need some (history) data to approximate it. Let's assume the probability of winning a game is $\hat p$ based on some data. (This is the point where Bayesian comes in, but later.)
+    - $\mu = 22.15$, $\sigma = 2.15$
+    - $\hat p = \mu / 38 = 0.582$
+- So, we come up with a binomial distribution with $n=38$ and $p=0.582$.
+- Now we can compute the probability of winning 30 games out of 38.
+    - $P(k=30) = {\binom{n=38}{k=30}} p^{30}(1-p)^{8}$
+- Or we can compute the probability of $P(k >= 25)$, which is
+$$
+  P(k >= 25) = 1 - P(k<25) = 1 - \sum_{k=0}^{24} P(k)
+$$
+
+
+
+
+### References
+
+1. [link](http://sphweb.bumc.bu.edu/otlt/MPH-Modules/BS/BS704_Probability/BS704_Probability7.html)
+1. [khan academy](https://www.youtube.com/watch?v=O12yTz_8EOw&feature=youtu.be)
 
 ## Poisson RV & Distribution 
 
@@ -108,7 +172,7 @@ plt.show()
 
 Regression problems
 
-Consider two models, 1 and 2, where model 1 is 'nested' within model 2. Model 1 is the restricted model, and Model 2 is the unrestricted one. That is, model 1 has p1 parameters, and model 2 has p2 parameters, where p2 > p1, and for any choice of parameters in model 1, the same regression curve can be achieved by some choice of the parameters of model 2.
+Consider two models, 1 and 2, where model 1 is 'nested' within model 2. Model 1 is the restricted model, and Model 2 is the unrestricted one. That is, model 1 has p1 parameters, and model 2 has $p_2$ parameters, where $p2 > p1$, and for any choice of parameters in model 1, the same regression curve can be achieved by some choice of the parameters of model 2.
 
 If there are $n$ data points to estimate parameters of both models from, then one can calculate the $F$ statistic, given by
 
