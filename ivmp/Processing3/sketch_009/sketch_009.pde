@@ -1,6 +1,7 @@
 void setup() {   
   size(400, 200);
   frameRate (2);
+  strokeWeight(4);
 }   
 
 void draw() {   

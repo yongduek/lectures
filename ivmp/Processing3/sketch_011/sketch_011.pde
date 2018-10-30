@@ -8,6 +8,7 @@ float increment = 0.01;
 
 void setup() {
   size(500, 500);
+  frameRate(120);
   background(255);
   smooth();
   
