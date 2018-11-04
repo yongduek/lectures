@@ -1,0 +1,9 @@
+
+## DC-GAN
+
+The code is from [DC-GAN](https://pytorch.org/tutorials/beginner/dcgan_faces_tutorial.html)
+
+
+### Q. Use 2D convolutional network for MNIST
+
+- `Conv2DTranspose`
