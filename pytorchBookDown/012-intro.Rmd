@@ -1,3 +1,11 @@
+
+``` {r python3setting}
+knitr::opts_chunk$set(engine.path = list(
+  python='/usr/local/bin/python3'
+))
+```
+
+
 ## With Pytorch Tensors
 
 Simply speaking, **Tensor = Numpy Arry**

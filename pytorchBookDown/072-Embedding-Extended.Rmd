@@ -12,7 +12,10 @@ knitr::opts_chunk$set(engine.path = list(
 
 - Various tries to combine word embedding with other data types.
 
-- The figure \@ref(fig:imageClassManifold) is from [this](https://nlp.stanford.edu/~socherr/SocherGanjooManningNg_NIPS2013.pdf)
+- The figure \@ref(fig:imageClassManifold) is from the 2013 paper [Zero-Shot Learning Through Cross-Modal Transfer
+](https://nlp.stanford.edu/~socherr/SocherGanjooManningNg_NIPS2013.pdf)
+by Socher, Ganjoo, Manning, and A. Ng.
+
 
 ```{r imageClassManifold, echo=FALSE, fig.align='center', fig.cap='RNN and its unrolled version'}
 knitr::include_graphics('figures/Socher-ImageClassManifold.png')

@@ -11,6 +11,11 @@ description: "Pytorch practice and deep learning. There are many tutorials in py
 ---
 
 
+``` {r}
+knitr::opts_chunk$set(engine.path = list(
+  python='/usr/local/bin/python3'
+))
+```
 
 <!-- ``` {r} -->
 <!-- knitr::opts_chunk$set(engine.path = list( -->
