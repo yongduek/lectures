@@ -70,7 +70,7 @@ This output `h` corresponds to the output of `lstm` for the last item of the inp
 ```{python}
 print ('@ h[0] =\n', h[0], '\n@ h[1] =\n', h[1])
 ```
-The first `h[0]` is the same as the last batch of `out` (you should check it), and `h[1]` is a tensor used inside lstem.
+The first `h[0]` is the same as the last batch of `out` (you should check it), and `h[1]` is a tensor used inside the `lstm`.
 
 The output `out` was provided from `lstm` after 5 iterations. Why 5? The length of the input seqnece `inp` is of length 5.
 

@@ -4,15 +4,15 @@
 //   2. millis()
 //   3. control of period of sin/cos in the unit of millis.
 
-Bar bar = new Bar(1,1); // basic shape
+Bar bar = new Bar(1,1); // basic shape, study purpose
 PVector b1 = new PVector(80, 100); // size of first bar
 PVector b2 = new PVector(30, 170); // size of second bar
-PVector b3 = new PVector(15, 220);
+PVector b3 = new PVector(15, 220); // 3rd bar
 
 float joint1 = 0, joint2 = 0;
 
 void setup() {
-  size (800, 800);
+  size (800, 800, P3D);
   frameRate (120);
 }
 
@@ -36,7 +36,7 @@ void draw() {
     drawAxes (400,height);
     
     translate (0, b1.y);
-    rotate (radians(joint1)); // first joint
+    rotateZ (radians(joint1)); // first joint
     
     // second bar
     pushMatrix();

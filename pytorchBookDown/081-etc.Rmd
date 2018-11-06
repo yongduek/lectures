@@ -152,7 +152,56 @@ plt.show()
 ```
 
 
-## p-value & Hypothesis Test
+
+
+
+
+
+
+
+
+## Exponential Distribution
+
+- The exponential distribution (also known as the negative exponential distribution) is the probability distribution that describes the **time between events** in a Poisson point process, i.e., a process in which events occur continuously and independently at a constant average rate. [wikipedia](https://en.wikipedia.org/wiki/Exponential_distribution)
+
+- It is a particular case of the **gamma** distribution. 
+- It is the continuous analogue of the **geometric distribution**, and it has the key property of being **memoryless**. 
+- In addition to being used for the analysis of Poisson point processes it is found in various other contexts.
+
+$$
+  p(x; \lambda) = \left\{ 
+        \begin{array}{lr} 
+        \lambda \exp ( -\lambda x ) & x \geq 0\\
+            0 & x < 0
+        \end{array} \right.
+$$
+```{r expPDF, echo=FALSE, out.width='50%', fig.align='center', fig.cap='PDFs of exponential distribution.'}
+knitr::include_graphics('figures/expPDF.png')
+```
+
+```{r expCDF, echo=FALSE, out.width='50%', fig.align='center', fig.cap='CDFs of exponential distribution.'}
+knitr::include_graphics('figures/expCDF.png')
+```
+
+- mean: $1/\lambda$
+- variance: $1/\lambda^2$
+
+
+
+## Geometric Distribution
+
+
+
+
+
+
+
+
+
+
+
+
+## The p-value & Hypothesis Test
 
 ## F-test
 
