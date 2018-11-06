@@ -1,7 +1,4 @@
 
-```{bash}
-which python
-```
 
 ## With Custom `nn` Modules
 

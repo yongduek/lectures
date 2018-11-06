@@ -32,7 +32,7 @@ description: "Pytorch practice and deep learning. There are many tutorials in py
 # Prerequisites
 
 
-1. Install `pytorch`, `python 3.x`, `anaconda`
+1. Install `pytorch`, `python 3.x`
 1. `numpy` and `torch.Tensor`
 1. Simple linear regression 
     - a line fitting for a data set of almost no noise: $y = w x + b$
