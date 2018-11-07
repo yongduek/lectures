@@ -1,25 +1,21 @@
 //Sierpiński triangle
 
-color c;
+int N = 5;
 
-void setup() 
-{
+void setup() {
   size(800, 800);
   background(255);
   frameRate (1);
 }
 
-void draw()
-{
+void draw() {
   smooth();
   noStroke();
-  triangleSier(0, 800, 400, 0, 800, 800, 7, color(random(255), random(255), random(255)));
+  triangleSier(0, 800, 400, 0, 800, 800, N, color(random(255), random(255), random(255)));
 }
 
-void triangleSier(float x1, float y1, float x2, float y2, float x3, float y3, int n, color c) //
-{
-  if ( n > 0 ) 
-  {   
+void triangleSier(float x1, float y1, float x2, float y2, float x3, float y3, int n, color c) {
+  if ( n > 0 ) {   
     fill (c);
     triangle(x1, y1, x2, y2, x3, y3);
     

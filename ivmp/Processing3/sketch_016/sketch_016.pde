@@ -1,11 +1,11 @@
 float theta;
 float t;
-float ratio = 0.7;
+float ratio = 0.67;
 
 void setup() {
   size(600,400);
-  theta = PI/1.8;
-  t = height/2;
+  theta = PI/5.5; //1.8;
+  t = height/3;
 }
 
 void draw(){
