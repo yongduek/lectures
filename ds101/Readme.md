@@ -2,12 +2,13 @@
 
 1. Python Data Science Handbook
 1. Introduction to Machine Learning with Python
+1. `https://scikit-learn.org` & `scipy.org`
 1. Think Stats
 1. Think Bayes
 
 
 
-Small Projects
+## Small Projects
 
 1. Given a text file in `.txt` format, count the number of alphabets, letters, words, and sentences. (Korean/English)
     - first try to make a small txt file using a text file editor such as notepad, pycharm, vscode, sublime, etc. 
