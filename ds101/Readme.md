@@ -19,10 +19,10 @@
         - Get a report/paper by Change DU, apply the analysis.
         - Get a report/paper by Fremery, W., apply the analysis.
         - Extract words peculiar to Chang's or Fremery's based on the above analysis
-        - use `spacy` for token analyser, use nouns only for the analysis.
+        - use `spacy` for token analyser, use them for the analysis.
     - Korean documents
         - Choose two authors and obtain their documents, apply the same procedure, and report.
-        - Apply Token Analyser (형태소분석기) such as `https://github.com/kakao/khaiii`, '코코마', or 'twitter', and do the same analysis for Nouns only.
+        - Apply Token Analyser (형태소분석기) such as `https://github.com/kakao/khaiii`, '코코마', or 'twitter', and do the same analysis.
         
 1. Draw several lines, triangles, circles in a numpy WHC array, and save it to a `png` or `jpg` file.
     - Read it into numpy, display with matplotlib.pyplot
