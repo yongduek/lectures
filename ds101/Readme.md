@@ -10,11 +10,23 @@
 
 ## Small Projects
 
-1. Given a text file in `.txt` format, count the number of alphabets, letters, words, and sentences. (Korean/English)
-    - first try to make a small txt file using a text file editor such as notepad, pycharm, vscode, sublime, etc. 
+1. short intro to `python` : Skip this part since it can be done during the exploration!
+    - data containers: list, dict, set
+    - conditional expression: if, else, elif
+    - tedious loop: for, while
+    - variable
+    - print
+    - class and member function
+
+1. Playing with text data: 
+    - Given a text file in `.txt` format, count the number of alphabets, letters, words, and sentences. (Korean/English)
+    - first try to make a small txt file using a text file editor
+        - jupyter notebook, pycharm, vscode, sublime, etc. 
     - Then a large file from a book or a new article.
+        - Gutenberg Project
     - make an automatically generated statistics report & publish it on `twitter` or `facebook`.
     - Separate a korean character into its Cho/Jung/Jong and do counting
+    
     - English documents
         - Get a report/paper by Change DU, apply the analysis.
         - Get a report/paper by Fremery, W., apply the analysis.
@@ -24,13 +36,32 @@
         - Choose two authors and obtain their documents, apply the same procedure, and report.
         - Apply Token Analyser (형태소분석기) such as `https://github.com/kakao/khaiii`, '코코마', or 'twitter', and do the same analysis.
         
-1. Draw several lines, triangles, circles in a numpy WHC array, and save it to a `png` or `jpg` file.
-    - Read it into numpy, display with matplotlib.pyplot
-    - Do the same thing with PIL
-    - Use a ttf font file to make images of characters with PIL.
+1. Draw several lines, triangles, circles in a `numpy` WHC array, and save it to a `png` or `jpg` file.
+    - what is `numpy`?
+        - short tutorial.
+    - Read a `jpg` image file into `numpy.array` and display it with `matplotlib.pyplot`
+    - Do the same thing with `PIL`
+    - Use a `ttf` font file to make images of characters with `PIL`.
         - Do research on the structure of ttf font file.
+        
+    - Line/tirangle/polygon drawing in a digital image.
+        - direct programming
+        - PIL function
     
-1. pandas dataframe. Read in IRIS csv file. 
+    - Computational Linear Algebra with `numpy`
+        - scalar, vector, matrix
+        - two operations: addition, multiplication
+       
+    - image processing:
+        - pixel-based operation: brightness control, color quantization
+        - window-based operation: convolution
+        - binarization, thresholding, edge filter
+        - histogram: another counting (as done with text)
+        
+1. `pandas` dataframe. 
+    - what is `pandas`?
+        - a tutorial on using `pandas`
+    - Read in `IRIS` csv file. 
     - Do explatory data analysis (visual inspection) with scatter plots
     - Choose two species, do classification with scikit-learn.
     - Read `azeleas.csv`. Report statistics of the 'codes' in the file.
@@ -49,3 +80,6 @@
     - apply `t-SNE` analysis and display it.
 
 1. TODO: Regression Problem
+    - use a `kaggle.com` data set & notepad
+    
+    
