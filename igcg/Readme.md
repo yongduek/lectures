@@ -28,5 +28,6 @@ It will cover any topics related to the achievement of the main goal of displayi
 1. image gradient
 1. image enhancement by LoG (Laplacian of Gaussian)
 
+## References
 
-[opencv python tutorials](https://opencv-python-tutroals.readthedocs.io/en/latest/py_tutorials/py_core/py_basic_ops/py_basic_ops.html)
+1. [opencv python tutorials](https://opencv-python-tutroals.readthedocs.io/en/latest/py_tutorials/py_core/py_basic_ops/py_basic_ops.html)
