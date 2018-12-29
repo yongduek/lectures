@@ -9,7 +9,9 @@
 
 
 ## Small Projects
-
+1. editor / IDE for python
+    - `https://www.datacamp.com/community/tutorials/data-science-python-ide`
+    
 1. short intro to `python` : Skip this part since it can be done during the exploration!
     - data containers: list, dict, set
     - conditional expression: if, else, elif
@@ -61,6 +63,7 @@
 1. `pandas` dataframe. 
     - what is `pandas`?
         - a tutorial on using `pandas`
+        - `https://towardsdatascience.com/be-a-more-efficient-data-scientist-today-master-pandas-with-this-guide-ea362d27386`
     - Read in `IRIS` csv file. 
     - Do explatory data analysis (visual inspection) with scatter plots
     - Choose two species, do classification with scikit-learn.
@@ -79,6 +82,9 @@
     - accuracy vs recall, F-score
     - apply `t-SNE` analysis and display it.
 
+1. network
+    - `https://www.datacamp.com/community/tutorials/social-network-analysis-python`
+    
 1. TODO: Regression Problem
     - use a `kaggle.com` data set & notepad
     
