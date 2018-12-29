@@ -21,6 +21,8 @@
     - class and member function
 
 1. Playing with text data: 
+    - string data and encoding:
+        - `https://mariapilot.noblogs.org/files/2017/05/MODERN-PYTHON-COOKBOOK.pdf`
     - Given a text file in `.txt` format, count the number of alphabets, letters, words, and sentences. (Korean/English)
     - first try to make a small txt file using a text file editor
         - jupyter notebook, pycharm, vscode, sublime, etc. 
