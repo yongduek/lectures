@@ -84,6 +84,7 @@
 
 1. network
     - `https://www.datacamp.com/community/tutorials/social-network-analysis-python`
+    - math: `https://www.youtube.com/playlist?list=PLPaDsoN2Ogtac0iF9S0I8Mmt-eW7VlJll`
     
 1. TODO: Regression Problem
     - use a `kaggle.com` data set & notepad
