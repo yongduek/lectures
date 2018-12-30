@@ -20,26 +20,6 @@
     - print
     - class and member function
 
-1. Playing with text data: 
-    - string data and encoding:
-        - `https://mariapilot.noblogs.org/files/2017/05/MODERN-PYTHON-COOKBOOK.pdf`
-    - Given a text file in `.txt` format, count the number of alphabets, letters, words, and sentences. (Korean/English)
-    - first try to make a small txt file using a text file editor
-        - jupyter notebook, pycharm, vscode, sublime, etc. 
-    - Then a large file from a book or a new article.
-        - Gutenberg Project
-    - make an automatically generated statistics report & publish it on `twitter` or `facebook`.
-    - Separate a korean character into its Cho/Jung/Jong and do counting
-    
-    - English documents
-        - Get a report/paper by Change DU, apply the analysis.
-        - Get a report/paper by Fremery, W., apply the analysis.
-        - Extract words peculiar to Chang's or Fremery's based on the above analysis
-        - use `spacy` for token analyser, use them for the analysis.
-    - Korean documents
-        - Choose two authors and obtain their documents, apply the same procedure, and report.
-        - Apply Token Analyser (형태소분석기) such as `https://github.com/kakao/khaiii`, '코코마', or 'twitter', and do the same analysis.
-        
 1. Draw several lines, triangles, circles in a `numpy` WHC array, and save it to a `png` or `jpg` file.
     - what is `numpy`?
         - short tutorial.
@@ -70,7 +50,30 @@
     - Do explatory data analysis (visual inspection) with scatter plots
     - Choose two species, do classification with scikit-learn.
     - Read `azeleas.csv`. Report statistics of the 'codes' in the file.
+
+1. Playing with text data: 
+    - string data and encoding:
+        - `https://mariapilot.noblogs.org/files/2017/05/MODERN-PYTHON-COOKBOOK.pdf`
+    - Given a text file in `.txt` format, count the number of alphabets, letters, words, and sentences. (Korean/English)
+    - first try to make a small txt file using a text file editor
+        - jupyter notebook, pycharm, vscode, sublime, etc. 
+    - Then a large file from a book or a new article.
+        - Gutenberg Project
+    - make an automatically generated statistics report & publish it on `twitter` or `facebook`.
+    - Separate a korean character into its Cho/Jung/Jong and do counting
     
+    - English documents
+        - Get a report/paper by Change DU, apply the analysis.
+        - Get a report/paper by Fremery, W., apply the analysis.
+        - Extract words peculiar to Chang's or Fremery's based on the above analysis
+        - use `spacy` for token analyser, use them for the analysis.
+    - Korean documents
+        - Choose two authors and obtain their documents, apply the same procedure, and report.
+        - Apply Token Analyser (형태소분석기) such as `https://github.com/kakao/khaiii`, '코코마', or 'twitter', and do the same analysis.
+        
+    - Reading pdf documents with python
+        - 'pypdf2'
+
 1. Do research on 'base64' encoding, provide an example.
     - convert a base64 encoded image into a numpy array.
     - generate extra column in the dataframe and put azelieas numpy char arrays.
@@ -91,4 +94,20 @@
 1. TODO: Regression Problem
     - use a `kaggle.com` data set & notepad
     
+1. References & Books
+    - [Python for Social Scientists](https://gawron.sdsu.edu/python_for_ss/)
+    - [Python for Social Science](https://gawron.sdsu.edu/python_for_ss/course_core/book_draft/index.html)
+        - See 6. Data, 7. Classification of Text, 8. Visualization, 9. Social Netowrks
+        - Interesting [Anna Karenina Network Assignment](https://gawron.sdsu.edu/python_for_ss/course_core/book_draft/Social_Networks/anna_karenina_network_assignment.html)
+    - [Modern Python Cookbook]()
+    - [Learning Python for Social Scientists](https://nealcaren.github.io/python-tutorials/)
+        - Personal compilation of a list of python tutorials and annotated analyses    
+        - Plenty of useful site links.
+    - [Fashion Color Analysis](https://github.com/rosariomgomez/fashion)
+        - Application of various image analysis techniques including face detection, color analysis
+        - impressive!
+    - [Text Analysis with Topic Models for the Humanities and Social Sciences](https://liferay.de.dariah.eu/tatom/)
+        - A little bit higher level than rudimentary.
+        - Text analysis requires some concepts of mathematics and statistics.
+        - Now is the time to learn about Bayesian statistics: [A first course in Bayesian statistical methods](https://www.stat.washington.edu/people/pdhoff/book.php)
     
