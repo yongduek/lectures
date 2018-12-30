@@ -21,6 +21,9 @@
     - class and member function
 
     - [First Python Notebook](http://www.firstpythonnotebook.org/)
+        - Hello git, github
+        - Hello pandas, data, filters
+        - This textbook will guide you through an investigation of money in politics using data from the [California Civic Data Coalition](https://www.californiacivicdata.org).
 
 1. Draw several lines, triangles, circles in a `numpy` WHC array, and save it to a `png` or `jpg` file.
     - what is `numpy`?
