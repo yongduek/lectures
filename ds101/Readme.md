@@ -20,26 +20,6 @@
     - print
     - class and member function
 
-1. Playing with text data: 
-    - string data and encoding:
-        - `https://mariapilot.noblogs.org/files/2017/05/MODERN-PYTHON-COOKBOOK.pdf`
-    - Given a text file in `.txt` format, count the number of alphabets, letters, words, and sentences. (Korean/English)
-    - first try to make a small txt file using a text file editor
-        - jupyter notebook, pycharm, vscode, sublime, etc. 
-    - Then a large file from a book or a new article.
-        - Gutenberg Project
-    - make an automatically generated statistics report & publish it on `twitter` or `facebook`.
-    - Separate a korean character into its Cho/Jung/Jong and do counting
-    
-    - English documents
-        - Get a report/paper by Change DU, apply the analysis.
-        - Get a report/paper by Fremery, W., apply the analysis.
-        - Extract words peculiar to Chang's or Fremery's based on the above analysis
-        - use `spacy` for token analyser, use them for the analysis.
-    - Korean documents
-        - Choose two authors and obtain their documents, apply the same procedure, and report.
-        - Apply Token Analyser (형태소분석기) such as `https://github.com/kakao/khaiii`, '코코마', or 'twitter', and do the same analysis.
-        
 1. Draw several lines, triangles, circles in a `numpy` WHC array, and save it to a `png` or `jpg` file.
     - what is `numpy`?
         - short tutorial.
@@ -70,7 +50,30 @@
     - Do explatory data analysis (visual inspection) with scatter plots
     - Choose two species, do classification with scikit-learn.
     - Read `azeleas.csv`. Report statistics of the 'codes' in the file.
+
+1. Playing with text data: 
+    - string data and encoding:
+        - `https://mariapilot.noblogs.org/files/2017/05/MODERN-PYTHON-COOKBOOK.pdf`
+    - Given a text file in `.txt` format, count the number of alphabets, letters, words, and sentences. (Korean/English)
+    - first try to make a small txt file using a text file editor
+        - jupyter notebook, pycharm, vscode, sublime, etc. 
+    - Then a large file from a book or a new article.
+        - Gutenberg Project
+    - make an automatically generated statistics report & publish it on `twitter` or `facebook`.
+    - Separate a korean character into its Cho/Jung/Jong and do counting
     
+    - English documents
+        - Get a report/paper by Change DU, apply the analysis.
+        - Get a report/paper by Fremery, W., apply the analysis.
+        - Extract words peculiar to Chang's or Fremery's based on the above analysis
+        - use `spacy` for token analyser, use them for the analysis.
+    - Korean documents
+        - Choose two authors and obtain their documents, apply the same procedure, and report.
+        - Apply Token Analyser (형태소분석기) such as `https://github.com/kakao/khaiii`, '코코마', or 'twitter', and do the same analysis.
+        
+    - Reading pdf documents with python
+        - 'pypdf2'
+
 1. Do research on 'base64' encoding, provide an example.
     - convert a base64 encoded image into a numpy array.
     - generate extra column in the dataframe and put azelieas numpy char arrays.
