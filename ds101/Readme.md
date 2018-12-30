@@ -7,8 +7,7 @@
 1. Think Bayes
 1. [First Python Notebook](http://www.firstpythonnotebook.org/)
     - This textbook will guide you through an investigation of money in politics using data from the [California Civic Data Coalition](https://www.californiacivicdata.org).
-    - California Civic Data Coalition Report: An open-source team of journalists and computer programmers from news organizations across America.
-        - [github source](https://github.com/california-civic-data-coalition/first-python-notebook)
+    - California Civic Data Coalition Report: An open-source team of journalists and computer programmers from news organizations across America. [github source](https://github.com/california-civic-data-coalition/first-python-notebook)
 
 
 ## Small Projects
