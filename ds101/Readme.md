@@ -20,6 +20,8 @@
     - print
     - class and member function
 
+    - [First Python Notebook](http://www.firstpythonnotebook.org/)
+
 1. Draw several lines, triangles, circles in a `numpy` WHC array, and save it to a `png` or `jpg` file.
     - what is `numpy`?
         - short tutorial.
