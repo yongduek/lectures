@@ -94,4 +94,20 @@
 1. TODO: Regression Problem
     - use a `kaggle.com` data set & notepad
     
+1. References & Books
+    - [Python for Social Scientists](https://gawron.sdsu.edu/python_for_ss/)
+    - [Python for Social Science](https://gawron.sdsu.edu/python_for_ss/course_core/book_draft/index.html)
+        - See 6. Data, 7. Classification of Text, 8. Visualization, 9. Social Netowrks
+        - Interesting [Anna Karenina Network Assignment](https://gawron.sdsu.edu/python_for_ss/course_core/book_draft/Social_Networks/anna_karenina_network_assignment.html)
+    - [Modern Python Cookbook]()
+    - [Learning Python for Social Scientists](https://nealcaren.github.io/python-tutorials/)
+        - Personal compilation of a list of python tutorials and annotated analyses    
+        - Plenty of useful site links.
+    - [Fashion Color Analysis](https://github.com/rosariomgomez/fashion)
+        - Application of various image analysis techniques including face detection, color analysis
+        - impressive!
+    - [Text Analysis with Topic Models for the Humanities and Social Sciences](https://liferay.de.dariah.eu/tatom/)
+        - A little bit higher level than rudimentary.
+        - Text analysis requires some concepts of mathematics and statistics.
+        - Now is the time to learn about Bayesian statistics: [A first course in Bayesian statistical methods](https://www.stat.washington.edu/people/pdhoff/book.php)
     
