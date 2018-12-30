@@ -10,12 +10,12 @@ link-citations: yes
 description: "Pytorch practice and deep learning. There are many tutorials in pytorch.org. Explanations are attached to learn it."
 ---
 
-
-``` {r}
-knitr::opts_chunk$set(engine.path = list(
-  python='/usr/local/bin/python3'
-))
-```
+<!-- this is for Mac -->
+<!-- # ``` {r} -->
+<!-- # knitr::opts_chunk$set(engine.path = list( -->
+<!-- #   python='/usr/local/bin/python3' -->
+<!-- # )) -->
+<!-- # ``` -->
 
 <!-- ``` {r} -->
 <!-- knitr::opts_chunk$set(engine.path = list( -->
