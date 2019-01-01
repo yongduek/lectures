@@ -5,10 +5,6 @@
 1. `https://scikit-learn.org` & `scipy.org`
 1. Think Stats
 1. Think Bayes
-1. [First Python Notebook](http://www.firstpythonnotebook.org/)
-    - This textbook will guide you through an investigation of money in politics using data from the [California Civic Data Coalition](https://www.californiacivicdata.org).
-    - California Civic Data Coalition Report: An open-source team of journalists and computer programmers from news organizations across America. [github source](https://github.com/california-civic-data-coalition/first-python-notebook)
-
 
 ## Small Projects
 1. editor / IDE for python
@@ -113,3 +109,9 @@
         - Text analysis requires some concepts of mathematics and statistics.
         - Now is the time to learn about Bayesian statistics: [A first course in Bayesian statistical methods](https://www.stat.washington.edu/people/pdhoff/book.php)
     
+    - [First Python Notebook](http://www.firstpythonnotebook.org/)
+        - This textbook will guide you through an investigation of money in politics using data from the [California Civic Data Coalition](https://www.californiacivicdata.org).
+        - California Civic Data Coalition Report: An open-source team of journalists and computer programmers from news organizations across America. [github source](https://github.com/california-civic-data-coalition/first-python-notebook)
+
+    - [INTEG 475: Computational Social Science](http://www.johnmclevey.com/475/) by John McLevey in Uni of Waterloo
+        - Another course on computational social science in Python
