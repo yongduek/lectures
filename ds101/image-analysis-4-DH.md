@@ -1,4 +1,30 @@
 # Image Analysis for Digital Humanities
+### techical topics
+
+1. numpy
+1. opencv python in command-line
+        - play a video file
+1. color models: rgb, hsv, grayscale
+1. pixel operation: negative, rgb permutation, brightness (ax+b)
+1. histogram operation: contrast, gamma correction, binarization
+1. filtering: linear filters, smoothing, gradient, sobel-edge
+1. interpolation: magnification
+1. geometric transfromation + bilinear interpolation
+1. gradient descent and filter coefficient computations.
+        - what is gradient?
+        - linear regression with gradient descent
+                - loss function concept
+                - pytorch, numpy
+        - sobel magnitude learning
+                - pytorch, cnn
+1. CNN transfer learning for image categorization
+
+### topics for DH & SS
+
+1. manifold learning from scikit-learn ([Manifold learning on handwritten digits](https://scikit-learn.org/stable/auto_examples/manifold/plot_lle_digits.html#sphx-glr-auto-examples-manifold-plot-lle-digits-py) )
+1. mimic Manovich
+1. fashion recommender by [Rosario Gomez](https://github.com/rosariomgomez/fashion/blob/master/fashion_recommender/images/FashionRecommender_Images.ipynb)
+1. DIY projects proposal ...
 
 ## Check out [widipedia](https://en.wikipedia.org/wiki/Visual_analytics) about visual analytics.
 - **Visual analytics** is an outgrowth of the fields of information visualization and scientific visualization that focuses on analytical reasoning facilitated by interactive visual interfaces [see here](https://en.wikipedia.org/wiki/Visual_analytics).
@@ -11,7 +37,7 @@
         ![example view](https://scikit-learn.org/stable/_images/sphx_glr_plot_lle_digits_002.png)
         
 - If manifold learning is explored, then check out the works of Manovich
-        - Visit and see [](http://lab.softwarestudies.com/p/overview-slides-and-video-articles-why.html)
+        - Visit and see [here](http://lab.softwarestudies.com/p/overview-slides-and-video-articles-why.html)
         ![4535 Time magazine covers (1923-2009) by dates](http://farm3.staticflickr.com/2629/4038907270_015dff0acc_z.jpg)
 
 - Project
@@ -22,6 +48,10 @@
                 - Color or Grayscale?
                 - 
 ## [Image Analysis at Scale in the Undergraduate Humanities Classroom](http://schopie1.com/digital-humanities/image-analysis-at-scale-in-the-undergraduate-humanities-classroom/) by Scott Schopieray, Michigan State University
+
+        - [gitlab](https://gitlab.msu.edu/CAL/distant-visualization)
+        - [ImagePlot](http://lab.softwarestudies.com/p/imageplot.html#download)
+        
 
 ## [Vogue Covers in Colormetric Space](http://dh.library.yale.edu/projects/vogue/colormetricspace)
         - A good try with Vogue magazine, but ... I need someone who can explain
