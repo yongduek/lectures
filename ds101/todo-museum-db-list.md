@@ -50,6 +50,11 @@
         1. 불상 데이터베이스 + 불상얼굴 패턴 비교
                 - storytelling
         
-        1. 수막새 데이터베이스 만들기와 패턴 비교
+        1. 수막새 데이터베이스 만들기
+                - 패턴 비교 by image processing/understanding
         
-        
+        1. OpenAPI/Python 를 이용한 eMusium 소장품 목록 및 상세정보
+                - [전국박물관 유물정보 (openApi)](https://www.data.go.kr/dataset/3036708/openapi.do)
+                - api 를 사용하여 접근하는 방식
+                - python, requests, json, xml
+                
