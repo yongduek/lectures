@@ -85,10 +85,13 @@
     - accuracy vs recall, F-score
     - apply `t-SNE` analysis and display it.
 
-1. network
+1. Network
     - `https://www.datacamp.com/community/tutorials/social-network-analysis-python`
     - math: `https://www.youtube.com/playlist?list=PLPaDsoN2Ogtac0iF9S0I8Mmt-eW7VlJll`
     
+1. Data
+    - (국립중앙박물관 소장품 이미지 공개 목록](https://www.data.go.kr/dataset/3070607/fileData.do)
+
 1. TODO: Regression Problem
     - use a `kaggle.com` data set & notepad
     
