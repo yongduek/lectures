@@ -1,4 +1,4 @@
-# Image Analysis for Digital Humanities
+# Image Analysis (& Visualization) for Digital Humanities
 ### techical topics
 
 1. numpy
@@ -79,3 +79,12 @@ Practice:
 - How to best democratize computer vision and digital image analysis techniques so they can be used by researchers and students without technical backgrounds?
 
 To address these challenges, we are developing easy to use techniques and software for exploratory media analysis and applying them to progressively larger image and video sets. In addition to digital humanities, these techniques can be also used in cinema studies, game studies, media studies, ethnography, exhibition design, sociology, anthropology, and other fields.
+
+
+## Data Visualization with Processing in Python
+- Postcodes, Census & Population Density, Geographic coordinates of French Cities
+- [Lab 2: Introduction to Processing in Python](https://perso.telecom-paristech.fr/eagan/class/igr204/lab2-python)
+
+ An interesting python visualization project using the graphics/creative coding environment [Processing](www.processing.org), provided during a course named [Visualization](https://perso.telecom-paristech.fr/eagan/class/igr204).
+        
+<img src="https://perso.telecom-paristech.fr/eagan/class/igr204/images/assignment-1.png" alt="drawing" width="400" />
