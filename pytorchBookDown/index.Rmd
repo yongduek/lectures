@@ -10,6 +10,23 @@ link-citations: yes
 description: "Pytorch practice and deep learning. There are many tutorials in pytorch.org. Explanations are attached to learn it."
 ---
 
+<!-- this is for Mac -->
+<!-- # ``` {r} -->
+<!-- # knitr::opts_chunk$set(engine.path = list( -->
+<!-- #   python='/usr/local/bin/python3' -->
+<!-- # )) -->
+<!-- # ``` -->
+
+<!-- ``` {r} -->
+<!-- knitr::opts_chunk$set(engine.path = list( -->
+<!--    python = '/Library/Frameworks/Python.framework/Versions/3.7/bin/python3' -->
+<!-- )) -->
+<!-- ``` -->
+<!-- ``` {r} -->
+<!-- knitr::opts_chunk$set(engine.path = list( -->
+<!-- python = 'c:/Vip/AppData/Local/Programs/Python/Python37/python.exe' -->
+<!-- )) -->
+<!-- ``` -->
 
 
 - MacOS: python 3.7 install `https://docs.python.org/3/using/mac.html`
@@ -20,7 +37,7 @@ description: "Pytorch practice and deep learning. There are many tutorials in py
 # Prerequisites
 
 
-1. Install `pytorch`, `python 3.x`, `anaconda`
+1. Install `pytorch`, `python 3.x`
 1. `numpy` and `torch.Tensor`
 1. Simple linear regression 
     - a line fitting for a data set of almost no noise: $y = w x + b$
@@ -81,20 +98,6 @@ knitr::write_bib(c(
 ```
 
 Python 언어를 사용하는 방법은 ... 쉽다.
-
-```{bash}
-which python
-```
-
-<!--  Mac OS X -->
-``` {r}
-knitr::opts_chunk$set(engine.path = list(
-  python='/usr/local/bin/python3'
-))
-```
-```{bash}
-which python
-```
 
 ```{python}
 import sys

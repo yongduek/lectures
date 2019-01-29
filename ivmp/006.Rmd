@@ -57,4 +57,4 @@ knitr::include_graphics('figs/6-1.png')
 
 ## Extensions
 
-What else motion do you want?
+Q. What else motion do you want?
