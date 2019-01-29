@@ -17,11 +17,12 @@ description: "Pytorch practice and deep learning. There are many tutorials in py
 <!-- # )) -->
 <!-- # ``` -->
 
-<!-- ``` {r} -->
-<!-- knitr::opts_chunk$set(engine.path = list( -->
-<!--    python = '/Library/Frameworks/Python.framework/Versions/3.7/bin/python3' -->
-<!-- )) -->
-<!-- ``` -->
+``` {r}
+knitr::opts_chunk$set(engine.path = list(
+   python = '/Library/Frameworks/Python.framework/Versions/3.7/bin/python3'
+))
+```
+
 <!-- ``` {r} -->
 <!-- knitr::opts_chunk$set(engine.path = list( -->
 <!-- python = 'c:/Vip/AppData/Local/Programs/Python/Python37/python.exe' -->
