@@ -19,6 +19,14 @@
                 - pytorch, cnn
 1. CNN transfer learning for image categorization
 
+### Papers from DH
+1. [The visaul digital turn: using neural networks to study historical images by Melvin Wevers & Thomas Smits, 2019](https://academic.oup.com/dsh/advance-article/doi/10.1093/llc/fqy085/5296356)
+1. [Analyzing and visualizing ancient Maya hieroglyphics using shape: From computer vision to digital humanities, 2017](https://academic.oup.com/dsh/article/32/suppl_2/ii179/3943649?searchresult=1)
+1. [Image as Data: Automated Visual Content Analysis for Political Science, Jungseock Joo, Zachary C. Steinert-Threlkeld, 2018](https://arxiv.org/abs/1810.01544)
+1. [Prediction and explanation in social systems, Hofman, Sharma, Watts, Science 2017](http://science.sciencemag.org/content/355/6324/486)
+1. [Social media image analysis for public health, arxiv 2017](https://arxiv.org/abs/1512.04476)
+
+
 ### topics for DH & SS
 
 1. manifold learning from scikit-learn ([Manifold learning on handwritten digits](https://scikit-learn.org/stable/auto_examples/manifold/plot_lle_digits.html#sphx-glr-auto-examples-manifold-plot-lle-digits-py) )
