@@ -1,3 +1,4 @@
+.ipynb_checkpoints/*
 pytorchBookDown/_book
 pytorchBookDown/_bookdown_files
 bookdown-demo

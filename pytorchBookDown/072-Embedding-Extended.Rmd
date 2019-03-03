@@ -1,11 +1,4 @@
 
-
-``` {r}
-knitr::opts_chunk$set(engine.path = list(
-  python='/usr/local/bin/python3'
-))
-```
-
 # Embedding Extended
 
 - Read [this](http://colah.github.io/posts/2014-07-NLP-RNNs-Representations)

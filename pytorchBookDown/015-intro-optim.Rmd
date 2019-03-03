@@ -90,3 +90,5 @@ ax.plot (range(1,1+epochs), res, '-')
 fig.suptitle ('loss-epoch curve with NN module')
 plt.show()
 ```
+
+

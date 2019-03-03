@@ -17,12 +17,6 @@ description: "Pytorch practice and deep learning. There are many tutorials in py
 <!-- # )) -->
 <!-- # ``` -->
 
-``` {r}
-knitr::opts_chunk$set(engine.path = list(
-   python = '/Library/Frameworks/Python.framework/Versions/3.7/bin/python3'
-))
-```
-
 <!-- ``` {r} -->
 <!-- knitr::opts_chunk$set(engine.path = list( -->
 <!-- python = 'c:/Vip/AppData/Local/Programs/Python/Python37/python.exe' -->
@@ -37,6 +31,15 @@ knitr::opts_chunk$set(engine.path = list(
 
 # Prerequisites
 
+
+Proclaim: 
+
+- Almost all the `pytorch` codes are from the tutorials in [pytorch.org](pytorch.org). They don't belong to me.
+
+- This document is prepared using `rmarkdown` in `Rstudio`: [R Markdown from RStudio](https://rmarkdown.rstudio.com/index.html)
+
+
+I am hoping to consider following topics.
 
 1. Install `pytorch`, `python 3.x`
 1. `numpy` and `torch.Tensor`
@@ -76,16 +79,6 @@ knitr::opts_chunk$set(engine.path = list(
     - `numpy` as image data container
 
 
-
-This is a _sample_ book written in **Markdown**. You can use anything that Pandoc's Markdown supports, e.g., a math equation $a^2 + b^2 = c^2$.
-
-The **bookdown** package can be installed from CRAN or Github:
-
-```{r eval=FALSE}
-install.packages("bookdown")
-# or the development version
-# devtools::install_github("rstudio/bookdown")
-```
 
 Remember each Rmd file contains one and only one chapter, and a chapter is defined by the first-level heading `#`.
 

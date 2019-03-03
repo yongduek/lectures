@@ -1,13 +1,5 @@
 
 
-
-``` {r}
-knitr::opts_chunk$set(engine.path = list(
-  python='/usr/local/bin/python3'
-))
-```
-
-
 # Text Processing & NLP
 
 Sources of the codes

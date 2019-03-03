@@ -1,9 +1,4 @@
 
-
-``` {r}
-knitr::opts_chunk$set(engine.path = list(python='/usr/local/bin/python3'))
-```
-
 # RNN (Recurrent Neural Network)
 
 Recurrent neural network has a feedback loop. It is a kind of for loop to calculate an accumulation given a list of inputs.
@@ -211,4 +206,7 @@ The rest is the same.
 - define a model, loss, optimizer
 - run a training loop
 - evaluate the trained model with a set of test data if there is. Otherwise, we can at most do evaluate the model with training data.
+
+
+
 

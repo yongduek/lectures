@@ -1,6 +1,6 @@
 # Data Loading & Pre-Processing
 
-Have a look at [`torch.utils.data`](https://pytorch.org/docs/stable/data.html) for a full listing of classes for data manipulation.
+Have a look at the web site [`torch.utils.data`](https://pytorch.org/docs/stable/data.html) for a full listing of classes for data manipulation.
 
 - `torch.utils.data.DataSet`
 - `torch.utils.data.DataLoader`

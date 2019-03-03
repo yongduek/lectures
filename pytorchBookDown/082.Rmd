@@ -1,6 +1,6 @@
 
 
-# Network Architectures
+# Well-Known Network Architectures
 
 ## AlexNet
 
