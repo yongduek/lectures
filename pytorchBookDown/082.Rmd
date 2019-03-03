@@ -9,3 +9,59 @@
 ## VggNet
 
 ## DenseNet
+
+
+
+# Using Docker
+
+This is very useful if you have to test multiple versions of tensorflow or pytorch.
+
+0. install an nvidia driver. e.g. `nvidia-driver-410`
+1. install `docker-ce`
+2. install `nvidia-docker2`
+3. use `--runtime=nvidia` option every time for your docker command:
+```{sh, eval=FALSE}
+$ docker run -it --rm --runtime=nvidia tensorflow/tensorflow:latest-gpu-py3-jupyter /bin/bash
+
+root@7cd9e7919325:/workspace# 
+root@7cd9e7919325:/workspace# python
+Python 3.6.5 |Anaconda, Inc.| (default, Apr 29 2018, 16:14:56) 
+[GCC 7.2.0] on linux
+Type "help", "copyright", "credits" or "license" for more information.
+>>> import torch
+>>> torch.cuda.is_available()
+True
+>>> 
+```
+
+* if you need to use `pytorch 0.3.0` with `cuda 9.0`, then follow two steps below.
+
+(1) do the following to install `pytorch`:
+```
+$ docker pull pytorch/pytorch:0.4-cuda9-cudnn7-devel
+$ docker run -it --rm --runtime=nvidia pytorch/pytorch:0.4-cuda9-cudnn7-devel
+
+root@cd9ff:/workspace# nvcc --version
+Copyright (c) 2005-2017 NVIDIA Corporation
+Built on Fri_Sep__1_21:08:03_CDT_2017
+Cuda compilation tools, release 9.0, V9.0.176
+
+root@cd9ff:/workspace# conda install pytorch=0.3.0 torchvision=0.2.0 cuda90 -c pytorch
+```
+```
+root@7cd9ff:/workspace# python
+Python 3.6.8 |Anaconda, Inc.| (default, Dec 30 2018, 01:22:34) 
+[GCC 7.3.0] on linux
+Type "help", "copyright", "credits" or "license" for more information.
+>>> import torch
+>>> torch.cuda.is_available()
+True
+>>> torch.__version__
+'0.3.0.post4'
+>>> 
+```
+(2) save the image of the docker container in another terminal
+```
+$ docker container ps
+$ docker commit <container id> pytorch/pytorch:0.3-cuda9-cudnn7-devel-yndk
+```
