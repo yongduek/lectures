@@ -25,6 +25,7 @@ import torch
 import torch.nn as nn
 import torch.nn.functional as F
 import torch.optim as optim
+import numpy as np
 
 torch.manual_seed(1)
 ```
@@ -210,3 +211,63 @@ The rest is the same.
 
 
 
+
+
+
+
+
+## Bi-directional RNN
+
+Bi-directional RNN is composed of two RNNS, one is a normal RNN and the other RNN get the data in the reverse order. Then the output of the two RNN sequences are concatnated. The figure below will be more helpful to understand the mechanism.
+
+```{r, echo=FALSE, fig.align='center', out.width='95%', fig.cap='Bi-directional RNN and its unrolled version(http://colah.github.io/posts/2015-09-NN-Types-FP)'}
+knitr::include_graphics('figures/bi-RNN.png')
+```
+
+Let's see how `pytorch` implementation works. This time we use `GRU`.
+```{python, birnn0}
+seq_len = 5
+batchsize = 1
+feature_dim = 1
+
+bi_grus = nn.GRU(input_size=feature_dim, hidden_size=1, bidirectional=True)
+```
+
+To check the output of the reverse part of `bi_grus`,
+```{python, birnn1}
+reverse_gru = torch.nn.GRU(input_size=1, hidden_size=1,  bidirectional=False)
+#
+reverse_gru.weight_ih_l0 = bi_grus.weight_ih_l0_reverse
+reverse_gru.weight_hh_l0 = bi_grus.weight_hh_l0_reverse
+reverse_gru.bias_ih_l0 = bi_grus.bias_ih_l0_reverse
+reverse_gru.bias_hh_l0 = bi_grus.bias_hh_l0_reverse
+```
+we declare a *normal* GRU named as `reverse_gru` and set its weights share the values of those of `bi_grus`
+
+```{python}
+input = torch.randn(seq_len, batchsize, feature_dim) # seq, batch, inputsize 
+#
+bi_out, bi_hidden = bi_grus (input)
+#
+rev_in = input[np.arange(4,-1,-1),:,:]
+#
+rev_out, rev_hidden = reverse_gru (rev_in)
+```
+Notice that we reverse the `input` and give it to `reverse_gru`, whose output should be reversed.
+```{python}
+print ('bi_out: ', bi_out[:,0,:].data) # the output is 1*2 since it is bi-directional
+```
+
+```{python}
+print ('rev_out: ', rev_out[:,0,0].data)
+```
+Check that the `rev_out` is found in the second column in `bi_out` in reversed order.
+```{python}
+print ('rev_hidden: ', rev_hidden.data)
+```
+```{python}
+print ('bi_hidden:', bi_hidden.data)
+```
+Conclusion: Bi-directional RNN is just a simple concatation of two RNN's, one in normal direction, the other in reversed direction.
+
+Q. Change `hidden_size` to another value like `2` and see the results.
