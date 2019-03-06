@@ -1,4 +1,6 @@
 .ipynb_checkpoints/*
+opencv-python/_book
+opencv-python/_bookdown_files
 pytorchBookDown/_book
 pytorchBookDown/_bookdown_files
 bookdown-demo

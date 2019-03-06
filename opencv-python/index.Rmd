@@ -1,0 +1,33 @@
+--- 
+title: "Image Generation, Processing & Understanding with Python"
+author: "Yongduek Seo"
+date: "`r Sys.Date()`"
+site: bookdown::bookdown_site
+documentclass: book
+bibliography: [book.bib, packages.bib]
+biblio-style: apalike
+link-citations: yes
+description: "Many things about image and video."
+---
+
+# Preparation & Documents
+
+1. `python 3.x`
+2. `pip install opencv-python numpy matplotlib`
+3. [OpenCV-Python Tutorial](https://opencv-python-tutroals.readthedocs.io/en/latest/index.html)
+4. [docs.opencv.org](docs.opencv.org)
+5. [Python Image Library: Pillow](https://pillow.readthedocs.io/en/stable/)
+6. [scikit-image.org](scikit-image.org)
+1. [github.com/opencv](github.com/opencv)
+
+
+
+
+```{r include=FALSE}
+# automatically create a bib database for R packages
+knitr::write_bib(c(
+  .packages(), 'bookdown', 'knitr', 'rmarkdown'
+), 'packages.bib')
+```
+
+

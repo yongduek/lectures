@@ -218,6 +218,8 @@ The rest is the same.
 
 ## Bi-directional RNN
 
+This part comes from [Understanding Bidirectional RNN in PyTorch](https://towardsdatascience.com/understanding-bidirectional-rnn-in-pytorch-5bd25a5dd66); see the jupyter notebook in the site. 
+
 Bi-directional RNN is composed of two RNNS, one is a normal RNN and the other RNN get the data in the reverse order. Then the output of the two RNN sequences are concatnated. The figure below will be more helpful to understand the mechanism.
 
 ```{r, echo=FALSE, fig.align='center', out.width='95%', fig.cap='Bi-directional RNN and its unrolled version(http://colah.github.io/posts/2015-09-NN-Types-FP)'}
