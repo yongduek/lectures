@@ -34,57 +34,7 @@ Try:
 
 ## Video File Read/Write
 
-```{python, eval=FALSE}
-# filename: video-open.py
-# https://opencv-python-tutroals.readthedocs.io/en/latest/py_tutorials/py_gui/py_drawing_functions/py_drawing_functions.html#drawing-functions
-
-import sys
-import numpy as np
-import cv2
-
-video_file = 'data/avideo.mov'
-cap = cv2.VideoCapture(video_file)
-
-if cap.isOpened() is False:
-    print ('video file open error: ', video_file)
-    sys.exit()
-#
-
-width = cap.get (cv2.CAP_PROP_FRAME_WIDTH)
-height = cap.get (cv2.CAP_PROP_FRAME_HEIGHT)
-nframes = cap.get (cv2.CAP_PROP_FRAME_COUNT)
-fps = cap.get (cv2.CAP_PROP_FPS)
-print (height, width, nframes, fps)
-
-outvideofile = 'data/outvideo.mov'
-out_wh = (640, 480)
-outVideo = cv2.VideoWriter (outvideofile, cv2.VideoWriter_fourcc(*'XVID'), 30.0, out_wh)
-
-while(cap.isOpened()):
-    ret, frame = cap.read()
-    if ret == False: 
-        break
-
-    frame = cv2.resize(frame, dsize=out_wh)
-
-    font = cv2.FONT_HERSHEY_SIMPLEX
-    text_xy = (100, 200)
-    frame = cv2.putText (frame, 'OpenCV', text_xy, font, 4, (0,255,255), 2, cv2.LINE_AA)
-
-    cv2.imshow('frame', frame)
-
-    outVideo.write (frame)
-
-    if cv2.waitKey(30) == 27:
-        break
-#
-
-cap.release()
-outVideo.release()
-
-cv2.destroyAllWindows()
-
-# EOF
+```{python, eval=FALSE, code=readLines('python/video-open.py')}
 ```
 
 Notes:
@@ -114,48 +64,7 @@ This is a way of getting a video frame at a specifiic frame number.
 - `videoCaputre().set(cv2.CAP_PROP_POS_FRAMES, nth_frame)`
 - `videoCaputre().set(cv2.CAP_PROP_POS_AVI_RATIO, relative_position_0_to_1)`
 
-```{python, eval=FALSE}
-# filename: video-lastframe.py
-
-import sys
-import numpy as np
-import cv2
-
-video_file = 'data/avideo.mov'
-cap = cv2.VideoCapture(video_file)
-
-if cap.isOpened() is False:
-    print ('video file open error: ', video_file)
-    sys.exit()
-#
-width = cap.get (cv2.CAP_PROP_FRAME_WIDTH)
-height = cap.get (cv2.CAP_PROP_FRAME_HEIGHT)
-nframes = cap.get (cv2.CAP_PROP_FRAME_COUNT)
-fps = cap.get (cv2.CAP_PROP_FPS)
-print (height, width, nframes, fps)
-
-for i in range (int(nframes)):
-    fcount = nframes - 1 - i
-    cap.set (cv2.CAP_PROP_POS_FRAMES, int(nframes-1-i))
-    ret, frame = cap.read()
-    if frame is None:
-        print ('frame None', i)
-        continue
-    if ret == False: 
-        print ('ret False', i)
-        continue
-    print ('frame read: ', i)
-
-    frame = cv2.resize(frame, dsize=None, fx=.25, fy=.25)
-
-    cv2.imshow('frame', frame)
-    if cv2.waitKey(3) == 27:
-        break
-#
-
-cap.release()
-cv2.destroyAllWindows()
-# EOF
+```{python, eval=FALSE, code=readLines('python/video-lastframe.py')}
 ```
 
 - See: [OpenCV VideoCapture Document](https://docs.opencv.org/4.0.1/d4/d15/group__videoio__flags__base.html#gaeb8dd9c89c10a5c63c139bf7c4f5704d) for `cv2.CV_CAP_PROP_POS_FRAMES` which sets '0-based index of the frame to be decoded/captured next.' 
@@ -166,30 +75,6 @@ cv2.destroyAllWindows()
 
 If you need to manipulate audio & video together, `moviepy` is an option.
 
-```{python, eval=FALSE}
-# filename: moviepy-open.py
-#
-from moviepy.editor import *
-import cv2
-import numpy as np
-
-videofile = 'data/avideo.mov'
-video = VideoFileClip(videofile)
-audio = video.audio
-duration = video.duration # == audio.duration, presented in seconds, float
-#note video.fps != audio.fps
-print ('video.duration: ', video.duration, video.fps)
-print ('audio.duration: ', audio.duration, audio.fps)
-
-step = 0.1
-for t in range(int(duration / step)): # runs through audio/video frames obtaining them by timestamp with step 100 msec
-    t = t * step
-    if t > audio.duration or t > video.duration: break
-    audio_frame = audio.get_frame(t) #numpy array representing mono/stereo values
-    video_frame = video.get_frame(t) #numpy array representing RGB/gray frame
-
-    cv2.imshow ('display', video_frame)
-    if cv2.waitKey(25) == 27: break
-#
+```{python, eval=FALSE, code=readLines('python/moviepy-open.py')}
 ```
 
