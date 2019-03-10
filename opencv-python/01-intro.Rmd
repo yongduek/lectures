@@ -78,3 +78,16 @@ If you need to manipulate audio & video together, `moviepy` is an option.
 ```{python, eval=FALSE, code=readLines('python/moviepy-open.py')}
 ```
 
+
+
+# Histogram of RGB numpy image
+
+```{python, eval=FALSE, code=readLines('python/numpy-hist.py')}
+```
+
+A result of the program is shown below.
+
+```{python, echo=FALSE, code=readLines('python/numpy-hist.py')}
+```
+
+
