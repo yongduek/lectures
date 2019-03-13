@@ -658,3 +658,8 @@ print ( model_od.layer1 ( torch.rand(1) ) )
 ```
 
 
+
+## Convolution in 2D
+
+```{python, code=readLines('torch-conv.py')}
+```
