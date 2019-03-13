@@ -11,3 +11,4 @@
 1. statistics, mainly computational view point
 1. bayesian data analysis
 1. network analysis with networkX
+1. python image 
