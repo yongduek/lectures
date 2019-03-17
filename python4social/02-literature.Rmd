@@ -1,0 +1,8 @@
+# Data
+
+## Numpy and Arrays
+
+```{python}
+```
+
+### Elementary Linear Algebra and Numpy Computation

@@ -1,0 +1,25 @@
+--- 
+title: "Python for Social Science"
+author: "Yongduek Seo"
+date: "`r Sys.Date()`"
+site: bookdown::bookdown_site
+documentclass: book
+bibliography: [book.bib, packages.bib]
+biblio-style: apalike
+link-citations: yes
+description: "A first step towards computational social science with Python programming language."
+---
+
+# Prerequisites
+
+1. python 3.6
+2. Visual Studio Code
+3. Jupyter Notebook
+4. [Python for Social Science in gawron.sdsu.edu](https://gawron.sdsu.edu/python_for_ss/course_core/book_draft/index.html)
+
+```{r include=FALSE}
+# automatically create a bib database for R packages
+knitr::write_bib(c(
+  .packages(), 'bookdown', 'knitr', 'rmarkdown'
+), 'packages.bib')
+```

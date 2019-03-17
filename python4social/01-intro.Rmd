@@ -1,0 +1,6 @@
+# Introduction to Python Language {#intro}
+
+
+```{r fig-python-types, echo=FALSE, fig.align='center', fig.cap='Python Data Types.'}
+knitr::include_graphics('figures/python_type_tree.png')
+```
