@@ -7,10 +7,22 @@
 
 - [A good explanation blog on GAP is here](https://alexisbcook.github.io/2017/global-average-pooling-layers-for-object-localization/). Figures are from this blog.
 
-```{r, echo=FALSE, fig.align='center', fig.cap='VGG-16 model architecture'}
+```{r, echo=FALSE, fig.align='center', fig.cap='VGG-16 model architecture.'}
 knitr::include_graphics('figures/vgg16.png')
 ```
 
+- The size of the feature maps in the middle is reduced to half because of the max pooling (red color).
+
+```{r, echo=FALSE, fig.align='center', fig.cap='VGG-16 model architecture.'}
+knitr::include_graphics('figures/vgg-16-arch.png')
+```
+
+- The output of `conv1` of VGG16 is of the same size as the input.
+- `conv2` gives half size.
+- `conv3' gives 1/4 size of the input
+- `conv5` gives 1/16 size of the input. So a pixel in this feature map corresponds to 16x16 in the input image.
+
+In pytorch, the vgg16 convolution blocks are not shown as we can check by printing out the model structure below.
 
 ```{python}
 import torch

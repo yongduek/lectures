@@ -1,37 +1,5 @@
-# -*- coding: utf-8 -*-
-"""
-Transfer Learning Tutorial
-==========================
-**Author**: `Sasank Chilamkurthy <https://chsasank.github.io>`_
-
-In this tutorial, you will learn how to train your network using
-transfer learning. You can read more about the transfer learning at `cs231n
-notes <http://cs231n.github.io/transfer-learning/>`__
-
-Quoting these notes,
-
-    In practice, very few people train an entire Convolutional Network
-    from scratch (with random initialization), because it is relatively
-    rare to have a dataset of sufficient size. Instead, it is common to
-    pretrain a ConvNet on a very large dataset (e.g. ImageNet, which
-    contains 1.2 million images with 1000 categories), and then use the
-    ConvNet either as an initialization or a fixed feature extractor for
-    the task of interest.
-
-These two major transfer learning scenarios look as follows:
-
--  **Finetuning the convnet**: Instead of random initializaion, we
-   initialize the network with a pretrained network, like the one that is
-   trained on imagenet 1000 dataset. Rest of the training looks as
-   usual.
--  **ConvNet as fixed feature extractor**: Here, we will freeze the weights
-   for all of the network except that of the final fully connected
-   layer. This last fully connected layer is replaced with a new one
-   with random weights and only this layer is trained.
-
-"""
-# License: BSD
-# Author: Sasank Chilamkurthy
+# filename: transferWithMyResent.py
+# original: transfer_learning_tutorial.py
 
 from __future__ import print_function, division
 
@@ -42,33 +10,16 @@ from torch.optim import lr_scheduler
 import numpy as np
 import torchvision
 from torchvision import datasets, models, transforms
+import matplotlib
+matplotlib.use('TkAgg')
 import matplotlib.pyplot as plt
 import time
 import os
 import copy
+import myresent
 
 plt.ion()   # interactive mode
 
-######################################################################
-# Load Data
-# ---------
-#
-# We will use torchvision and torch.utils.data packages for loading the
-# data.
-#
-# The problem we're going to solve today is to train a model to classify
-# **ants** and **bees**. We have about 120 training images each for ants and bees.
-# There are 75 validation images for each class. Usually, this is a very
-# small dataset to generalize upon, if trained from scratch. Since we
-# are using transfer learning, we should be able to generalize reasonably
-# well.
-#
-# This dataset is a very small subset of imagenet.
-#
-# .. Note ::
-#    Download the data from
-#    `here <https://download.pytorch.org/tutorial/hymenoptera_data.zip>`_
-#    and extract it to the current directory.
 
 # Data augmentation and normalization for training
 # Just normalization for validation
@@ -99,8 +50,8 @@ dataloaders = {x: torch.utils.data.DataLoader(image_datasets[x], batch_size=4,
 dataset_sizes = {x: len(image_datasets[x]) for x in ['train', 'val']}
 class_names = image_datasets['train'].classes
 
-#device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
-device = torch.device("cpu") # for simple note-writing. Use cuda:0 if you have one.
+device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
+#device = torch.device("cpu") # for simple note-writing. Use cuda:0 if you have one.
 
 ######################################################################
 # Visualize a few images
@@ -252,7 +203,8 @@ def visualize_model(model, num_images=6):
 # Load a pretrained model and reset final fully connected layer.
 #
 
-model_ft = models.resnet18(pretrained=True)
+#model_ft = models.resnet18(pretrained=True)
+model_ft = myresent.resnet18(pretrained=True)
 num_ftrs = model_ft.fc.in_features
 model_ft.fc = nn.Linear(num_ftrs, 2)
 
