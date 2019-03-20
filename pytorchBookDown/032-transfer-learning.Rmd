@@ -40,6 +40,44 @@ These two major transfer learning scenarios look as follows:
 ```{python, eval=FALSE, code=readLines('srcs/transfer_learning_tutorial.py')}
 ```
 
+### CNN Model for Classification
+
+Notice that `model_conv` adopts `resnet18` architecture, whose building bloks are provided in the python `torchvision.models` module.
+
+```{python}
+import torchvision
+model_conv = torchvision.models.resnet18(pretrained=True)
+print (model_conv)
+```
+
+Compare the output with the block diagram of resnet-18 below.
+
+```{r, echo=FALSE, fig.align='center', out.width='95%', fig.cap='ResNet-18 Architecture.'}
+knitr::include_graphics('figures/resent-18-arch.png')
+```
+
+```{python, eval=FALSE}
+for param in model_conv.parameters():
+    param.requires_grad = False
+
+# Parameters of newly constructed modules have requires_grad=True by default
+num_ftrs = model_conv.fc.in_features
+model_conv.fc = nn.Linear(num_ftrs, 2)
+
+model_conv = model_conv.to(device)
+
+criterion = nn.CrossEntropyLoss()
+
+# Observe that only parameters of final layer are being optimized as
+# opoosed to before.
+optimizer_conv = optim.SGD(model_conv.fc.parameters(), lr=0.001, momentum=0.9)
+
+# Decay LR by a factor of 0.1 every 7 epochs
+exp_lr_scheduler = lr_scheduler.StepLR(optimizer_conv, step_size=7, gamma=0.1)
+```
+
+
+
 
 ### Resnet-18
 
@@ -64,7 +102,7 @@ model = myresnet.resnet18 (pretrained=True)
 ```
 
 
-### ResNet, The last Layer for classification
+### ResNet, The Trained CNN Model for Classification
 
 Following is an exerpt of the `ResNet` network. The function `forward` returns the output of `self.fc(x)` which is an `nn.Linear` layer.
 

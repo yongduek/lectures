@@ -28,13 +28,16 @@ bluehist /= num_pixels
 greenhist /= num_pixels
 redhist /= num_pixels
 
-fig, ax = plt.subplots(2,1)
-ax[0].imshow (frame)
-ax[0].set(xticks=[], yticks=[])
-ax[0].set_title ('Input Image')
+plt.imshow (frame[:,:,::-1]) ## cv2's BGR -> RGB
+plt.title ('Input Image')
+plt.pause (1)
+plt.close()
+
 x = range(0,256,1)
-ax[1].plot (x, bluehist, 'b', x, redhist, 'r', x, greenhist, 'g')
-ax[1].grid(True)
-ax[1].set_title ('Histograms for R,G,B, respectively')
-plt.show()
+plt.plot (x, bluehist, 'b', x, redhist, 'r', x, greenhist, 'g')
+plt.grid(True)
+plt.title ('Histograms for R,G,B, respectively')
+plt.pause (1)
+plt.close ()
+
 #EOF

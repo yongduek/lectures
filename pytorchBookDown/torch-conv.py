@@ -12,6 +12,7 @@ class SobelY (torch.nn.Module):
     def __init__(self):
         super(SobelY, self).__init__()
         self.conv = torch.nn.Conv2d (in_channels=1, out_channels=1, kernel_size=3, bias=False)
+        print ('self.conv.weight.data.shape = ', self.conv.weight.data.shape)
         self.conv.weight.data = torch.FloatTensor([[-1,-1,-1],[0, 0, 0], [1,1,1]]).reshape(self.conv.weight.data.shape)
         
     def forward(self, x):

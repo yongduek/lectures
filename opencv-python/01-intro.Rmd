@@ -1,6 +1,6 @@
 # Pixelwose Operations {#pixel}
 
-## Image Blending 
+## Blending Two Images
 
 $$ I_B = \alpha I_1 + (1-\alpha) I_2 , \quad \alpha \in [0, 1]$$
 
@@ -21,68 +21,20 @@ Try:
 
 - make a video showing a progressive change from one image to another by increasing $\alpha$ from 0 to 1 smoothly.
 
-
-
-
-
-
-
-
-
-
-# Video File Manipulation {#video}
-
-## Video File Read/Write
-
-```{python, eval=FALSE, code=readLines('python/video-open.py')}
+```{python, code=readLines('python/blending.py') }
 ```
 
-Notes:
 
-1. The color image in opencv is BGR order, not RGB order.
-2. `cap.get()` returns `float` numbers, not integer numbers.
-3. The video `frame` obtained from `cap.read()` is a `numpy` array, in BGR order. If you want to know its color values at `(x,y)`, then try `frame[y,x]` and you will get the BGR at the location.
-4. The fourcc `cv2.VideoWriter_fourcc()` is always confusing. Please search for a concrete explanation on it.
-5. There is no way to deal with sound with `OpenCV`. Try another python module such as `moviepy`, see [MoviePy](http://zulko.github.io/moviepy/index.html) for its documentation. Below is an example:
+## Negative Film Effect
 
+The image looks like a negative film in old days.
 
-Try:
-
-- Negative Film Effect Operation for a duration of the video
-- Gray Scale
-- Reversed-mode play 
-
-
-
-
-
-
-## Video File Set Frame Position
-
-This is a way of getting a video frame at a specifiic frame number.
-
-- `videoCaputre().set(cv2.CAP_PROP_POS_FRAMES, nth_frame)`
-- `videoCaputre().set(cv2.CAP_PROP_POS_AVI_RATIO, relative_position_0_to_1)`
-
-```{python, eval=FALSE, code=readLines('python/video-lastframe.py')}
-```
-
-- See: [OpenCV VideoCapture Document](https://docs.opencv.org/4.0.1/d4/d15/group__videoio__flags__base.html#gaeb8dd9c89c10a5c63c139bf7c4f5704d) for `cv2.CV_CAP_PROP_POS_FRAMES` which sets '0-based index of the frame to be decoded/captured next.' 
-
-
-
-## MoviePy Example
-
-If you need to manipulate audio & video together, `moviepy` is an option.
-
-[Check the site](https://zulko.github.io/moviepy/).
-
-```{python, eval=FALSE, code=readLines('python/moviepy-open.py')}
+```{python, code=readLines('python/negative_film.py') }
 ```
 
 
 
-# Histogram of RGB numpy image
+## Histogram of RGB numpy image
 
 ```{python, eval=FALSE, code=readLines('python/numpy-hist.py')}
 ```
@@ -93,15 +45,58 @@ A result of the program is shown below.
 ```
 
 
-# Histogram Equalization
+## Histogram Equalization
 
-Check [Wikipedia Histogram Equalization](https://en.wikipedia.org/wiki/Histogram_equalization)
+- Check [Wikipedia Histogram Equalization](https://en.wikipedia.org/wiki/Histogram_equalization)
 
 ```{python, echo=FALSE, code=readLines('python/histogram_equalization.py')}
 ```
 
 
 ```{python, eval=FALSE, code=readLines('python/histogram_equalization.py')}
+```
+
+
+
+
+## Gamma Correction
+
+- Read [Wikipedia Gamma Correction Page](https://en.wikipedia.org/wiki/Gamma_correction)
+
+```{python, code=readLines('python/gamma_correction.py')}
+```
+
+
+
+
+
+## Color Space Conversion
+
+HSV color representation is another popular way.
+```{r hsvCylinder, echo=FALSE, fig.align='center', fig.cap='HSV Cylinder'}
+knitr::include_graphics('python/figures/hsv-cylinder.png')
+```
+
+```{python, code=readLines('python/rgb_hsv.py')}
+```
+
+
+
+
+
+# Non-Photorealistic Rendering
+
+## OpenCV non-photorealistic rendering
+
+- [Domain Transform for Edge-Aware Image & Video Processing](http://www.inf.ufrgs.br/~eslgastal/DomainTransform/)
+
+```{python, code=readLines('python/non-photorealistic.py')}
+```
+
+
+## Hand-made cartoon-like filtering
+
+```{python, code=readLines('python/cartoon-1.py')}
 ```
 
 
