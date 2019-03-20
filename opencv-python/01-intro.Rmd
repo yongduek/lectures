@@ -75,6 +75,8 @@ This is a way of getting a video frame at a specifiic frame number.
 
 If you need to manipulate audio & video together, `moviepy` is an option.
 
+[Check the site](https://zulko.github.io/moviepy/).
+
 ```{python, eval=FALSE, code=readLines('python/moviepy-open.py')}
 ```
 
@@ -88,6 +90,18 @@ If you need to manipulate audio & video together, `moviepy` is an option.
 A result of the program is shown below.
 
 ```{python, echo=FALSE, code=readLines('python/numpy-hist.py')}
+```
+
+
+# Histogram Equalization
+
+Check [Wikipedia Histogram Equalization](https://en.wikipedia.org/wiki/Histogram_equalization)
+
+```{python, echo=FALSE, code=readLines('python/histogram_equalization.py')}
+```
+
+
+```{python, eval=FALSE, code=readLines('python/histogram_equalization.py')}
 ```
 
 
