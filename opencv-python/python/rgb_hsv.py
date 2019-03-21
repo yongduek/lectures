@@ -50,4 +50,20 @@ print ('HSV(White) = ', skimage.color.rgb2hsv([[[1.,1.,1.]]]))
 
 hsvpixel = [[[0.999, 1., 1.]]]
 print ('RGB({}) = '.format(hsvpixel), skimage.color.hsv2rgb (np.array(hsvpixel)))
+
+print ('Now Extract Redful pixels only.')
+for r in range(hsv.shape[0]):
+    for c in range (hsv.shape[1]):
+        if (hsv[r,c,0] > 0.9 or hsv[r,c,0] < 0.1):
+            pass # this is a red
+        else:
+            hsv[r,c,:] = [0,0,0] # black
+#
+rgb_redful = skimage.color.hsv2rgb (hsv)
+imshow (rgb_redful, 'Redful')
+imageio.imwrite ('data/redful.png', (rgb_redful*255).astype(np.uint8))
+
+# Q. Can you remove white pixels in the clouds?
+#  and (hsv[r,c,1] > 0.5)
+
 # EOF
