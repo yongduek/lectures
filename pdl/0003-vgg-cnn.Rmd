@@ -1,0 +1,10 @@
+
+#  VGG Network & Convolution
+
+```{r vgg16-diagram, echo=FALSE, fig.align='center', fig.cap='VGG-16 Network'}
+knitr::include_graphics('figures/vgg16.png')
+```
+
+```{r vgg16-flow, echo=FALSE, fig.align='center', fig.cap='VGG-16 Network Flow'}
+knitr::include_graphics('figures/vgg16-flowgraph.png')
+```
