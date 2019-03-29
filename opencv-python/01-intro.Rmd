@@ -1,4 +1,4 @@
-# Pixelwose Operations {#pixel}
+# Pixelwise Operations {#pixel}
 
 ## Blending Two Images
 

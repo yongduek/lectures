@@ -68,6 +68,10 @@ plt.close()
 
 heq = histogram (img_eq)
 plt.plot (heq)
+plt.pause (1)
+plt.close()
+
+plt.bar (range(0,256), heq, width=4)
 plt.pause (3)
 plt.close()
 
