@@ -16,7 +16,7 @@ import matplotlib.pyplot as plt
 import time
 import os
 import copy
-import myresent
+import myresnet
 
 plt.ion()   # interactive mode
 

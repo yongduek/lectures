@@ -18,7 +18,7 @@ def imshow (img, title=None):
 #
 
 def negative_film (img):
-#    return 255 - img
+#    return 255 - img  # simple way using numpy.
     neg = np.zeros_like (img)
     for r in range (img.shape[0]):
         for c in range (img.shape[1]):
