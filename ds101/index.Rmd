@@ -1,0 +1,27 @@
+--- 
+title: "Data Science 101"
+author: "서 용 덕 (Yonduek Seo), yndk@sogang.ac.kr"
+date: "`r Sys.Date()`"
+site: bookdown::bookdown_site
+documentclass: book
+bibliography: [book.bib, packages.bib]
+biblio-style: apalike
+link-citations: yes
+description: "A multiple of python data science projects."
+---
+
+# Prerequisites {-}
+
+1. python 3.6 or higher
+1. `vscode`, `jupyter-lab`
+1. enthusiasm
+
+
+
+
+```{r include=FALSE}
+# automatically create a bib database for R packages
+knitr::write_bib(c(
+  .packages(), 'bookdown', 'knitr', 'rmarkdown'
+), 'packages.bib')
+```

@@ -1,0 +1,9 @@
+# RSS Feed {#rssfeed}
+
+```{python rssfeed, code=readLines('python/rss-feed.py')}
+```
+
+* Examine an entry of `feed.entries`
+  - Can you find the web link corresponding to the title `post.title`?
+
+* Find a list of RSS feeds for news services, weather services, etc.
