@@ -70,7 +70,7 @@ A result of the program is shown below.
 
 
 
-## Color Space Conversion
+## HSV Color Space
 
 HSV color representation is another popular way.
 ```{r hsvCylinder, echo=FALSE, fig.align='center', fig.cap='HSV Cylinder'}
@@ -81,22 +81,5 @@ knitr::include_graphics('python/figures/hsv-cylinder.png')
 ```
 
 
-
-
-
-# Non-Photorealistic Rendering
-
-## OpenCV non-photorealistic rendering
-
-- [Domain Transform for Edge-Aware Image & Video Processing](http://www.inf.ufrgs.br/~eslgastal/DomainTransform/)
-
-```{python, code=readLines('python/non-photorealistic.py')}
-```
-
-
-## Hand-made cartoon-like filtering
-
-```{python, code=readLines('python/cartoon-1.py')}
-```
 
 

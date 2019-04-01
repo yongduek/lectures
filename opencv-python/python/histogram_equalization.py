@@ -9,7 +9,7 @@ import matplotlib.pyplot as plt
 
 imagefilename = 'data/300px-Unequalized_Hawkes_Bay_NZ.jpg'
 img = cv2.imread(imagefilename, cv2.IMREAD_GRAYSCALE)
-print (img.shape)
+print ('image size (gray scale): ', img.shape)
 
 plt.imshow (img, cmap='gray')
 plt.pause (1)
@@ -31,18 +31,29 @@ def make_cdf (pmf):
     return cdf
 #
 
-
+# compute histogram
 h = histogram (img)
+
+# normalize to get PMF, Probability Mass Function
 pmf = h / float(img.shape[0]*img.shape[1])
 
+# Accumulate to get CDF, Cumulative Distribution Function
 cdf = make_cdf (pmf)
 
-plt.plot (h) # show the histogram
+plt.plot (h); plt.title ('histogram (counts)') # show the histogram
 plt.pause (1) # seconds
 plt.close()
 
-plt.plot (cdf) # check the CDF
+plt.plot (cdf); plt.title('CDF') # check the CDF
 plt.pause (1)
+plt.close()
+
+#
+pmf_max = pmf.max()
+print ('max of pmf: ', pmf_max)
+plt.plot (range(cdf.shape[0]), cdf, 'b-', range(cdf.shape[0]), pmf*0.7/pmf_max, 'r-'); 
+plt.title ('CDF, PMF')
+plt.pause(1)
 plt.close()
 
 def histogram_equalization (img, cdf):
@@ -57,9 +68,8 @@ def histogram_equalization (img, cdf):
 
 # do it now
 img_eq = histogram_equalization (img, cdf)
-print ('img_eq: ', img_eq.shape)
 
-plt.imshow (img_eq, cmap='gray')
+plt.imshow (img_eq, cmap='gray'); plt.title('histogram equalized')
 plt.pause(1)
 plt.close()
 
@@ -67,12 +77,10 @@ plt.close()
 # verify what you did.
 
 heq = histogram (img_eq)
-plt.plot (heq)
-plt.pause (1)
-plt.close()
 
 plt.bar (range(0,256), heq, width=4)
-plt.pause (3)
+plt.title('histogram of histogram-equalized image')
+plt.pause (1)
 plt.close()
 
 # Now, make & plot the CDF of heq

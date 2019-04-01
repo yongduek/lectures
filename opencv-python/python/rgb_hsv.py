@@ -1,5 +1,8 @@
-# filename rgb_hsv.py
-# http://scikit-image.org/docs/dev/auto_examples/color_exposure/plot_rgb_to_hsv.html
+# filename: rgb_hsv.py
+# REF: http://scikit-image.org/docs/dev/auto_examples/color_exposure/plot_rgb_to_hsv.html
+
+# RGB -> HSV is done with skimage.color.rgb2hsv()
+#    * RGB, HSV data are assumed to be in the ranage [0,1]
 
 import sys
 import numpy as np 
@@ -32,8 +35,8 @@ if rgb is None:
 imshow (rgb, 'RGB Image')
 
 # The conversion assumes an input data range of [0, 1] for all color components.
-
-hsv = skimage.color.rgb2hsv (rgb/255.) 
+rgb01 = rgb/255.
+hsv = skimage.color.rgb2hsv (rgb01) 
 hue = hsv[:,:,0]
 saturation = hsv[:,:,1]
 value = hsv[:,:,2]
@@ -42,13 +45,15 @@ imshow (hue, 'Hue Image')
 imshow (saturation, 'Saturation Image')
 imshow (value, 'Value Image (== Gray Scale)')
 
-print ('HSV(Red) = ', skimage.color.rgb2hsv([[[1.,0,0]]]))
-print ('HSV(Yellow) = ', skimage.color.rgb2hsv([[[1.,1.,0]]]))
-print ('HSV(Green) = ', skimage.color.rgb2hsv([[[0,1.,0]]]))
-print ('HSV(Blue) = ', skimage.color.rgb2hsv([[[0,0,1.]]]))
-print ('HSV(White) = ', skimage.color.rgb2hsv([[[1.,1.,1.]]]))
+print ('HSV(Red)   = {}'.format(skimage.color.rgb2hsv([[[1.,0,0]]])))
+print ('HSV(Yellow)= {}'.format(skimage.color.rgb2hsv([[[1.,1.,0]]])))
+print ('HSV(Green) = {}'.format(skimage.color.rgb2hsv([[[0,1.,0]]])))
+print ('HSV(Blue)  = {}'.format(skimage.color.rgb2hsv([[[0,0,1.]]])))
+print ('HSV(White) = {}'.format(skimage.color.rgb2hsv([[[1.,1.,1.]]])))
 
 hsvpixel = [[[0.999, 1., 1.]]]
+print ('RGB({}) = '.format(hsvpixel), skimage.color.hsv2rgb (np.array(hsvpixel)))
+hsvpixel = [[[0., 1., 1.]]]
 print ('RGB({}) = '.format(hsvpixel), skimage.color.hsv2rgb (np.array(hsvpixel)))
 
 print ('Now Extract Redful pixels only.')
@@ -64,6 +69,9 @@ imshow (rgb_redful, 'Redful')
 imageio.imwrite ('data/redful.png', (rgb_redful*255).astype(np.uint8))
 
 # Q. Can you remove white pixels in the clouds?
-#  and (hsv[r,c,1] > 0.5)
+#    Hint: Examine the HSV Cylinder. ( hsv[r,c,1] > 0.5 )
+
+# Q. Rotate the color along the HUE axis, make a video of the chage.
+#    Step = 0, 0.01, 1
 
 # EOF

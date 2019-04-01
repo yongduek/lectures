@@ -1,0 +1,18 @@
+
+
+# Non-Photorealistic Rendering
+
+## OpenCV non-photorealistic rendering
+
+- [Domain Transform for Edge-Aware Image & Video Processing](http://www.inf.ufrgs.br/~eslgastal/DomainTransform/)
+
+```{python, code=readLines('python/non-photorealistic.py')}
+```
+
+
+## Hand-made cartoon-like filtering
+
+```{python, code=readLines('python/cartoon-1.py')}
+```
+
+
