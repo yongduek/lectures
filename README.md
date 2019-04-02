@@ -12,3 +12,8 @@
 1. bayesian data analysis
 1. network analysis with networkX
 1. python image 
+1. pdl: Practical Deep Learning
+
+
+
+[https://stackoverflow.com/questions/8588768/how-do-i-avoid-the-specification-of-the-username-and-password-at-every-git-push](https://stackoverflow.com/questions/8588768/how-do-i-avoid-the-specification-of-the-username-and-password-at-every-git-push)
