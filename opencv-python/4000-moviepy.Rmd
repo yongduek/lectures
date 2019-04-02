@@ -1,0 +1,66 @@
+
+# MoviePy to manipulate movie files
+
+
+If you need to manipulate audio & video together, `moviepy` is an option.
+
+- [Check the site](https://zulko.github.io/moviepy/).
+
+```
+$ pip3 install moviepy
+$ sudo apt-get install imagemagick
+```
+
+## Install `youtube-dl`
+
+```
+ $ pip install youtube-dl
+ $ youtube-dl <youtube.com url>
+```
+
+## Text overlay on a video clip
+```{python, eval=FALSE, code=readLines('python/moviepy_textoverlay.py')}
+```
+
+- Use 'mp4' extension to save to a file (in Linux). No experience with Windows 10 / Mac OS X.
+
+
+## Extract audio (MP3) from a movie file
+```{python, eval=FALSE, code=readLines('python/moviepy_get_audio.py')}
+```
+
+
+## Movie Concatanation
+```{python, eval=FALSE, code=readLines('python/moviepy_concat.py')}
+```
+
+## Apply Filter Frame by Frame
+```{python, eval=FALSE, code=readLines('python/moviepy_filter.py')}
+```
+
+
+## MoviePy Open & Get A Frame
+
+```{python, eval=FALSE, code=readLines('python/moviepy-open.py')}
+```
+
+
+
+## Errors
+
+* Use 'mp4' to save a movie clip into a file!
+Error:
+```
+Could not load source '</usr/local/local/lib/python3.6/site-packages/decorator.py:decorator-gen-49>': Source unavailable.
+```
+
+
+* Edit `/etc/ImageMagick-6/policy.xml` : comment out (or remove the line that reads)
+`<policy domain="path" rights="none" pattern="@*" />`
+```
+<!-- <policy domain="path" rights="none" pattern="@*" /> -->
+```
+Error:
+```
+ImageMagick not detected by moviepy while
+```

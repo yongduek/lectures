@@ -41,13 +41,3 @@ This is a way of getting a video frame at a specifiic frame number.
 
 
 
-## MoviePy Example
-
-If you need to manipulate audio & video together, `moviepy` is an option.
-
-[Check the site](https://zulko.github.io/moviepy/).
-
-```{python, eval=FALSE, code=readLines('python/moviepy-open.py')}
-```
-
-
