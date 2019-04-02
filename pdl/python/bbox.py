@@ -67,3 +67,4 @@ for i, a in enumerate(anchors):
     fig.axes.add_patch (bbox_to_rect(abox2bbox(a, (w,h), (250,250)), colors[i]))
     fig.axes.text (rect[0], rect[1], a[-1], color='k', bbox=dict(facecolor=colors[i], lw=0) )
 plt.pause(1)
+

@@ -1,0 +1,665 @@
+
+# Making Torch NN Models {#intro}
+
+
+
+
+The codes here are mostly from [https://pytorch.org/tutorials/beginner/pytorch_with_examples.html](Learning Pytorch with Examples)
+
+The python codes are modified just a little bit to fit in the book format; instead of printing out values, their 2d plots are drawn.
+
+Make sure that all the required modules & packages are installed in your machine.
+
+
+## Warm-up numpy
+
+Let's make a small network model with `numpy`.
+
+```{python numpyNetwork}
+import sys
+import numpy as np
+import matplotlib.pyplot as plt
+
+# N is batch size; D_in is input dimension;
+# H is hidden dimension; D_out is output dimension.
+N, D_in, H, D_out = 64, 1000, 100, 10
+
+# Create random input and output data
+x = np.random.randn(N, D_in)
+y = np.random.randn(N, D_out)
+
+# Randomly initialize weights
+w1 = np.random.randn(D_in, H)
+w2 = np.random.randn(H, D_out)
+
+learning_rate = 1e-6
+niter = 20
+res = []
+for t in range(niter):
+    # Forward pass: compute predicted y
+    h = x.dot(w1)
+    h_relu = np.maximum(h, 0)
+    y_pred = h_relu.dot(w2)
+
+    # Compute and print loss
+    loss = np.square(y_pred - y).sum()
+    #print(t, loss)
+    res.append (loss)
+    
+    # Backprop to compute gradients of w1 and w2 with respect to loss
+    grad_y_pred = 2.0 * (y_pred - y)
+    grad_w2 = h_relu.T.dot(grad_y_pred)
+    grad_h_relu = grad_y_pred.dot(w2.T)
+    grad_h = grad_h_relu.copy()
+    grad_h[h < 0] = 0
+    grad_w1 = x.T.dot(grad_h)
+
+    # Update weights
+    w1 -= learning_rate * grad_w1
+    w2 -= learning_rate * grad_w2
+#
+
+plt.plot (range(niter), res, '-o')
+plt.ylabel ('loss')
+plt.xlabel ('epoch')
+plt.show()
+
+```
+
+So, what is happening here?
+
+- The network will have 64 input items: `N=64`. This is called a *batch* or *mini_batch* because it is small.
+
+- The network's input is of dimension 1000: `D_in=1000`
+- The network has one hidden layer of size 100: `H=100`
+- The network's output is of dimension 10: `D_out = 10`
+```{python}
+# N is batch size; D_in is input dimension;
+# H is hidden dimension; D_out is output dimension.
+N, D_in, H, D_out = 64, 1000, 100, 10
+```
+
+Then, the input matrix $x$ of size `N x D_in` is created randomly since here we do not want to be bothered how to get it from some source. The output matrix $y$ corresponding to the input $x$ is randomly created too. We have N=64 correspondences, and we want to find a function $f$ that maps $y_i = f(x_i)$ for $i=1,...,N$.
+```{python}
+# Create random input and output data
+x = np.random.randn(N, D_in)
+y = np.random.randn(N, D_out)
+```
+
+Now we create two networks $w_1$ and $w_2$ that transfers from input to the hidden layer and from the hidden layer to the output.
+
+```{python}
+# Randomly initialize weights
+w1 = np.random.randn(D_in, H)
+w2 = np.random.randn(H, D_out)
+```
+
+Q: What are the functions of `numpy`  for 
+
+1. random integer generation
+1. random uniform generation
+1. random Gaussian generation
+
+The function $f$ that we want to seek is parametrized by several steps:
+
+1. linear mapping, $w_1$, a matrix of size $1000\times100$ 
+2. relu: *Rectifier Linear Unit*
+3. linear mapping, $w_2$, another weight matrix of size $100\times10$
+
+The procedure is encoded in python codes with `numpy` functions as follows
+
+```{python eval=FALSE}
+# Forward pass: compute predicted y
+h = x.dot(w1)
+h_relu = np.maximum(h, 0)
+y_pred = h_relu.dot(w2)
+```
+
+Q: what is the mathematical meaning of them: `x.dot(w1)`, `np.maximum(h,0)`, `h_relu.dot(w2)` ?  
+Describe them using the notations of linear algebra.
+
+The error or loss for the predicted value `y_pred` from the model is the sum of the squared differences:
+\begin{equation}
+    \mathrm{loss} = \sum_{i=0}^{N-1}  (y_\mathrm{pred} - y )^2
+\end{equation}
+
+```{python eval=FALSE}
+# Compute and print loss
+loss = np.square(y_pred - y).sum()
+#print(t, loss)  # orignial source prints out the values. Here it will be displayed in the figure
+res.append (loss)
+```
+
+One of the most important *hidden* part of the neural network modeling is to compute the 
+gradient of the loss function $\mathrm{loss}$ with respect
+to each of the variables. Here we must compute
+
+\begin{equation}
+    \frac{\partial \mathrm{loss}}{\partial w_1}  \quad \frac{\partial \mathrm{loss}}{\partial w_2}
+\end{equation}
+
+The python code below computes the gradients step by step.
+
+\begin{equation}
+    \frac{\partial \mathrm{loss}}{\partial w_1} = 
+        \frac{\partial \mathrm{loss}}{\partial y_\mathrm{pred}}
+        \frac{\partial y_\mathrm{pred}}{\partial w_1}
+\end{equation}
+
+which goes down to ...
+
+Q: Manually calculate the gradients for the following codes of python.
+
+```{python eval=FALSE}
+# Backprop to compute gradients of w1 and w2 with respect to loss
+grad_y_pred = 2.0 * (y_pred - y)
+grad_w2 = h_relu.T.dot(grad_y_pred)
+grad_h_relu = grad_y_pred.dot(w2.T)
+grad_h = grad_h_relu.copy()
+grad_h[h < 0] = 0
+grad_w1 = x.T.dot(grad_h)
+```
+
+Final step of deep neural network is updating the variables $w_1$ and $w_2$ by 
+adding fractions of the gradients weighted by the user-supplied parameter $learning_rate$.
+
+```{python eval=FALSE}
+# Update weights
+w1 -= learning_rate * grad_w1
+w2 -= learning_rate * grad_w2
+```
+
+The code shows the basic principle of the gradient descent method. The learning rate shold be small enough for the loss to decrease and converge to a local minimum.
+
+Q: Change `learning_rate` to other values and observe the graphs. Try larger values, and compare the graphs.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+## With Pytorch Tensors
+
+Simply speaking, **Tensor = Numpy Arry**
+
+
+To run the code, you must have `pytorch` installed.
+
+```{python}
+import torch
+
+dtype = torch.float   # data type
+device = torch.device("cpu") # which device to run the code
+# device = torch.device("cuda:0") # Uncomment this to run on GPU
+
+# N is batch size; D_in is input dimension;
+# H is hidden dimension; D_out is output dimension.
+N, D_in, H, D_out = 64, 1000, 100, 10
+
+# Create random input and output data
+x = torch.randn(N, D_in, device=device, dtype=dtype)
+y = torch.randn(N, D_out, device=device, dtype=dtype)
+
+# Randomly initialize weights
+w1 = torch.randn(D_in, H, device=device, dtype=dtype)
+w2 = torch.randn(H, D_out, device=device, dtype=dtype)
+
+learning_rate = 1e-6
+epochs = 30
+res = []
+for t in range(epochs):
+    # Forward pass: compute predicted y
+    h = x.mm(w1)
+    h_relu = h.clamp(min=0)
+    y_pred = h_relu.mm(w2)
+
+    # Compute and print loss
+    loss = (y_pred - y).pow(2).sum().item()
+    #print(t, loss)
+    res.append (loss)
+    
+    # Backprop to compute gradients of w1 and w2 with respect to loss
+    grad_y_pred = 2.0 * (y_pred - y)
+    grad_w2 = h_relu.t().mm(grad_y_pred)
+    grad_h_relu = grad_y_pred.mm(w2.t())
+    grad_h = grad_h_relu.clone()
+    grad_h[h < 0] = 0
+    grad_w1 = x.t().mm(grad_h)
+
+    # Update weights using gradient descent
+    w1 -= learning_rate * grad_w1
+    w2 -= learning_rate * grad_w2
+#    
+print ('loss = {} after epochs {}'.format(loss, epochs))
+
+import matplotlib.pyplot as plt
+fig, ax = plt.subplots();
+ax.plot (range(1,1+epochs), res, '-o')
+plt.show()
+```
+
+The package we use for the implementation of deep learning algorithm is `pytorch` with version greater than 4.0. In python, we import `torch` which is the original name of it.
+
+```
+import torch
+```
+
+Normally, almost all the data type in `torch` is `torch.float` which is the 32 bit floating point data type.
+```{python, eval=FALSE}
+dtype = torch.float   # data type
+```
+
+If you have an Nvidia cuda device such as GTX 1080, then you can use its parallel processing power.
+Otherwise, CPU is the only option.
+
+```{python, eval=FALSE}
+device = torch.device("cpu") # which device to run the code
+# device = torch.device("cuda:0") # Uncomment this to run on GPU
+```
+
+
+We used `np.randn()` and now we use `torch.randn()` with two more options.
+```
+# Create random input and output data
+x = torch.randn(N, D_in, device=device, dtype=dtype)
+y = torch.randn(N, D_out, device=device, dtype=dtype)
+
+# Randomly initialize weights
+w1 = torch.randn(D_in, H, device=device, dtype=dtype)
+w2 = torch.randn(H, D_out, device=device, dtype=dtype)
+```
+
+Let's see the dimension of $x$ and $y$:
+```{python}
+print (x.shape, y.shape)
+```
+
+```{python}
+print (x)
+```
+
+Q: What is the role of `mm()` function below?
+
+```{python}
+# Forward pass: compute predicted y
+h = x.mm(w1)
+h_relu = h.clamp(min=0)
+y_pred = h_relu.mm(w2)
+
+print ('h: ', h.shape, 'y_pred: ', y_pred.shape)
+```
+
+Q: Can you guess what the following code is calculating?
+```{python}
+# Compute and print loss
+loss = (y_pred - y).pow(2).sum().item()
+print ('type(loss) = ', type(loss))
+```
+
+Q: What is the role of `item()` above?
+
+
+The whole computation was done in the form of Tensor object defined in `torch`.
+```{python}
+tensor_loss = (y_pred - y).pow(2).sum()
+print ('type(tensor_loss) = ', type(tensor_loss), tensor_loss.shape, 'tensor_loss=', tensor_loss)
+```
+
+
+The rest of the process of computing is the same as before: 
+
+1. Computing the **gradient** of the loss function
+2. and updating the model parameters $w_1$ and $w_2$ in the **negative** gradient direction.
+
+```{python}
+# Backprop to compute gradients of w1 and w2 with respect to loss
+grad_y_pred = 2.0 * (y_pred - y)
+grad_w2 = h_relu.t().mm(grad_y_pred)
+grad_h_relu = grad_y_pred.mm(w2.t())
+grad_h = grad_h_relu.clone()
+grad_h[h < 0] = 0
+grad_w1 = x.t().mm(grad_h)
+
+# Update weights using gradient descent
+w1 -= learning_rate * grad_w1
+w2 -= learning_rate * grad_w2
+```
+
+Q: Can you decrease the loss down ? Do whatever you like and plot the loss-epoch graph.
+
+End.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+## With Pytorch Automatic Gradient 
+
+
+```{python}
+import torch
+
+dtype = torch.float
+device = torch.device("cpu")
+device = torch.device("cuda:0") # Uncomment this to run on GPU
+
+# N is batch size; D_in is input dimension;
+# H is hidden dimension; D_out is output dimension.
+N, D_in, H, D_out = 64, 1000, 100, 10
+
+# Create random Tensors to hold input and outputs.
+# Setting requires_grad=False indicates that we do not need to compute gradients
+# with respect to these Tensors during the backward pass.
+#torch.manual_seed (7)
+x = torch.randn(N, D_in, device=device, dtype=dtype)
+y = torch.randn(N, D_out, device=device, dtype=dtype)
+
+# Create random Tensors for weights.
+# Setting requires_grad=True indicates that we want to compute gradients with
+# respect to these Tensors during the backward pass.
+w1 = torch.randn(D_in, H, device=device, dtype=dtype, requires_grad=True)
+w2 = torch.randn(H, D_out, device=device, dtype=dtype, requires_grad=True)
+
+learning_rate = 1e-6
+epochs = 30
+res = []
+for t in range(30):
+    # Forward pass: compute predicted y using operations on Tensors; these
+    # are exactly the same operations we used to compute the forward pass using
+    # Tensors, but we do not need to keep references to intermediate values since
+    # we are not implementing the backward pass by hand.
+    y_pred = x.mm(w1).clamp(min=0).mm(w2)
+
+    # Compute and print loss using operations on Tensors.
+    # Now loss is a Tensor of shape (1,)
+    # loss.item() gets the a scalar value held in the loss.
+    loss = (y_pred - y).pow(2).sum()
+    #print(t, loss.item())
+    res.append (loss.item())
+
+    # Use autograd to compute the backward pass. This call will compute the
+    # gradient of loss with respect to all Tensors with requires_grad=True.
+    # After this call w1.grad and w2.grad will be Tensors holding the gradient
+    # of the loss with respect to w1 and w2 respectively.
+    loss.backward()
+
+    # Manually update weights using gradient descent. Wrap in torch.no_grad()
+    # because weights have requires_grad=True, but we don't need to track this
+    # in autograd.
+    # An alternative way is to operate on weight.data and weight.grad.data.
+    # Recall that tensor.data gives a tensor that shares the storage with
+    # tensor, but doesn't track history.
+    # You can also use torch.optim.SGD to achieve this.
+    with torch.no_grad():
+        w1 -= learning_rate * w1.grad
+        w2 -= learning_rate * w2.grad
+
+        # Manually zero the gradients after updating weights
+        # the output is not used.
+        _ = w1.grad.zero_()
+        _ = w2.grad.zero_()
+    #
+```
+
+```{python}
+#
+print ('loss = {} after epochs {}'.format(loss, epochs))
+
+import matplotlib.pyplot as plt
+fig, ax = plt.subplots();
+ax.plot (range(1,1+epochs), res, '-o')
+plt.show()
+```
+
+Q. What has changed compared to the previsous code?
+
+
+When the parameters $w_1$, $w_2$ are defined, an additonal option is provided: `requires_grad=True`. This indicates that any function $f(w_1, w_2)$ of these variables may have pytorch compute the gradient of it with respect to $w_1$, $w_2$.
+
+```
+# Create random Tensors for weights.
+# Setting requires_grad=True indicates that we want to compute gradients with
+# respect to these Tensors during the backward pass.
+w1 = torch.randn(D_in, H, device=device, dtype=dtype, requires_grad=True)
+w2 = torch.randn(H, D_out, device=device, dtype=dtype, requires_grad=True)
+```
+
+Then how can we define a function with respect to $w_1$, $w_2$?
+You can simply do any `Tensor` operations.
+See [torch.Tensors](https://pytorch.org/docs/stable/tensors.html) for the full documentation.
+The function of our network model is defined as below:
+```
+y_pred = x.mm(w1).clamp(min=0).mm(w2)
+```
+The loss function is also a function of `w1` and `w2`. Below is the code:
+```
+loss = (y_pred - y).pow(2).sum()
+```
+
+Computing the gradient of `loss` with respect to $w_1$, $w_2$ is as easy as 
+calling a member function `backward()`:
+```
+loss.backward()
+```
+
+The actual gradient values are kept in `w1.grad` and `w2.grad`.
+Therefore, we can use them for the gradient descent operation as we did before. Below is how to do it.
+```
+  with torch.no_grad():
+      w1 -= learning_rate * w1.grad
+      w2 -= learning_rate * w2.grad
+  
+      # Manually zero the gradients after updating weights
+      w1.grad.zero_()
+      w2.grad.zero_()
+```
+As explained in the code, you must do this together with `with torch.no_grad():`.
+The last two lines `w1.grad.zero_()` is necessary because in the next call of `loss.backward()` the result of gradient computation will be added to `w1.grad` and `w2.grad`. This example does not accumulation, so we zero the gradient varaibles by calling the two lines. Well, it is bothersome. we can use `torch.optim` package instead, but later.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+## With Pytorch NN Module
+
+Let's see how to use Pytorch NN module. This is necessary to build up more complex neural network models.
+
+
+```{python}
+import torch
+import matplotlib.pyplot as plt
+
+# N is batch size; D_in is input dimension;
+# H is hidden dimension; D_out is output dimension.
+N, D_in, H, D_out = 64, 1000, 100, 10
+
+# Create random Tensors to hold inputs and outputs
+x = torch.randn(N, D_in)
+y = torch.randn(N, D_out)
+
+# Use the nn package to define our model as a sequence of layers. nn.Sequential
+# is a Module which contains other Modules, and applies them in sequence to
+# produce its output. Each Linear Module computes output from input using a
+# linear function, and holds internal Tensors for its weight and bias.
+model = torch.nn.Sequential(
+    torch.nn.Linear(D_in, H),
+    torch.nn.ReLU(),
+    torch.nn.Linear(H, D_out),
+)
+
+# The nn package also contains definitions of popular loss functions; in this
+# case we will use Mean Squared Error (MSE) as our loss function.
+loss_fn = torch.nn.MSELoss(reduction='sum')
+
+learning_rate = 1e-4
+epochs = 300
+res = []
+for t in range(epochs):
+    # Forward pass: compute predicted y by passing x to the model. Module objects
+    # override the __call__ operator so you can call them like functions. When
+    # doing so you pass a Tensor of input data to the Module and it produces
+    # a Tensor of output data.
+    y_pred = model(x)
+
+    # Compute and print loss. We pass Tensors containing the predicted and true
+    # values of y, and the loss function returns a Tensor containing the
+    # loss.
+    loss = loss_fn(y_pred, y)
+    #print(t, loss.item())
+    res.append (loss.item())
+
+    # Zero the gradients before running the backward pass.
+    model.zero_grad()
+
+    # Backward pass: compute gradient of the loss with respect to all the learnable
+    # parameters of the model. Internally, the parameters of each Module are stored
+    # in Tensors with requires_grad=True, so this call will compute gradients for
+    # all learnable parameters in the model.
+    loss.backward()
+
+    # Update the weights using gradient descent. Each parameter is a Tensor, so
+    # we can access its gradients like we did before.
+    with torch.no_grad():
+        for param in model.parameters():
+            param -= learning_rate * param.grad
+    #
+#
+print ('loss = {} after epochs {}'.format(loss, epochs))
+fig, ax = plt.subplots();
+ax.plot (range(1,1+epochs), res, '-')
+fig.suptitle ('loss-epoch curve with NN module')
+plt.show()
+```
+
+Previously, the network model is built by
+```
+y_pred = x.mm(w1).clamp(min=0).mm(w2)
+```
+Now we build it with the help of `torch.nn.Sequential`:
+```
+model = torch.nn.Sequential(
+    torch.nn.Linear(D_in, H),
+    torch.nn.ReLU(),
+    torch.nn.Linear(H, D_out),
+)
+```
+From top to bottom, the input data flows, and the model does (1) linear matrix operation, (2) ReLU, and (3) another linear matrix operation. The size of the matrices are given in the definition. See the full detail in [torch.nn.Sequential](https://pytorch.org/docs/stable/nn.html#sequential), including additional methods to define models.
+
+
+The `torch.nn` package also contains definitions of popular loss functions; in this
+case we use Mean Squared Error (MSE) as our loss function. [torch.nn.MSELoss](https://pytorch.org/docs/stable/nn.html#mseloss).
+```
+loss_fn = torch.nn.MSELoss(reduction='sum')
+```
+Compare this to the previous defintion of the same loss function:
+```
+loss = (y_pred - y).pow(2).sum()
+```
+
+One good thing to use `torch.nn.Sequential` to make the model is that we can use the model as if it is a function that accepts `x` as input. Well, it is actually a function. In the learning loop, this makes the code look concise.
+```
+y_pred = model(x)
+```
+Likewise, `loss_fn` is also a function. We compute `loss` by providing `y_pred` and `y`:
+```
+loss = loss_fn(y_pred, y)
+```
+
+Gradient computation is done in the same way:
+```
+loss.backward()
+```
+However, we must clear the gradient buffer in `model`. Otherwise, the gradient values will be added up along the iteration.
+```
+model.zero_grad()
+```
+
+Now, it is time to apply gradient descent. We don't have the explicit definiton of the parameter variables which was `w1`, `w2`, but `model` has them defined inside.
+```
+  with torch.no_grad():
+      for param in model.parameters():
+          param -= learning_rate * param.grad
+```
+By calling `model.parameters()` we may iterate & update the parameters one by one.
+
+
+
+
+
+### torch.nn.Sequential
+
+```{python, label.nn.seq}
+import torch.nn as nn
+
+# Example of using Sequential
+model_s = nn.Sequential(
+            nn.Linear(1,5), 
+            nn.ReLU()
+            )
+print (model_s)
+```
+
+
+
+
+### Sequential with `collections.OrderedDict`
+
+Or we can use `OrderedDict` to give a name to each of the moduels:
+```{python}
+from collections import OrderedDict
+
+model_od = nn.Sequential(OrderedDict([
+          ('layer1', nn.Linear(1,5)),
+          ('relu1', nn.ReLU())
+        ]))
+print (model_od)
+```
+Any module inside `model_s` or `model_od` can be accessed by `_modules` method:
+```{python}
+print (model_s._modules)
+```
+so we can access any single moduel by using its key-value property:
+```{python}
+print ('output of module[0]: ', model_s._modules['0'] ( torch.randn(1) ) )
+```
+That is, given a 1-d tensor, it produces a 5-d tensor.
+With `OrderedDict` it is easier to access any layer:
+```{python, }
+print ( model_od.layer1 ( torch.rand(1) ) )
+```
+

@@ -13,7 +13,8 @@
 
 - It is time consuming and boring to annotate a data-set on character-level.
 - Variable length output
-```{r ctcWhy, echo=FALSE, fig.align='center', fig.cap='Connectionist Temporal Classification, why?'}
+
+```{r ctcWhy, echo=FALSE, fig.align='center', fig.cap='Why Connectionist Temporal Classification'}
 knitr::include_graphics('figures/ctc-why.png')
 ```
 
@@ -90,8 +91,17 @@ knitr::include_graphics('figures/ctc-decoding.png')
 knitr::include_graphics('figures/audio-signal.png')
 ```
 
-```{r audioSampling, echo=FALSE, fig.align='center', fig.cap='Sampling an audio signal.'}
-knitr::include_graphics('figures/audio-sampling-steps.gif')
+```{r audioSampling0, echo=FALSE, fig.align='center', fig.cap='Sampling an audio signal.'}
+knitr::include_graphics('figures/audio-sampling-steps-0.png')
+```
+```{r audioSampling1, echo=FALSE, fig.align='center', fig.cap='Sampling an audio signal.'}
+knitr::include_graphics('figures/audio-sampling-steps-1.png')
+```
+```{r audioSampling2, echo=FALSE, fig.align='center', fig.cap='Sampling an audio signal.'}
+knitr::include_graphics('figures/audio-sampling-steps-2.png')
+```
+```{r audioSampling3, echo=FALSE, fig.align='center', fig.cap='Sampling an audio signal.'}
+knitr::include_graphics('figures/audio-sampling-steps-3.png')
 ```
 
 - uncompressed `.wav` audio file contains such sampled data.

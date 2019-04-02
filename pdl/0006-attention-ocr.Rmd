@@ -111,32 +111,32 @@ knitr::include_graphics('figures/attention-ocr/f03.png')
 - 물론 중간 레이어 정보를 이미지 feature로 사용하는 것이 요즘 추세.
     - 하지만 어떤 layer가 좋은 이미지 feature인가는 말하기가 쉽지 않음. (이건 뒤에 다시 설명)
     - 추가로 pretrained vs. training w/ random-init 를 비교.
-- 출력 함수 \\(f\\) 를 \\(f=\\{\\;f\_{i, j, c}\\;\\}\\) 로 정의. (\\(i\\) 와 \\(j\\) 는 위치정보, \\(c\\) 는 채널 정보)
+- 출력 함수 $f$ 를 $f=\{\;f_{i, j, c}\;\}$ 로 정의. $i$ 와 $j$ 는 위치정보, $c$ 는 채널 정보)
 
 #### RNN
 
 - feature map 정보를 하나의 단어에 매핑하기 위한 방법으로 RNN을 사용함.
 - 그냥 일반적인 char-RNN 을 생각하면 된다.
 - attention 모델을 적용하였다.
-- 이 때 사용되는 attention mask는 다음과 같이 정의된다. \\(\alpha\_{t} = \\{ \\; \alpha\_\{t, i, j\} \\; \\}\\)
+- 이 때 사용되는 attention mask는 다음과 같이 정의된다. $\alpha_{t} = \{ \; \alpha_{t, i, j} \; \}$
 
 - 실제 이 값을 생성하는 식은 뒤에 언급된다.
 - 최종적인 출력 결과는 다음과 같다.
 
 $$u_{t, c} = \sum_{i, j}{\alpha_{t,i,j}f_{i,j,c}}\qquad{(1)}$$
 
-- 타임 \\(t\\) 시점에서의 RNN 입력값은 다음과 같다.
+- 타임 $t$ 시점에서의 RNN 입력값은 다음과 같다.
 
 $$\widehat{x}_{t,c} = W_{c}c_{t-1} + W_{u_{1}}{u_{t-1}}\qquad{(2)}$$
 
-- 이 때 \\(c\_{t-1}\\) 은 (one-hot 인코딩으로 처리된) 문자의 값을 의미한다.
+- 이 때 $c_{t-1}$ 은 (one-hot 인코딩으로 처리된) 문자의 값을 의미한다.
     - 당연히 학습(training) 단계에서는 정답 문자를 사용하고, 추론(inference) 단계에서는 예측된 이전 문자를 사용한다.
 
 - RNN을 통과한뒤 얻어지는 결과는 다음과 같다.
 
 $$(o_t, s_t) = RNNstep(\widehat{x}_{t:}, s_{t-1})\qquad{(3)}$$
 
-- 출력값 \\(o\_t\\)는 특정 문자를 의미하는, softmax 결과값이다. 생성시 RNN Cell 결과 뿐만 아니라 \\(u\_t\\) 값도 함께 사용한다.
+- 출력값 $o_t$는 특정 문자를 의미하는, softmax 결과값이다. 생성시 RNN Cell 결과 뿐만 아니라 $u_t$ 값도 함께 사용한다.
 
 $$\widehat{o}_t = softmax(W_{o}o_t + W_{u_2}u_t)\qquad{(4)}$$
 
@@ -153,19 +153,19 @@ $$c_t = {arg\max}_{c} \left(\widehat{o}_t(c)\right)\qquad{(5)}$$
 
 $$\alpha_{t, i, j} = softmax(V_a \circ \tanh(W_s s_t + W_f f_{i,j,:}))\qquad{(6)}$$
 
-- 여기서 \\( \circ \\) 은 element 단위로 곱(multiplication)을 하는 것을 의미한다.
+- 여기서 $\circ$ 은 element 단위로 곱(multiplication)을 하는 것을 의미한다.
 - 이 식을 해석(?)해 보자면,
-    - \\(W\_f f\\) 는 이미지로 부터 얻어지는 컨텐츠 정보를 의미하고,
-    - \\(W\_s s\_t\\) 는 시퀀스 데이터를 이용해서 컨텐츠 중 어느 곳에 집중을 해야 하는지를 나타내는 정보가 된다.
+    - $W_f f$ 는 이미지로 부터 얻어지는 컨텐츠 정보를 의미하고,
+    - $W_s s_t$ 는 시퀀스 데이터를 이용해서 컨텐츠 중 어느 곳에 집중을 해야 하는지를 나타내는 정보가 된다.
 
 - 위의 식은 **permutation invariant** 한 속성을 가지고 있음.
-    - \\(f\_{i,j,:}\\) 에 대해 \\(W\_{f}\\) 가 FC 를 이루므로 지역적 정보는 존재하지 않는다.
+    - $f_{i,j,:}$ 에 대해 $W_{f}$ 가 FC 를 이루므로 지역적 정보는 존재하지 않는다.
     - 그래서 위치 정보 (spatial coordinates) 를 데이터에 추가함.
 - 따라서 다음의 식을 사용한다.
 
 $$W_s s_t + W_{f_1}f_{i,j,:} + W_{f_2}e_i + W_{f_3}e_j\qquad{(7)}$$
 
-- 여기서 \\(e\_{i}\\)와 \\(e\_{j}\\) 는 각각 \\(i\\) 와 \\(j\\) 에 대한 one-hot 인코딩 값이다.
+- 여기서 $e_{i}$와 $e_{j}$ 는 각각 $i$ 와 $j$ 에 대한 one-hot 인코딩 값이다.
 
 ```{r , echo=FALSE, fig.align='center'}
 knitr::include_graphics('figures/attention-ocr/f04.png')
@@ -177,9 +177,9 @@ knitr::include_graphics('figures/attention-ocr/f04.png')
 - 입력 데이터는 4개의 이미지가 같이 들어간다.
     - 따라서 하나의 feature map 의 크기는 16x16x320 이고 4장이므로 64x16x320이 된다.
 - MLE를 최대화하는 식을 목적 함수로 사용한다.
-    - 따라서 \\(\sum\_{t=1}^{T}\log p(y\_t\|y\_{1:t-1}, x)\\)를 최대화하는 형태로 구현한다.
-    - 이 때 \\(x\\) 는 입력 이미지가 되고 \\(y\_{t}\\) 는 \\(t\\) 위치를 가지는 문자를 의미한다.
-    - \\(T=37\\) 을 사용한다. (FSNS Dataset)
+    - 따라서 $\sum_{t=1}^{T}\log p(y_t\|y_{1:t-1}, x)$를 최대화하는 형태로 구현한다.
+    - 이 때 $x$ 는 입력 이미지가 되고 $y_{t}$ 는 $t$ 위치를 가지는 문자를 의미한다.
+    - $T=37$ 을 사용한다. (FSNS Dataset)
 - 보통 이러한 스타일의 학습에는 CTC(Connectionist Temporal Classification) loss를 사용한다.
     - 이와 관련된 내용은 이 [문서](https://gab41.lab41.org/speech-recognition-you-down-with-ctc-8d3b558943f0){:target="blank"} 를 참고하자.
 - 하지만 여기서는 autoregressive connection을 사용하기 때문에 CTC는 사용할 수 없다.
