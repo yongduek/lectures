@@ -1,4 +1,6 @@
-# src: http://d2l.ai/chapter_computer-vision/index.html
+# filename: bbox.py
+
+# ref: http://d2l.ai/chapter_computer-vision/index.html
 
 import os, sys 
 import imageio 

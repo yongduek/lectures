@@ -1,0 +1,19 @@
+
+# Convolution is a Key Element of Deep NN
+
+## Filtering with 2D Convolution Kernel
+
+- Apply a 2D convolution kernel to an image.
+
+```{python, code=readLines('python/torch-conv.py')}
+```
+
+
+## Supervised Learning for A Convolution Kernel
+
+- Input is a gray image.
+- Output is its SobelY result.
+- NN is predicted to be learning the SobelY kernel.
+
+```{python, code=readLines('python/torch-conv-learn.py')}
+```

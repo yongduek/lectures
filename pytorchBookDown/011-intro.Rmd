@@ -659,7 +659,12 @@ print ( model_od.layer1 ( torch.rand(1) ) )
 
 
 
-## Convolution in 2D
+## Convolution in 2D with Fixed Convolution Kernel
 
 ```{python, code=readLines('torch-conv.py')}
+```
+
+
+## Supervised Learning for A Convolution Kernel
+```{python, code=readLines('torch-conv-learn.py')}
 ```
