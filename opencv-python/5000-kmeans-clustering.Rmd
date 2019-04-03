@@ -1,0 +1,7 @@
+
+# k-means clustering 
+
+```{python kmeansColors, code=readLines('python/kmeans-colors.py')}
+```
+
+# EOF

@@ -1,0 +1,10 @@
+# Float32 Pixel Representation
+
+- `uint8` is a popular choice. 24bit representation.
+- `float32` for $[0,1]$ pixel values is another choice.
+  - One RGB pixel occupies $3\times32$bits or  12byte representation.
+- TIF image file format can be used to save images of `float32` pixel data.
+
+
+```{python, code=readLines('python/float-image-type.py')}
+```
