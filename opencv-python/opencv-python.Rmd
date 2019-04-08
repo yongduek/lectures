@@ -1,0 +1,357 @@
+--- 
+title: "Image Generation, Processing & Understanding with Python"
+author: "Yongduek Seo"
+date: "`r Sys.Date()`"
+site: bookdown::bookdown_site
+documentclass: book
+bibliography: [book.bib, packages.bib]
+biblio-style: apalike
+link-citations: yes
+description: "Many things about image and video."
+---
+
+# Preparation & Documents
+
+1. `python 3.x`
+2. `pip install opencv-python numpy matplotlib`
+3. [OpenCV-Python Tutorial](https://opencv-python-tutroals.readthedocs.io/en/latest/index.html)
+4. [docs.opencv.org](docs.opencv.org)
+5. [Python Image Library: Pillow](https://pillow.readthedocs.io/en/stable/)
+6. [scikit-image.org](scikit-image.org)
+1. [github.com/opencv](github.com/opencv)
+
+
+
+
+```{r include=FALSE}
+# automatically create a bib database for R packages
+knitr::write_bib(c(
+  .packages(), 'bookdown', 'knitr', 'rmarkdown'
+), 'packages.bib')
+```
+
+
+
+<!--chapter:end:index.Rmd-->
+
+# Pixelwise Operations {#pixel}
+
+## Blending Two Images
+
+$$ I_B = \alpha I_1 + (1-\alpha) I_2 , \quad \alpha \in [0, 1]$$
+
+Procedure:
+
+1. prepare two image files
+1. read the two files
+1. set $\alpha$ to a value, e.g. $0.5$
+1. compute the weighted sum of the two images
+1. display the result
+
+Notice:
+
+- `np.uint8` is the type of a pixel value for display.
+- BGR in OpenCV!
+
+Try:
+
+- make a video showing a progressive change from one image to another by increasing $\alpha$ from 0 to 1 smoothly.
+
+```{python, code=readLines('python/blending.py') }
+```
+
+
+## Negative Film Effect
+
+The image looks like a negative film in old days.
+
+```{python, code=readLines('python/negative_film.py') }
+```
+
+
+
+## Histogram of RGB numpy image
+
+```{python, eval=FALSE, code=readLines('python/numpy-hist.py')}
+```
+
+A result of the program is shown below.
+
+```{python, echo=FALSE, code=readLines('python/numpy-hist.py')}
+```
+
+
+
+
+<!--chapter:end:1000-intro.Rmd-->
+
+# Float32 Pixel Representation
+
+- `uint8` is a popular choice. 24bit representation.
+- `float32` for $[0,1]$ pixel values is another choice.
+  - One RGB pixel occupies $3\times32$bits or  12byte representation.
+- TIF image file format can be used to save images of `float32` pixel data.
+
+
+```{python, code=readLines('python/float-image-type.py')}
+```
+
+<!--chapter:end:1002-float-image.Rmd-->
+
+
+# Geometric Transformations
+
+1. Translation
+1. Scaling (magnifying x2)
+  1. interpolation
+1. Rotation
+1. Matrix Notation & Homogeneous Coordinate Representation
+1. Similarity Transformation
+1. Affine Tranformation
+1. Projective (Perspective) Transformation
+
+<!--chapter:end:1003-geometric-transformations.Rmd-->
+
+
+
+# Histogram Equalization
+
+- Check [Wikipedia Histogram Equalization](https://en.wikipedia.org/wiki/Histogram_equalization)
+
+```{python, echo=FALSE, code=readLines('python/histogram_equalization.py')}
+```
+
+
+```{python, eval=FALSE, code=readLines('python/histogram_equalization.py')}
+```
+
+Q. For an RGB image, convert it to HSV format, apply hisotgram equalization to V channel, convert back to RGB. Show an example.
+
+<!--chapter:end:1003-histograms.Rmd-->
+
+
+
+# Gamma Correction
+
+- Read [Wikipedia Gamma Correction Page](https://en.wikipedia.org/wiki/Gamma_correction)
+
+```{python, code=readLines('python/gamma_correction.py')}
+```
+
+
+<!--chapter:end:1004-gamma-correction.Rmd-->
+
+
+
+# HSV Color Space
+
+HSV color representation is another popular way.
+```{r hsvCylinder, echo=FALSE, fig.align='center', fig.cap='HSV Cylinder'}
+knitr::include_graphics('python/figures/hsv-cylinder.png')
+```
+
+```{python, code=readLines('python/rgb_hsv.py')}
+```
+
+
+
+<!--chapter:end:1005-HSV-color.Rmd-->
+
+
+
+# Video File Manipulation {#video}
+
+## Video File Read/Write
+
+```{python, eval=FALSE, code=readLines('python/video-open.py')}
+```
+
+Notes:
+
+1. The color image in opencv is BGR order, not RGB order.
+2. `cap.get()` returns `float` numbers, not integer numbers.
+3. The video `frame` obtained from `cap.read()` is a `numpy` array, in BGR order. If you want to know its color values at `(x,y)`, then try `frame[y,x]` and you will get the BGR at the location.
+4. The fourcc `cv2.VideoWriter_fourcc()` is always confusing. Please search for a concrete explanation on it.
+5. There is no way to deal with sound with `OpenCV`. Try another python module such as `moviepy`, see [MoviePy](http://zulko.github.io/moviepy/index.html) for its documentation. Below is an example:
+
+
+Try:
+
+- Negative Film Effect Operation for a duration of the video
+- Gray Scale
+- Reversed-mode play 
+
+
+
+
+
+
+## Video File Set Frame Position
+
+This is a way of getting a video frame at a specifiic frame number.
+
+- `videoCaputre().set(cv2.CAP_PROP_POS_FRAMES, nth_frame)`
+- `videoCaputre().set(cv2.CAP_PROP_POS_AVI_RATIO, relative_position_0_to_1)`
+
+```{python, eval=FALSE, code=readLines('python/video-lastframe.py')}
+```
+
+- See: [OpenCV VideoCapture Document](https://docs.opencv.org/4.0.1/d4/d15/group__videoio__flags__base.html#gaeb8dd9c89c10a5c63c139bf7c4f5704d) for `cv2.CV_CAP_PROP_POS_FRAMES` which sets '0-based index of the frame to be decoded/captured next.' 
+
+
+
+
+<!--chapter:end:2000-videofile.Rmd-->
+
+# Convolution (Space Filter)
+
+- [OpenCV filtering](https://docs.opencv.org/3.1.0/d4/d13/tutorial_py_filtering.html)
+
+- Convolution operation: linear filter
+- Fast computation should be implemented in C/C++, or use `numpy` with care after its manual.
+- 
+
+## Smoothing or Blurring
+
+```{python blurFilter, code=readLines('python/filter-box-blur.py')}
+```
+
+
+<!--chapter:end:3000-space-filters.Rmd-->
+
+
+# Morphological Filters
+
+1. Structuring Element
+1. Dilation
+1. Erosion
+1. Close
+1. Open
+1. Gradient (for B/W images)
+
+<!--chapter:end:3001-morph-filter.Rmd-->
+
+
+# Gradient & Edge Operation
+
+1. Sobel X, Y
+1. Sobel Magnitude & Direction
+1. Canny Edge Detector
+
+<!--chapter:end:3002-gradient-edge.Rmd-->
+
+
+# MoviePy to manipulate movie files
+
+
+If you need to manipulate audio & video together, `moviepy` is an option.
+
+- [Check the site](https://zulko.github.io/moviepy/).
+
+```
+$ pip3 install moviepy
+$ sudo apt-get install imagemagick
+```
+
+## Install `youtube-dl`
+
+```
+ $ pip install youtube-dl
+ $ youtube-dl <youtube.com url>
+```
+
+## Text overlay on a video clip
+```{python, eval=FALSE, code=readLines('python/moviepy_textoverlay.py')}
+```
+
+- Use 'mp4' extension to save to a file (in Linux). No experience with Windows 10 / Mac OS X.
+
+
+## Extract audio (MP3) from a movie file
+```{python, eval=FALSE, code=readLines('python/moviepy_get_audio.py')}
+```
+
+
+## Movie Concatanation
+```{python, eval=FALSE, code=readLines('python/moviepy_concat.py')}
+```
+
+## Apply Filter Frame by Frame
+```{python, eval=FALSE, code=readLines('python/moviepy_filter.py')}
+```
+
+
+## MoviePy Open & Get A Frame
+
+```{python, eval=FALSE, code=readLines('python/moviepy-open.py')}
+```
+
+
+
+## Errors
+
+* Use 'mp4' to save a movie clip into a file!
+Error:
+```
+Could not load source '</usr/local/local/lib/python3.6/site-packages/decorator.py:decorator-gen-49>': Source unavailable.
+```
+
+
+* Edit `/etc/ImageMagick-6/policy.xml` : comment out (or remove the line that reads)
+`<policy domain="path" rights="none" pattern="@*" />`
+```
+<!-- <policy domain="path" rights="none" pattern="@*" /> -->
+```
+Error:
+```
+ImageMagick not detected by moviepy while
+```
+
+<!--chapter:end:4000-moviepy.Rmd-->
+
+
+# k-means clustering 
+
+```{python kmeansColors, code=readLines('python/kmeans-colors.py')}
+```
+
+# EOF
+
+<!--chapter:end:5000-kmeans-clustering.Rmd-->
+
+
+# SuperPixel Segmentation
+
+- Check [Labeling superpixel colorfulness](https://www.pyimagesearch.com/2017/06/26/labeling-superpixel-colorfulness-opencv-python/)
+
+
+
+<!--chapter:end:5001-superpixel-slic.Rmd-->
+
+
+
+# Non-Photorealistic Rendering
+
+## OpenCV non-photorealistic rendering
+
+- [Domain Transform for Edge-Aware Image & Video Processing](http://www.inf.ufrgs.br/~eslgastal/DomainTransform/)
+
+```{python, code=readLines('python/non-photorealistic.py')}
+```
+
+
+## Hand-made cartoon-like filtering
+
+```{python, code=readLines('python/cartoon-1.py')}
+```
+
+
+
+<!--chapter:end:5002-nonphotorealistic.Rmd-->
+
+`r if (knitr::is_html_output()) '
+# References {-}
+'`
+
+<!--chapter:end:9999-references.Rmd-->
+

@@ -1,0 +1,9 @@
+
+# Morphological Filters
+
+1. Structuring Element
+1. Dilation
+1. Erosion
+1. Close
+1. Open
+1. Gradient (for B/W images)

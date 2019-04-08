@@ -1,0 +1,9 @@
+
+
+# Gamma Correction
+
+- Read [Wikipedia Gamma Correction Page](https://en.wikipedia.org/wiki/Gamma_correction)
+
+```{python, code=readLines('python/gamma_correction.py')}
+```
+

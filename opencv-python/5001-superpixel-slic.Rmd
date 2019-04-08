@@ -1,0 +1,6 @@
+
+# SuperPixel Segmentation
+
+- Check [Labeling superpixel colorfulness](https://www.pyimagesearch.com/2017/06/26/labeling-superpixel-colorfulness-opencv-python/)
+
+

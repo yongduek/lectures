@@ -1,0 +1,6 @@
+
+# Gradient & Edge Operation
+
+1. Sobel X, Y
+1. Sobel Magnitude & Direction
+1. Canny Edge Detector

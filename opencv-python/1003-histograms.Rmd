@@ -1,0 +1,14 @@
+
+
+# Histogram Equalization
+
+- Check [Wikipedia Histogram Equalization](https://en.wikipedia.org/wiki/Histogram_equalization)
+
+```{python, echo=FALSE, code=readLines('python/histogram_equalization.py')}
+```
+
+
+```{python, eval=FALSE, code=readLines('python/histogram_equalization.py')}
+```
+
+Q. For an RGB image, convert it to HSV format, apply hisotgram equalization to V channel, convert back to RGB. Show an example.

@@ -45,41 +45,4 @@ A result of the program is shown below.
 ```
 
 
-## Histogram Equalization
-
-- Check [Wikipedia Histogram Equalization](https://en.wikipedia.org/wiki/Histogram_equalization)
-
-```{python, echo=FALSE, code=readLines('python/histogram_equalization.py')}
-```
-
-
-```{python, eval=FALSE, code=readLines('python/histogram_equalization.py')}
-```
-
-
-
-
-## Gamma Correction
-
-- Read [Wikipedia Gamma Correction Page](https://en.wikipedia.org/wiki/Gamma_correction)
-
-```{python, code=readLines('python/gamma_correction.py')}
-```
-
-
-
-
-
-## HSV Color Space
-
-HSV color representation is another popular way.
-```{r hsvCylinder, echo=FALSE, fig.align='center', fig.cap='HSV Cylinder'}
-knitr::include_graphics('python/figures/hsv-cylinder.png')
-```
-
-```{python, code=readLines('python/rgb_hsv.py')}
-```
-
-
-
 

@@ -1,3 +1,13 @@
-# Methods
+# Convolution (Space Filter)
 
-We describe our methods in this chapter.
+- [OpenCV filtering](https://docs.opencv.org/3.1.0/d4/d13/tutorial_py_filtering.html)
+
+- Convolution operation: linear filter
+- Fast computation should be implemented in C/C++, or use `numpy` with care after its manual.
+- 
+
+## Smoothing or Blurring
+
+```{python blurFilter, code=readLines('python/filter-box-blur.py')}
+```
+

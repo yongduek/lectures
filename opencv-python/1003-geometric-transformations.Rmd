@@ -1,0 +1,11 @@
+
+# Geometric Transformations
+
+1. Translation
+1. Scaling (magnifying x2)
+  1. interpolation
+1. Rotation
+1. Matrix Notation & Homogeneous Coordinate Representation
+1. Similarity Transformation
+1. Affine Tranformation
+1. Projective (Perspective) Transformation
