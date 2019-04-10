@@ -1,6 +1,48 @@
 
 # Gradient & Edge Operation
 
+- Check [Toturial on Sobel Derivatives](https://docs.opencv.org/3.4.3/d2/d2c/tutorial_sobel_derivatives.html)
+
+- Linear operators can be exchanged:
+$$
+\begin{align}
+  I_x  & = \frac{\partial}{\partial x} \left[ G(\sigma) * I \right] \\
+       & = \left[ \frac{\partial}{\partial x}  G(\sigma) \right] * I 
+\end{align}
+$$
+- The gradient of $G(\sigma)$ is approximated in discrete space: Sobel, Prewit, etc.
+
+
+- Edge magnitude:
+$$
+\begin{align}
+    M & = \big( I_x^2 + I_y^2 \big)^{1/2} \quad \mbox{$L_2$ norm} \\
+      & = | I_x | + | I_y | \quad \mbox{$L_1$ norm} \\
+      & = \max \{ |I_x|, |I_y|\} \quad \mbox{$L_\infty$ norm}
+\end{align}
+$$
+  - [Norm (mathematics)](https://en.wikipedia.org/wiki/Norm_(mathematics))
+  - [L0 Norm, L1 Norm, L-Infinity Norm](https://medium.com/@montjoile/l0-norm-l1-norm-l2-norm-l-infinity-norm-7a7d18a4f40c)
+  
 1. Sobel X, Y
 1. Sobel Magnitude & Direction
 1. Canny Edge Detector
+
+## Sobel-X
+
+```{python sobelX, code=readLines('python/sobel-x.py')}
+```
+
+
+## Canny Edge Detector
+
+- Edge map is extracted. That is, the output contains 0/1 values only (1 for edge pixels).
+- The result depends on the value of `sigma` ($\sigma$) that controls the width of Gaussian operator for edge detection.
+
+```{python canny, code=readLines('python/canny-edge.py)}
+```
+
+1. Q. Try various values of `sigma`.
+1. Q. Apply morphological operators to the edge map.
+1. Q. Try to extract edge's connect data with `cv.findContours()`.
+
