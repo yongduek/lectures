@@ -251,8 +251,22 @@ $$
 
 ## Sobel-X
 
-```{python sobelX, code=readLines('sobel-x.py')}
+```{python sobelX, code=readLines('python/sobel-x.py')}
 ```
+
+
+## Canny Edge Detector
+
+- Edge map is extracted. That is, the output contains 0/1 values only (1 for edge pixels).
+- The result depends on the value of `sigma` ($\sigma$) that controls the width of Gaussian operator for edge detection.
+
+```{python canny, code=readLines('python/canny-edge.py)}
+```
+
+1. Q. Try various values of `sigma`.
+1. Q. Apply morphological operators to the edge map.
+1. Q. Try to extract edge's connect data with `cv.findContours()`.
+
 
 <!--chapter:end:3002-gradient-edge.Rmd-->
 

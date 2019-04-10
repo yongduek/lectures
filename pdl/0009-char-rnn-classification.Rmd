@@ -36,6 +36,7 @@ $$
 knitr::include_graphics('./figures/nll-loss.jpg')
 ```
 
+
 ## Source Code
 
 ```{python charRNNClassfy, code=readLines('python/char_rnn_classification_tutorial.py')}

@@ -353,7 +353,7 @@ def train(category_tensor, line_tensor):
 import time
 import math
 
-n_iters = 100000
+n_iters = 10000
 print_every = 5000
 plot_every = 1000
 
