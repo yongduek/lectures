@@ -27,7 +27,7 @@ where $P$ is given by `softmax`, or $\log(P)$ is given by `LogSoftmax()`.
 
 - Negative log likelihood loss for the batch:
 $$
-    L = -\frac{1}{N} \sum_{i=1}^N -\log P(\hat y_i |x_i; w)
+    L = -\frac{1}{N} \sum_{i=1}^N \log P(\hat y_i |x_i; w)
 $$
 
 - Various [Loss Functions are well summarized in a post](https://isaacchanghau.github.io/post/loss_functions/).
