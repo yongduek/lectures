@@ -12,76 +12,21 @@ description: "Many things about image and video."
 
 # Preparation & Documents
 
-1. `python 3.x`
-2. `pip install opencv-python numpy matplotlib`
-3. [OpenCV-Python Tutorial](https://opencv-python-tutroals.readthedocs.io/en/latest/index.html)
-4. [docs.opencv.org](docs.opencv.org)
-5. [Python Image Library: Pillow](https://pillow.readthedocs.io/en/stable/)
-6. [scikit-image.org](scikit-image.org)
-1. [github.com/opencv](github.com/opencv)
-
-
-
-
-```{r include=FALSE}
-# automatically create a bib database for R packages
-knitr::write_bib(c(
-  .packages(), 'bookdown', 'knitr', 'rmarkdown'
-), 'packages.bib')
-```
+Placeholder
 
 
 
 <!--chapter:end:index.Rmd-->
 
+
 # Pixelwise Operations {#pixel}
 
+Placeholder
+
+
 ## Blending Two Images
-
-$$ I_B = \alpha I_1 + (1-\alpha) I_2 , \quad \alpha \in [0, 1]$$
-
-Procedure:
-
-1. prepare two image files
-1. read the two files
-1. set $\alpha$ to a value, e.g. $0.5$
-1. compute the weighted sum of the two images
-1. display the result
-
-Notice:
-
-- `np.uint8` is the type of a pixel value for display.
-- BGR in OpenCV!
-
-Try:
-
-- make a video showing a progressive change from one image to another by increasing $\alpha$ from 0 to 1 smoothly.
-
-```{python, code=readLines('python/blending.py') }
-```
-
-
 ## Negative Film Effect
-
-The image looks like a negative film in old days.
-
-```{python, code=readLines('python/negative_film.py') }
-```
-
-
-
 ## Histogram of RGB numpy image
-
-```{python, eval=FALSE, code=readLines('python/numpy-hist.py')}
-```
-
-A result of the program is shown below.
-
-```{python, echo=FALSE, code=readLines('python/numpy-hist.py')}
-```
-
-
-
 
 <!--chapter:end:1000-intro.Rmd-->
 
@@ -158,48 +103,13 @@ knitr::include_graphics('python/figures/hsv-cylinder.png')
 <!--chapter:end:1005-HSV-color.Rmd-->
 
 
-
 # Video File Manipulation {#video}
 
+Placeholder
+
+
 ## Video File Read/Write
-
-```{python, eval=FALSE, code=readLines('python/video-open.py')}
-```
-
-Notes:
-
-1. The color image in opencv is BGR order, not RGB order.
-2. `cap.get()` returns `float` numbers, not integer numbers.
-3. The video `frame` obtained from `cap.read()` is a `numpy` array, in BGR order. If you want to know its color values at `(x,y)`, then try `frame[y,x]` and you will get the BGR at the location.
-4. The fourcc `cv2.VideoWriter_fourcc()` is always confusing. Please search for a concrete explanation on it.
-5. There is no way to deal with sound with `OpenCV`. Try another python module such as `moviepy`, see [MoviePy](http://zulko.github.io/moviepy/index.html) for its documentation. Below is an example:
-
-
-Try:
-
-- Negative Film Effect Operation for a duration of the video
-- Gray Scale
-- Reversed-mode play 
-
-
-
-
-
-
 ## Video File Set Frame Position
-
-This is a way of getting a video frame at a specifiic frame number.
-
-- `videoCaputre().set(cv2.CAP_PROP_POS_FRAMES, nth_frame)`
-- `videoCaputre().set(cv2.CAP_PROP_POS_AVI_RATIO, relative_position_0_to_1)`
-
-```{python, eval=FALSE, code=readLines('python/video-lastframe.py')}
-```
-
-- See: [OpenCV VideoCapture Document](https://docs.opencv.org/4.0.1/d4/d15/group__videoio__flags__base.html#gaeb8dd9c89c10a5c63c139bf7c4f5704d) for `cv2.CV_CAP_PROP_POS_FRAMES` which sets '0-based index of the frame to be decoded/captured next.' 
-
-
-
 
 <!--chapter:end:2000-videofile.Rmd-->
 
@@ -222,51 +132,11 @@ This is a way of getting a video frame at a specifiic frame number.
 
 # Gradient & Edge Operation
 
-- Check [Toturial on Sobel Derivatives](https://docs.opencv.org/3.4.3/d2/d2c/tutorial_sobel_derivatives.html)
+Placeholder
 
-- Linear operators can be exchanged:
-$$
-\begin{align}
-  I_x  & = \frac{\partial}{\partial x} \left[ G(\sigma) * I \right] \\
-       & = \left[ \frac{\partial}{\partial x}  G(\sigma) \right] * I 
-\end{align}
-$$
-- The gradient of $G(\sigma)$ is approximated in discrete space: Sobel, Prewit, etc.
-
-
-- Edge magnitude:
-$$
-\begin{align}
-    M & = \big( I_x^2 + I_y^2 \big)^{1/2} \quad \mbox{$L_2$ norm} \\
-      & = | I_x | + | I_y | \quad \mbox{$L_1$ norm} \\
-      & = \max \{ |I_x|, |I_y|\} \quad \mbox{$L_\infty$ norm}
-\end{align}
-$$
-  - [Norm (mathematics)](https://en.wikipedia.org/wiki/Norm_(mathematics))
-  - [L0 Norm, L1 Norm, L-Infinity Norm](https://medium.com/@montjoile/l0-norm-l1-norm-l2-norm-l-infinity-norm-7a7d18a4f40c)
-  
-1. Sobel X, Y
-1. Sobel Magnitude & Direction
-1. Canny Edge Detector
 
 ## Sobel-X
-
-```{python sobelX, code=readLines('python/sobel-x.py')}
-```
-
-
 ## Canny Edge Detector
-
-- Edge map is extracted. That is, the output contains 0/1 values only (1 for edge pixels).
-- The result depends on the value of `sigma` ($\sigma$) that controls the width of Gaussian operator for edge detection.
-
-```{python canny, code=readLines('python/canny-edge.py)}
-```
-
-1. Q. Try various values of `sigma`.
-1. Q. Apply morphological operators to the edge map.
-1. Q. Try to extract edge's connect data with `cv.findContours()`.
-
 
 <!--chapter:end:3002-gradient-edge.Rmd-->
 
@@ -285,69 +155,16 @@ $$
 
 # MoviePy to manipulate movie files
 
+Placeholder
 
-If you need to manipulate audio & video together, `moviepy` is an option.
-
-- [Check the site](https://zulko.github.io/moviepy/).
-
-```
-$ pip3 install moviepy
-$ sudo apt-get install imagemagick
-```
 
 ## Install `youtube-dl`
-
-```
- $ pip install youtube-dl
- $ youtube-dl <youtube.com url>
-```
-
 ## Text overlay on a video clip
-```{python, eval=FALSE, code=readLines('python/moviepy_textoverlay.py')}
-```
-
-- Use 'mp4' extension to save to a file (in Linux). No experience with Windows 10 / Mac OS X.
-
-
 ## Extract audio (MP3) from a movie file
-```{python, eval=FALSE, code=readLines('python/moviepy_get_audio.py')}
-```
-
-
 ## Movie Concatanation
-```{python, eval=FALSE, code=readLines('python/moviepy_concat.py')}
-```
-
 ## Apply Filter Frame by Frame
-```{python, eval=FALSE, code=readLines('python/moviepy_filter.py')}
-```
-
-
 ## MoviePy Open & Get A Frame
-
-```{python, eval=FALSE, code=readLines('python/moviepy-open.py')}
-```
-
-
-
 ## Errors
-
-* Use 'mp4' to save a movie clip into a file!
-Error:
-```
-Could not load source '</usr/local/local/lib/python3.6/site-packages/decorator.py:decorator-gen-49>': Source unavailable.
-```
-
-
-* Edit `/etc/ImageMagick-6/policy.xml` : comment out (or remove the line that reads)
-`<policy domain="path" rights="none" pattern="@*" />`
-```
-<!-- <policy domain="path" rights="none" pattern="@*" /> -->
-```
-Error:
-```
-ImageMagick not detected by moviepy while
-```
 
 <!--chapter:end:4000-moviepy.Rmd-->
 
@@ -390,6 +207,33 @@ ImageMagick not detected by moviepy while
 
 
 <!--chapter:end:5002-nonphotorealistic.Rmd-->
+
+
+# Drawing Text in Image with a Font (OTF) file
+
+- Install [Google Noto CJK Fonts](https://www.google.co.kr/get/noto/help/cjk)
+
+- Use `PIL` with `python`
+  - [`PIL.ImageFont`](https://pillow.readthedocs.io/en/stable/reference/ImageFont.html)
+  - [Drawing anti-aliased unicode text with python](https://kalyanchakravarthy.net/blog/drawing-anti-aliased-unicode-text-with-python)
+  
+- [Computer_font](https://en.wikipedia.org/wiki/Computer_font#OUTLINE)
+  - Outline font:
+    - Outline fonts or vector fonts are collections of vector images, consisting of lines and curves defining the boundary of glyphs.
+    - The primary advantage of outline fonts is that, unlike bitmap fonts, they are a set of lines and curves instead of pixels; they can be scaled without causing pixellation.
+    
+- [OpenType Font](https://en.wikipedia.org/wiki/OpenType)
+  - ensuring that all of the required glyphs for a document are contained in one cross-platform font file throughout the workflow. [Adobe opentype](https://www.adobe.com/products/type/opentype.html)
+  
+- [GNU Charmap](https://wiki.gnome.org/Apps/Gucharmap)
+
+- [OpenGL Text Rendering](https://en.wikibooks.org/wiki/OpenGL_Programming/Modern_OpenGL_Tutorial_Text_Rendering_01)
+
+- [FreeType Library](https://www.freetype.org/)
+  - FreeType is a freely available software library to render fonts.
+  -It is written in C, designed to be small, efficient, highly customizable, and portable while capable of producing high-quality output (glyph images) of most vector and bitmap font formats.
+
+<!--chapter:end:5003-fonts.Rmd-->
 
 `r if (knitr::is_html_output()) '
 # References {-}

@@ -5,6 +5,7 @@
 
 - Use `PIL` with `python`
   - [`PIL.ImageFont`](https://pillow.readthedocs.io/en/stable/reference/ImageFont.html)
+  - [Drawing anti-aliased unicode text with python](https://kalyanchakravarthy.net/blog/drawing-anti-aliased-unicode-text-with-python)
   
 - [Computer_font](https://en.wikipedia.org/wiki/Computer_font#OUTLINE)
   - Outline font:
@@ -21,3 +22,6 @@
 - [FreeType Library](https://www.freetype.org/)
   - FreeType is a freely available software library to render fonts.
   -It is written in C, designed to be small, efficient, highly customizable, and portable while capable of producing high-quality output (glyph images) of most vector and bitmap font formats.
+  
+- [한글코드](https://d2.naver.com/helloworld/76650?nil_openapi=s.)
+
