@@ -33,6 +33,7 @@ $$
 ```{python sobelX, code=readLines('python/sobel-x.py')}
 ```
 
+Q. Produce edge-enhanced image using a combination of binarization and sobel edge map.
 
 ## Canny Edge Detector
 

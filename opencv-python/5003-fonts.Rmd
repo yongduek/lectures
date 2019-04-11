@@ -1,0 +1,23 @@
+
+# Drawing Text in Image with a Font (OTF) file
+
+- Install [Google Noto CJK Fonts](https://www.google.co.kr/get/noto/help/cjk)
+
+- Use `PIL` with `python`
+  - [`PIL.ImageFont`](https://pillow.readthedocs.io/en/stable/reference/ImageFont.html)
+  
+- [Computer_font](https://en.wikipedia.org/wiki/Computer_font#OUTLINE)
+  - Outline font:
+    - Outline fonts or vector fonts are collections of vector images, consisting of lines and curves defining the boundary of glyphs.
+    - The primary advantage of outline fonts is that, unlike bitmap fonts, they are a set of lines and curves instead of pixels; they can be scaled without causing pixellation.
+    
+- [OpenType Font](https://en.wikipedia.org/wiki/OpenType)
+  - ensuring that all of the required glyphs for a document are contained in one cross-platform font file throughout the workflow. [Adobe opentype](https://www.adobe.com/products/type/opentype.html)
+  
+- [GNU Charmap](https://wiki.gnome.org/Apps/Gucharmap)
+
+- [OpenGL Text Rendering](https://en.wikibooks.org/wiki/OpenGL_Programming/Modern_OpenGL_Tutorial_Text_Rendering_01)
+
+- [FreeType Library](https://www.freetype.org/)
+  - FreeType is a freely available software library to render fonts.
+  -It is written in C, designed to be small, efficient, highly customizable, and portable while capable of producing high-quality output (glyph images) of most vector and bitmap font formats.
