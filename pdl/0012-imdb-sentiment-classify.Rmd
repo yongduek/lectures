@@ -1,0 +1,26 @@
+
+# Sentment Binary Classification
+
+- IMDB movie review dataset: Internet Movie Database
+- 25000 reviews for training and 25000 reviews for testing
+- 50% negative 50% positive reviews
+- [IMDB Dataset is here](http://mng.bz/0tIo). Click and downloading will be started.
+- [Large Movie Review Dataset Homepage](http://ai.stanford.edu/~amaas/data/sentiment/)
+
+- `torchtext` provides a pakage composed of data processing utilities and popular datasets for natural language (mostly English).
+
+- [A good tutorial on sentiment analysis with Pytorch](https://github.com/bentrevett/pytorch-sentiment-analysis)
+
+- [Deep learning with Python by Chollet github](https://github.com/fchollet/deep-learning-with-python-notebooks)
+
+## Binary Cross-Entropy Loss Function
+
+## Data Preprocessing
+
+## Large Data & Fully-Connected Network
+
+## Shortened & Data FC Network
+
+## Shortened Data & Embedding
+
+## Shortended Data & LSTM

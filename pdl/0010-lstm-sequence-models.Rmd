@@ -143,5 +143,8 @@ print(hidden[0].shape, '\n', hidden[0].data, hidden[1].data)
 ```{python lstmPOSTag, code=readLines('python/lstm_pos_tagging.py')}
 ```
 
+Q. try the option: batch_first=True
+
+Q. Implement character level seq-seq learning. You might need two special words {SOS, EOS}.
 
 EOF
