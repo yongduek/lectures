@@ -1,0 +1,11 @@
+
+# Morphological Filters
+
+- Dilate = choose max
+- Erode = choose min
+
+- see skimage examples
+
+```{python, code=readLines('morph-dilation.py')}
+```
+
