@@ -34,11 +34,11 @@ Autoencoder model has evolved since 2006 and can be listed as follows. See [From
 ```{python simpleAE, eval=FALSE, code=readLines('python/autoencoder-simple.py')}
 ```
 
-```{r simpleAESample0, echo=FALSE, fig.align='center', fig.cap='Sample output after 1 epoch of training (rep_dim=4).'}
+```{r simpleAESample, echo=FALSE, fig.align='center', fig.cap='Sample output after 1 epoch of training (dim=4).'}
 knitr::include_graphics('data/samples/image_0.png')
 ```
 
-```{r simpleAESample1, echo=FALSE, fig.align='center', fig.cap='Sample output after 40 epochs of training'}
+```{r simpleAESampleAnother, echo=FALSE, fig.align='center', fig.cap='Sample output after 40 epochs of training'}
 knitr::include_graphics('data/samples/image_40.png')
 ```
 
@@ -81,7 +81,7 @@ knitr::include_graphics('figures/pokemons-ae-output.png')
 ```{python convAE, eval=FALSE, code=readLines('python/autoencoder-conv.py')}
 ```
 
-```{r convAESample0, echo=FALSE, fig.align='center', fig.cap='Sample output after 90 epochs of training (rep_dim=4) by convolutional AE.'}
+```{r convAESample, echo=FALSE, fig.align='center', fig.cap='Sample output after 90 epochs of training (rep dim=4) by convolutional AE.'}
 knitr::include_graphics('data/samples_dc/samples_dc_90.png')
 ```
 
@@ -150,7 +150,8 @@ knitr::include_graphics('figures/vae-gaussian.png')
 ```
 
 - Sample output using the trained decoder with random inputs $z\sim N(0,1)$
-```{r, fig.align='center', fig.cap='Sample output from VAE decoder with $z\sim N(0,1)$'}
+
+```{r, fig.align='center', fig.cap='Sample output from VAE decoder'}
 knitr::include_graphics('data/samples_vae/sampled-15.png')
 ```
 
@@ -194,13 +195,15 @@ knitr::include_graphics('figures/gm-vae.png')
 ```
 
 
-#### VAE vs GAN
+#### VAE-GAN
 
-```{r, fig.align='center', fig.cap='VAE-GAN architecutre, the discriminator from GAN takes input from VAE's decoder.'}
+```{r, fig.align='center', fig.cap='VAE-GAN architecutre, the discriminator from GAN takes input from VAE\'s decoder.'}
 knitr::include_graphics('figures/vae-vs-gan.png')
 ```
 
+- A major drawback of VAEs is the blurry outputs that they generate. As suggested by Dosovitskiy & Brox, VAE models tend to produce unrealistic, blurry samples. This has to do with how data distributions are recovered and loss functions are calculated in VAEs in which we will discuss further below. A 2017 paper by [Zhao et. al.](https://arxiv.org/pdf/1702.08658.pdf) has suggested modifications to VAEs to not use variational Bayes method to improve output quality.
 
+-  The final output of GAN, $D(x)$, can then be used to calculate its own loss function, resulting in improved performance. See [“Autoencoding beyond pixels using a learned similarity metric” by A. Larsen et. al.](https://arxiv.org/abs/1512.09300)
 
 
 ### Sequence-to-Sequence Autoencoder

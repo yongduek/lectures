@@ -1,2 +1,2 @@
 
-# CRNN, Text Detection
+# EAST Text Detection
