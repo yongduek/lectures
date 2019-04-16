@@ -6,6 +6,6 @@
 
 - see skimage examples
 
-```{python, code=readLines('morph-dilation.py')}
+```{python, code=readLines('python/morph-dilation.py')}
 ```
 
