@@ -17,13 +17,27 @@ def imshow (rgb, title="imshow", p=2):
     plt.pause(p); plt.close()
 #
 
+<<<<<<< HEAD
 datadir = './data'
 fontfilenames = ['NanumGothic.ttf', 
                 'NotoSerifKR-SemiBold.otf', 
                 'SourceHanSansK-Medium.otf', 
                 'HANBatang-LVT.ttf']
+=======
+fontdir = '/home/yndk/.fonts'
+fontfilenames = [
+    'NotoSansCJKkr-Medium.otf',
+    'NanumBarunGothicOTF_Light.otf',
+    'NanumBarunGothicOTF_Regular.otf',
+    'NanumBarunGothicOTF_Semi_Bold.otf',
+    'NanumBarunGothicOTF_YetHangul_Regular.otf',
+    'NanumGothicOTF_Bold.otf',
+    'NanumGothicOTF_Semi_Bold.otf',
+    'NanumMyeongjoOTF_YetHangul_Regular.otf'
+]
+>>>>>>> 52a7d1f7df5ea3af6898358ddbb06d9b637ee2be
 
-fontfiles = [datadir + '/' + f for f in fontfilenames] 
+fontfiles = [ os.path.join (fontdir, f) for f in fontfilenames] 
 
 for fontfile in fontfiles:
     print ('fontfile = ', fontfile)
@@ -36,14 +50,19 @@ im = np.ones((500, 1200,3), dtype=np.uint8)*128 # numpy rgb, gray color
 pilimg = PIL.Image.fromarray (im)
 
 # prepare font data
-fonts = [ImageFont.truetype(font=fontfile, size=30) for fontfile in fontfiles]
+fonts = [ImageFont.truetype(font=fontfile, size=16) for fontfile in fontfiles]
 
 draw = ImageDraw.Draw(pilimg)
 
-hun = [' 나랏〮말〯ᄊᆞ미〮 中듀ᇰ國귁에〮 달아〮 문ᄍᆞᆼ와〮로 서르 ᄉᆞᄆᆞᆺ디〮 아니〮ᄒᆞᆯᄊᆡ〮  ']
+with open ('data/fk050000000000.txt') as f:
+    fk05 = f.read()
+print (fk05)
+for c in fk05:
+    print ('c: {} {:5d} hex: {:7}'.format(c, ord(c), hex(ord(c))))
 
+hun = [fk05]
 for i, font in enumerate(fonts):
-    draw.text ((20,10 + 50*i), fontfilenames[i] + hun[0], font=font, fill=(0,0,0)) # black color
+    draw.text ((8,10 + 50*i), fontfilenames[i] + hun[0], font=font, fill=(0,0,0), language='kr') # black color
 
 imshow (pilimg, title='PIL Image with Text Inserted.')
 
@@ -55,5 +74,6 @@ for c in w:
     print ('c: {}  {:5d} hex: {:7}'.format(c, ord(c), hex(ord(c))))
 
 imageio.imwrite ('data/font-drawings.png', im2)
+
 
 # EOF

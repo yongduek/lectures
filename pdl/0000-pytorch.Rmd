@@ -1,0 +1,4 @@
+
+# Pytorch Preliminaries
+
+- mostly from [pytorch tutorial by yunjey@github.com](http://github.com/yunjey)

@@ -1,1 +1,12 @@
-# 
+# Various Resources for Deep Learning
+
+## Lecture informations
+
+- [Svetlana Lazebnik @ cs.illinois.edu](http://slazebni.cs.illinois.edu/)
+    - [Variational Autoencoders](http://slazebni.cs.illinois.edu/spring17/lec12_vae.pdf)
+    
+## PyTorch tutorial github sites
+
+1. [Learn deep learning with pytorch by L1aoXingyu](https://github.com/L1aoXingyu/code-of-learn-deep-learning-with-pytorch)
+    - [pytorch beginner](https://github.com/L1aoXingyu/pytorch-beginner)
+1. [pytorch tutorial by Yunjey](https://github.com/yunjey/pytorch-tutorial)

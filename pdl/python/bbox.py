@@ -66,5 +66,6 @@ for i, a in enumerate(anchors):
     #print (i, 'bbox: ', bbox, 'rect: ', rect)
     fig.axes.add_patch (bbox_to_rect(abox2bbox(a, (w,h), (250,250)), colors[i]))
     fig.axes.text (rect[0], rect[1], a[-1], color='k', bbox=dict(facecolor=colors[i], lw=0) )
+plt.title ('%d bounding boxes drawn at xy=(%d, %d)' % (len(anchors), 250, 250))
 plt.pause(1)
 

@@ -1,7 +1,5 @@
 
-# Various Topics on CNN Network Modeling
-
-## Global Average Pooling
+# Global Average Pooling
 
 - [Network in Network, 2014, Min Lin, Qiang Chen, Shuicheng Yan](https://arxiv.org/pdf/1312.4400.pdf). Section 3.2's title is Global Average Pooling.
 
@@ -90,14 +88,16 @@ knitr::include_graphics('figures/dog_localization.png')
 ```
 
 
-Q. Find class activation maps for bees/ants classification problem, or dogs breed problem.
+Q. Visualize a class activation maps for 
+    - bees/ants classification problem, or 
+    - dogs breed problem.
 
 
 ## Why GAP
 
 GAP is known to reduce overfitting.
 
-- [A comment in the blog site says] (https://alexisbcook.github.io/2017/global-average-pooling-layers-for-object-localization/)
+- [A comment in the blog site says](https://alexisbcook.github.io/2017/global-average-pooling-layers-for-object-localization/)
 
 > Imagine I show my network images of dogs all in the right hand side. So now my final activation map before flatten layers will only have high activations on right side and the connections to flatten will be trained to only have high weights in that region. So if my dog is now on left, that region does not have high weights to fc layer and is not detected.
 >
