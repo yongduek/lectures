@@ -36,6 +36,18 @@ $$
 knitr::include_graphics('./figures/nll-loss.jpg')
 ```
 
+- The Negative Log-Likelihood (NLL) loss function.
+
+## Representation of Text Data
+
+1. BoW: Bag of words.
+    - Given a vocabulary, the feature vector of a text sentence is the (normalized) histogram of the words, where the x-axis of the histogram is the word index according to the vocabulary.
+
+2.  OHE: One hot encoding.
+     - Given a vocabulary (of size 100), each word is corresponded to a one-hot  vector. If the sentence has 50 words, then the sentence corresponds to 50  sequences of 100D vectors.
+    
+3. Embedding into $R^n$: Word embedding.
+    - Each word in a sentence is assigned to an $n$-dimensional vector. If the size of vocabulary is 100, then there must be 100 $n$-dimensional vectors. The vector for a sentence of $50$ words becomes a sequences of 50 vectors (out of 100 vocabulary vectors), each of which has dimension $n$.
 
 ## Source Code
 

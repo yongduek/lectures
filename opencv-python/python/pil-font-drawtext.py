@@ -18,7 +18,7 @@ def imshow (rgb, title="imshow", p=2):
 #
 
 datadir = './data'
-fontfilenames = ['NanumBatang-LVT.ttf', 
+fontfilenames = ['NanumGothic.ttf', 
                 'NotoSerifKR-SemiBold.otf', 
                 'SourceHanSansK-Medium.otf', 
                 'HANBatang-LVT.ttf']
