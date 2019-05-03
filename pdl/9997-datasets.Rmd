@@ -1,6 +1,12 @@
 # Datasets
 
+## From Google Search
 
+- see [How to create a deep learning dataset using Google images](https://www.pyimagesearch.com/2017/12/04/how-to-create-a-deep-learning-dataset-using-google-images/)
+    - search images at images.google.com
+    - Javascript provided to download all the links to the images
+    - Video explanation at [fast.ai course v3](https://course.fast.ai/videos/?lesson=2) 17:04.
+    
 ## MNIST
 
 

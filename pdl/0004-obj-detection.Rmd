@@ -23,8 +23,8 @@ output:
 * So the image location (250,250) has 5 anchor boxes. Other image locations will also have 5 boxes each.
 
 ## IoU: Intersection over Union
-```{r iou, fig.align='center', fig.cap='IoU = Intersection over Union'}
-knitr::include_graphics('figures/iou.svg')
+```{r iouFigure, fig.align='center', fig.cap='IoU = Intersection over Union'}
+knitr::include_graphics('figures/iou.png')
 ```
 
 
@@ -43,7 +43,7 @@ In prediction stage, the network produces
 - So how do we assign gt bboxes to anchor boxes similar to them?
 
 ```{r anchorLabel, fig.align='center', fig.cap='Assigning GT bounding boxes to anchor boxes. From left to right, it shows 3 steps.'}
-knitr::include_graphics('figures/anchor-label.svg')
+knitr::include_graphics('figures/anchor-label.png')
 ```
 
 1. Build a matrix $X$ of size $n_a \times n_b$ where $n_a$ is the num. of anchor boxes and $n_b$ is the num. of gt bboxes. $x_{ij}$ is the IoU.

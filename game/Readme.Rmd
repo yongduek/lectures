@@ -1,0 +1,4 @@
+# Game programming with python
+
+- [Code your first game in pygame, by Jody LeCompte](https://medium.com/@jodylecompte/code-your-first-game-in-pygame-5585dfcc6388)
+  - anaconda project.
