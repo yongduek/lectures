@@ -1,0 +1,8 @@
+# Transposed Convolution &  Upsampling+Conv
+
+- [Up-sampling with Transposed Convolution, Naoki Shibuya, in towardsdatascience.com](https://towardsdatascience.com/up-sampling-with-transposed-convolution-9ae4f2df52d0)
+    - Conv kernel may be reshaped into a 2D matrix, input reshaped to 1D vector, output reshaped to 1D vector; then the convolution operation is a matrix-vector multiplication
+    - Transposed Conv: input is multiplied by the transposed matrix of the conv kernel to produce output of a larger dimension.
+    
+- [Deconvolution and Checkerboard Artifacts in distill by Odena, Dumoulin, Olah, 2017](https://distill.pub/2016/deconv-checkerboard/)
+    - Better to use NN upsampling followed by convolution
