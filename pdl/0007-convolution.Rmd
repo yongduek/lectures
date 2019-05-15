@@ -17,3 +17,11 @@
 
 ```{python, code=readLines('python/torch-conv-learn.py')}
 ```
+
+
+## Convolution & Transposed Convolution
+
+- Read [the document about Convolution arithmetic tutorial in Theano 1.0 page](http://deeplearning.net/software/theano/tutorial/conv_arithmetic.html#transposed-convolution-arithmetic)
+    - Convolution may be represented in matrix multiplication
+    - Transposed convolution is the multiplication of transposed convolution matrix and the input vector (rearranged from 2d image).
+    

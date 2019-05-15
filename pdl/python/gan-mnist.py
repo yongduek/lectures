@@ -1,4 +1,5 @@
 # gan-mnist.py
+# org: https://github.com/yunjey/pytorch-tutorial/blob/master/tutorials/03-advanced/generative_adversarial_network/main.py
 
 import os
 import torch
@@ -7,9 +8,9 @@ import torch.nn as nn
 from torchvision import transforms
 from torchvision.utils import save_image
 
-
 # Device configuration
 device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
+print ('device: ', device)
 
 # Hyper-parameters
 latent_size = 64

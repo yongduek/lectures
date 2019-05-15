@@ -5,6 +5,7 @@
 knitr::include_graphics('figures/auto-encoder-concept.png')
 ```
 
+
 Autoencoder model has evolved since 2006 and can be listed as follows. See [From Autoencoder to Beta-VAE](https://lilianweng.github.io/lil-log/2018/08/12/from-autoencoder-to-beta-vae.html)
 
 1. Auto Encoder Model
@@ -143,6 +144,42 @@ knitr::include_graphics('figures/vae.png')
 ```{r vaeGaussian, echo=FALSE, fig.align='center', fig.cap='Illustration of variational autoencoder model with the multivariate Gaussian assumption'}
 knitr::include_graphics('figures/vae-gaussian.png')
 ```
+
+
+* Read [Tutorial on Variational Autoencoders by Carl Doersch](https://arxiv.org/abs/1606.05908) for a better mathematical intuition.
+
+    * NN is a function approximator. So it can be used as a function that maps a random vector (image) into a stanadard Gaussian distribution (of a dimension $N$).
+
+    * Note: Gaussian random variable can be transformed to a completely different distribution. E.g., the following transform will move the samples from standard Gaussian to a ring shaped distribution.
+    $$
+        z = x / 10 + x / || x ||
+    $$
+```{python gaussanToCircular}
+import numpy as np
+import matplotlib.pyplot as plt
+
+ndata=1000
+dim=2
+x = np.random.normal (size=(ndata,dim))
+z = x / 10 + x / np.linalg.norm(x,axis=1)[:,None]
+
+fig, ax = plt.subplots(1,2, figsize=(10,4))
+ax[0].plot (x[:,0], x[:,1], '.'); ax[0].set_title ('Gaussain Samples')
+ax[1].plot (z[:,0], z[:,1], '.'); ax[1].set_title ('Ring Shaped')
+plt.pause(1);
+```
+
+* In VAE, the encoder network encodes the sample images into the standard Gaussian distribution, the decoder network decodes the samples from the standard Gaussian to the samples in the image space. If the training of the encoder/decoder networks is successful, the encoded space is the standard Gaussian of a dimension (that you have chosen for the network and data).
+
+
+- Following is from [pytorch VAE example](https://github.com/pytorch/examples/blob/master/vae/main.py)
+```{python pytorch-example-vae, eval=FALSE, code=readLines('python/vae-mnist-linear.py')}
+```
+- Note that the reconstruction loss is binary cross entropy function. Since the target image to be reconstructred is binary, we can use bce. Of couse mse or mae can replace bce.
+
+
+
+
 
 #### Pytorch code example
 

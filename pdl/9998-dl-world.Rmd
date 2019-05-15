@@ -10,3 +10,10 @@
 1. [Learn deep learning with pytorch by L1aoXingyu](https://github.com/L1aoXingyu/code-of-learn-deep-learning-with-pytorch)
     - [pytorch beginner](https://github.com/L1aoXingyu/pytorch-beginner)
 1. [pytorch tutorial by Yunjey](https://github.com/yunjey/pytorch-tutorial)
+
+
+## GAN: Generative Adversarial Network
+
+1. [pytorch.org DCGAN Tutoral](https://pytorch.org/tutorials/beginner/dcgan_faces_tutorial.html)
+1. [The GAN Zoo by hindupuravinash@github](https://github.com/hindupuravinash/the-gan-zoo)
+1. [Curated list of awesome GAN applications and demo by nashory@github](https://github.com/nashory/gans-awesome-applications)
