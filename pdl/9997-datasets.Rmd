@@ -1,12 +1,6 @@
 # Datasets
 
-## From Google Search
 
-- see [How to create a deep learning dataset using Google images](https://www.pyimagesearch.com/2017/12/04/how-to-create-a-deep-learning-dataset-using-google-images/)
-    - search images at images.google.com
-    - Javascript provided to download all the links to the images
-    - Video explanation at [fast.ai course v3](https://course.fast.ai/videos/?lesson=2) 17:04.
-    
 ## MNIST
 
 
@@ -119,3 +113,19 @@ knitr::include_graphics('figures/sllfw_neg_pairs.jpg')
 ```{r, fig.align='center', fig.cap='Varification accuracy on LFW and SLLFW'}
 knitr::include_graphics('figures/lfw-sllfw-accuracy.png')
 ```
+
+
+
+## Visual Genome
+
+* [Visual Genome](https://visualgenome.org/)
+
+Visual Genome is a dataset, a knowledge base, an ongoing effort to connect structured image concepts to language.
+
+- 108077 images
+- 5.4 million region descriptions
+- 1.7 M visual question answers
+- 3.8 M object instances
+- 2.8 M attributes
+- 2.3 M relation ships
+- Everything mapped to Wordnet Synsets
