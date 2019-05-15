@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html >
+
+<head>
+
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Chapter 2 Introduction | Visual Media Programming with Pygame</title>
+  <meta name="description" content="Making a game must be the best way to learn a computer programming!">
+  <meta name="generator" content="bookdown  and GitBook 2.6.7">
+
+  <meta property="og:title" content="Chapter 2 Introduction | Visual Media Programming with Pygame" />
+  <meta property="og:type" content="book" />
+  
+  
+  <meta property="og:description" content="Making a game must be the best way to learn a computer programming!" />
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Chapter 2 Introduction | Visual Media Programming with Pygame" />
+  
+  <meta name="twitter:description" content="Making a game must be the best way to learn a computer programming!" />
+  
+
+<meta name="author" content="서용덕 Yongduek Seo (yndk@sogang.ac.kr)">
+
+
+<meta name="date" content="2019-05-14">
+
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  
+  
+<link rel="prev" href="index.html">
+<link rel="next" href="references.html">
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">A Minimal Book Example</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Prerequisites</a></li>
+<li class="chapter" data-level="2" data-path="intro.html"><a href="intro.html"><i class="fa fa-check"></i><b>2</b> Introduction</a><ul>
+<li class="chapter" data-level="2.1" data-path="intro.html"><a href="intro.html#why-background.convert"><i class="fa fa-check"></i><b>2.1</b> Why <code>background.convert()</code>?</a></li>
+<li class="chapter" data-level="2.2" data-path="intro.html"><a href="intro.html#then-why-convert_alpha"><i class="fa fa-check"></i><b>2.2</b> Then why <code>convert_alpha()</code>?</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Visual Media Programming with Pygame</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="intro" class="section level1">
+<h1><span class="header-section-number">Chapter 2</span> Introduction</h1>
+<div id="why-background.convert" class="section level2">
+<h2><span class="header-section-number">2.1</span> Why <code>background.convert()</code>?</h2>
+<p>convert() is used to convert the pygame.Surface to the same pixel format as the one you use for final display, the same one created from pygame.display.set_mode(). If you don’t call it, then every time you blit a surface to your display surface, a pixel conversion will be needed - this is a per pixel operation, very slow - instead of a series of memory copies. You may not feel the difference on your octa-core development PC, but when you’re on constrained devices like handhelds (or just bring up your CPU counter), it makes a big difference. The recommendation is to do it as early as possible, preferably when you load or create your assets, or at least outside your game loop.</p>
+<p>Why don’t surfaces match the display by default? Good question, as it’s an obvious newbie trap. I don’t know the considerations that went into this design, but one issue is that you don’t know until run time what your display pixel format will be. The user might specify 16-bit pixels and it might end up as some wacky format like BGR565. If you do some image processing at low bit depths, you might get results that you weren’t expecting.</p>
+<p>Another issue is that your display format most likely doesn’t have alpha. If all surfaces matched the display format by default, then every time you try to blit semi-transparent surfaces, or ones loaded from PNGs or GIFs with transparent pixels, you end up with images over a black rectangle. If you need transparency, you can use convert_alpha(), which is marginally faster than unconverted but not nearly as fast as convert() - alpha blending is expensive. Pygame can’t tell whether you need alpha surfaces or not, so you need to specify yourself.</p>
+<p>src: <a href="https://gamedev.stackexchange.com/questions/81280/pygame-surfaces-which-and-when-do-i-need-to-convert" class="uri">https://gamedev.stackexchange.com/questions/81280/pygame-surfaces-which-and-when-do-i-need-to-convert</a></p>
+</div>
+<div id="then-why-convert_alpha" class="section level2">
+<h2><span class="header-section-number">2.2</span> Then why <code>convert_alpha()</code>?</h2>
+<p>It creates a new copy of the surface with the desired pixel format. The new surface will be in a format suited for quick blitting to the given format with per pixel alpha. If no surface is given, the new surface will be optimized for blitting to the current display.Creates a new copy of the surface with the desired pixel format. The new surface will be in a format suited for quick blitting to the given format with per pixel alpha. If no surface is given, the new surface will be optimized for blitting to the current display.</p>
+<p>src: <a href="https://www.pygame.org/docs/ref/surface.html#pygame.Surface.convert_alpha" class="uri">https://www.pygame.org/docs/ref/surface.html#pygame.Surface.convert_alpha</a></p>
+
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="index.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="references.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"google": false,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"all": ["facebook", "google", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"history": {
+"link": null,
+"text": null
+},
+"download": ["pygame.pdf", "pygame.epub"],
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+</body>
+
+</html>
