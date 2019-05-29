@@ -1,5 +1,55 @@
 # Introduction {#intro}
 
+Making a video game is a good way of learning a programming language.
+
+
+# Basic structure of a program with infinite loop
+
+# Background image creation
+
+# Direct drawing on the background image
+
+# Circle drawing for animation
+
+# Many circles 
+
+# Blit operation
+    - What is blit? See wikipedia.
+
+# Image file loading
+
+# Animation of a set of still images
+
+# Keyboard input
+
+# Mouse input
+
+# Sound & music
+
+# Geometric Transforms
+    - rotation and zoom
+    - `pygame.transform`
+
+# Text & Font Rendering
+
+# Sprite
+
+# Layered updates and parallax scrolling
+
+# Inheritance and physics (17)
+
+# Collision detection (step 18)
+
+
+# Box2d for 2D pysical engine
+
+# Simple Shooting Game
+    - keyborad control (left, right), space key for shoot
+    - hit baloons floating on the sky, moving down slowly
+    - the game finishes when a baloon sits on the ground.
+    
+# FAQ / Q&A
+
 ## Why `background.convert()`?
 
 convert() is used to convert the pygame.Surface to the same pixel format as the one you use for final display, the same one created from pygame.display.set_mode(). If you don't call it, then every time you blit a surface to your display surface, a pixel conversion will be needed - this is a per pixel operation, very slow - instead of a series of memory copies. You may not feel the difference on your octa-core development PC, but when you're on constrained devices like handhelds (or just bring up your CPU counter), it makes a big difference. The recommendation is to do it as early as possible, preferably when you load or create your assets, or at least outside your game loop.
