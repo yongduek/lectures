@@ -1,0 +1,16 @@
+
+# Photo Mosaic
+
+- python [Photomosaic package by Daniel Ballan](http://danielballan.github.io/photomosaic/docs)
+
+## General Procedure
+
+1. Prepare lots of image data. One image can also be used by applying proper image processing techniques such as brightness control, color contol, or saturation control.
+1. define grid size on the source image
+1. For each grid, generate proper thumb nail image.
+1. Save the output.
+
+* What kind of image processing or treatment can be thougth of to make an interesting photomosaic?
+
+
+## References
