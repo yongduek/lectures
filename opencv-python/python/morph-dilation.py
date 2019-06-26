@@ -9,3 +9,4 @@ selem = disk(6)
 print (type(selem), selem.dtype, selem.shape, '\n', selem)
 plt.imshow (selem, cmap='gray')
 plt.pause(2)
+

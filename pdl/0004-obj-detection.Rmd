@@ -11,7 +11,39 @@ output:
 - Q. Try to figure out the size of receptive field for VGG-16 network.
 
 
+## mAP: mean Average Precision
 
+- refer to  [Object Detection Metrics by rafaelpadilla@github.com](https://towardsdatascience.com/breaking-down-mean-average-precision-map-ae462f623a52)
+
+* Precision : ratio of true positives to the number of predictions marked as True
+\[
+    P = \frac{TP}{TP + FP}
+\]
+* Recall = TPR = True Positve Rate = Sensitivity
+\[
+    R = \frac{TP}{TP+FN}
+\]
+
+* AP : Average Precision = AUC = Area Under Precison-Recall Curve
+```{r, echo=FALSE, fig.align='center', fig.cap='Precision-Recall Curve. The area is approximated as shown, which gives the AP for this curve. An IoU threshold values should be fixed and given so that this graph may be constructed.'}
+knitr::include_graphics('figures/interpolated_precision-AUC_v2.png')
+```
+
+* mAP: mean Average Precision: AP is averaged over all class categories, give.
+
+* `mAP@[.5,.95]` means average mAP over different IoU thresholds for [0.5:0.05:0.95] - from [stackexchange.com](https://datascience.stackexchange.com/questions/16797/what-does-the-notation-map-5-95-mean)
+    - There is an associated MS COCO challenge with a new evaluation metric, that averages mAP over different IoU thresholds, from 0.5 to 0.95, step 0.05. See [Inside-Outside Net: Detecting Objects in Context with Skip Pooling and RNN by Sean Bell, Zitnick, Bala, Girshick, 2016, CVPR](https://www.cs.cornell.edu/~sbell/pdf/cvpr2016-ion-bell.pdf)
+    - We evaluate the mAP averaged for IoU $\in [0.5:0.05:0.95]$ (COCO's standard metric, simply denoted as mAP@[.5, .95]) - [Faster RCNN ](https://arxiv.org/pdf/1506.01497.pdf)
+    - To evaluate our final detections, we use the official COCO API, which measures mAP averaged over IoU thresholds in [0.5:0.05:0.95], amongst other metrics. [Speed/accuracy trade-offs for modern convolutional object detectors, Huang, et.al, 2017](https://arxiv.org/pdf/1611.10012.pdf) Figure shows a performance evaluation of various architectures.
+```{r, echo=FALSE, fig.align='center', fig.cap='Accuracy of detector (mAP on COCO) vs accuracy of feature extractor (as measured by top-1 accuracy on ImageNet-CLS)'}
+knitr::include_graphics('figures/obj-det-accuracy.png')
+```
+    BTW, the [source code](https://github.com/cocodataset/cocoapi/blob/master/PythonAPI/pycocotools/cocoeval.py#L501) of coco shows exactly what mAP@[.5:.95] is doing:
+`self.iouThrs = np.linspace(.5, 0.95, np.round((0.95 - .5) / .05) + 1, endpoint=True)`
+
+
+    
+    
 ## Bounding Boxes, Anchor Boxes
 
 - Anchor boxes mean a set of boxes defined for an input image location.
