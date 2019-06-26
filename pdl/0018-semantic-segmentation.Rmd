@@ -21,3 +21,10 @@ Indeed, the test results from the U-Net architecture are qualitatively better th
 
 - Current state of the art algorithm for instance segmentation is **Mask-RCNN**: a two-stage approach with multiple sub-networks working together: RPN (Region Proposal Network), FPN (Feature Pyramid Network) and FCN (Fully Convolutional Network)
 
+```{r, echo=FALSE, fig.align='center', fig.cap='Semantic Segmentation'}
+knitr::include_graphics('figures/sem-seg.png')
+```
+```{r, echo=FALSE, fig.align='center', fig.cap='Instance Segmentation'}
+knitr::include_graphics('figures/inst-seg.png')
+```
+ 
