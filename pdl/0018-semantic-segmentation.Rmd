@@ -1,0 +1,23 @@
+# Semantic Segmentation
+
+By definition, **semantic segmentation** is the partition of an image into coherent parts. For example classifying each pixel that belongs to a person, a car, a tree or any other entity in our dataset.
+
+
+- Starting at [Pytorch torchvision document about semantic segmentation](https://pytorch.org/docs/stable/torchvision/models.html#semantic-segmentation)
+
+- atrous: coal-balck; very black
+
+- A blog about [Atrous convolutions & U-Net architectures for deep learning: a brief history](https://blog.exxactcorp.com/atrous-convolutions-u-net-architectures-for-deep-learning-a-brief-history/)
+Indeed, the test results from the U-Net architecture are qualitatively better than either the fully-connected and the multi-scale conv-net with atrous convolutions. 
+
+
+## Semantic Segmentation vs. Instance Segmentation
+
+- [source is here: Semantic Segmentation -- U-Net](https://medium.com/@keremturgutlu/semantic-segmentation-u-net-part-1-d8d6f6005066)
+
+- Semantic segmentation is relatively easier compared to it’s big brother, **instance segmentation**.
+
+- In instance segmentation, our goal is to not only make pixel-wise predictions for every person, car or tree but also to identify each entity separately as person 1, person 2, tree 1, tree 2, car 1, car 2, car 3 and so on. 
+
+- Current state of the art algorithm for instance segmentation is **Mask-RCNN**: a two-stage approach with multiple sub-networks working together: RPN (Region Proposal Network), FPN (Feature Pyramid Network) and FCN (Fully Convolutional Network)
+
