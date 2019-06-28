@@ -10,6 +10,14 @@ output:
 
 - Q. Try to figure out the size of receptive field for VGG-16 network.
 
+## COCO Object Detection Evaluation Metric
+
+Evaluation method is found in [COCO: Common Objects in Context site](http://cocodataset.org/#detection-eval)
+
+```{r, echo=FALSE, fig.align='center', fig.cap='The metrics used for characterizing the performance of an object detector on COCO.'}
+knitr::include_graphics('figures/coco-ap-def.png')
+```
+
 
 ## mAP: mean Average Precision
 
