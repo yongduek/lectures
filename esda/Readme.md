@@ -17,8 +17,8 @@ Course Target:
 - Null Hypothesis Testing for $z$-test and $t$-test, when time allows.
 
 
-Related computational support
-- python 3.x
+## Related computational support
+- python 3.6 or higher
 - Data exploration with `matplotlib`, `seaborne`
 - Data manipulation with `numpy`, `torch`, `pandas`
 - Probability and Statistics, Computational Approach with `pymc3`
@@ -33,3 +33,55 @@ Related computational support
 1. Bayesian Analysis with Python
 1. https://greenteapress.com/wp/think-stats-2e/
 1. Think Bayes
+
+
+## Schedule
+1. Introduction to `scipy.stats`
+  - uniform distribution & random sampling from U[0,1]
+  - Z=X1 + X2 + ... + X100  for Xi ~ U[0,1]
+  - Bernoulli, Binomial, Beta
+  
+2. PMF, CDF, PDF
+  - mathematical concepts and definitions of PMF, Expectation, Variance, Standard deviation
+  - statistics from computation (OpenIntro Stats)
+    - sample mean, std, var, median, quartile, IQR, box plots
+  - mass or density?
+  - utility functions and random sampling using `scipy.stats`
+  
+3. Joint probability P(X,Y)
+  - contingency table
+  - conditional probability  
+  - Sum Rule and Product Rule
+  
+4. Simple survey analysis
+  - 12 out of 30, Binomial
+  - dependency on p of Binomial
+    - is p = 0.5?
+  - given multiple assumptions on p, find the probabilty of the outcome.
+  
+5. Some more problems with Bayesian thinking
+  - Think Bayes
+  
+6. Linear Regression
+  - Least-squares estimation
+  - Maximum likelihood estimation
+
+7. Topics in LR
+  - types of outliers in LR
+  - various data manipulation for LR modeling
+
+8. Intermission
+
+9. Linear Regression with Priors
+  - intro to pymc3
+  - density == set of samples
+  - histogram and kernel density estimation (http://faculty.washington.edu/yenchic/18W_425/Lec6_hist_KDE.pdf)
+  - data standardization and how to interprete the posterior samples
+  
+10.LR with outliers and density selection
+  - prior selection
+
+11. Classification / Logistic Regression
+  - logit transformation, log-odds
+  
+12. 
