@@ -102,6 +102,7 @@ Course Target:
   - poisson regression
   
 15. Mixture models and multi-level models
-
+  - Zero Inflated Poisson/Binomial
+  
 16. Finalization
 ---
