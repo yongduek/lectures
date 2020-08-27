@@ -27,12 +27,12 @@ Course Target:
 
 ## References
 1. [OpenIntro Statistics](https://docs.pymc.io/notebooks/posterior_predictive.html)
-1. [Khan Acamdemy AP College Statistics](https://www.khanacademy.org/math/ap-statistics/)
 1. Regression and Other Stories, Gelman
 1. Statistical Rethinking 2ed. McElreath
 1. Bayesian Analysis with Python
-1. https://greenteapress.com/wp/think-stats-2e/
 1. Think Bayes
+1. [Think Stats 2ed](https://greenteapress.com/wp/think-stats-2e/)
+1. [Khan Acamdemy AP College Statistics](https://www.khanacademy.org/math/ap-statistics/)
 
 
 ## Schedule
@@ -78,10 +78,30 @@ Course Target:
   - histogram and kernel density estimation (http://faculty.washington.edu/yenchic/18W_425/Lec6_hist_KDE.pdf)
   - data standardization and how to interprete the posterior samples
   
-10.LR with outliers and density selection
+10.LR with outliers, density selection, and multivariate 
   - prior selection
-
-11. Classification / Logistic Regression
-  - logit transformation, log-odds
+  - multivariate linear models
+  - regression with interaction terms
   
-12. 
+11. Overfitting, regularization, information criteria
+  - polynomial regression
+  - intro to information theory
+  - model selection
+  
+12. introduction to MCMC
+  - Metropolis-Hastings
+  - Hamiltonian Monte Carlo and NUTS
+  
+13. GLR: Generalized Linear Regression
+  - Classification / Logistic Regression
+  - logit transformation, log-odds
+  - multinomial/categorical logistic regression, softmax
+  
+14. GLR examples
+  - binomial regression
+  - poisson regression
+  
+15. Mixture models and multi-level models
+
+16. Finalization
+---
