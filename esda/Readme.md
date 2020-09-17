@@ -1,5 +1,8 @@
 # Introduction to Exploratory & Statistical Data Analysis
 
+1. Intro to Probabilistic Programming and Statistical Machine Learning
+2. Intor to PP and Machine Learning
+
 - This course introduces fundamental concepts and methods of modern computational statistical data analysis.
 - The focus is on computational and exploratory data analysis
 - Mainly with python codes with minimal mathematics and equations
