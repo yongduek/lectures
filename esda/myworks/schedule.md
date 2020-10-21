@@ -16,8 +16,10 @@
 
 ## 2. Linear Models
 - Linear Regression with One Predictor Variable
+    * Gaussian Model of Height [SR2]
     * Height and Earnings [ROS, p84]
     * Elections and Economy [ROS, p93]
+    * Data Nomalization
 - Point Estimation vs Density Estimation
     * MLE / MAP estimation for data analysis
     * Parametric vs non-parametric Bayesian Estimation

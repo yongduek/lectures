@@ -1,0 +1,16 @@
+<통계표 메타자료>
+
+○ 통계표ID : DT_2AAF011
+
+○ 통계표명 : 성별 체중별 출생아 수
+
+○ 출처 : KOSIS(UN), 2020.10.21 16:20
+
+○ 통계표URL : https://kosis.kr/statHtml/statHtml.do?orgId=101&tblId=DT_2AAF011&conn_path=I3
+              * KOSIS 개편 시 통계표 URL은 달라질 수 있음
+
+○ 단위 : 명
+
+○ 주석
+ ■ 출생아 무게
+  출생아 무게 : g
