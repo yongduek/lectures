@@ -16,7 +16,7 @@
 
 ## 2. Linear Models
 - Linear Regression with One Predictor Variable
-    * Gaussian Model of Height [SR2]
+    * Gaussian Model of Height- [SR2]
     * Height and Earnings [ROS, p84]
     * Elections and Economy [ROS, p93]
     * Data Nomalization
@@ -29,7 +29,7 @@
 - Control vs Treatment
     * [Drug IQ: One treatment vs. one control](https://ericmjl.github.io/bayesian-stats-talk/)
     * [A or B?, Rasmusab](https://www.youtube.com/watch?v=mAUwjSo5TJE)
-    * [Smat Drug for IQ](https://docs.pymc.io/notebooks/BEST.html) Bayesian Extimation Supersedes the T-Test.
+    * [Smart Drug for IQ](https://docs.pymc.io/notebooks/BEST.html) Bayesian Extimation Supersedes the T-Test.
 - Hierarchical (Multilevel) Model Example
     * [The Best of Both Worlds](https://docs.pymc.io/notebooks/GLM-hierarchical.html)
     * [Rat Tumor Example](https://docs.pymc.io/notebooks/GLM-hierarchical-binominal-model.html)
