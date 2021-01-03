@@ -1,0 +1,14 @@
+# Binary Logistic Regression:
+- dependent variable: $y$, 0 or 1
+- goal of the estimation is to estimate the probability $\theta \in [0,1]$
+- GLM predicts $\theta$ given independent variables: $\theta = \beta_0 + x_1 \beta_1 + ...$
+- Bayesian Modeling: $P(
+    - $\theta \sim Binomial(\alpha, \beta)$
+    - $y \sim Bernoulli(\theta)$
+  
+# Categorical Logistic Regression
+  
+# References
+- https://youtu.be/U4AnlXqx-EI A basic model for ordinal data and Bayesian analysis in JAGS to estimate the paramters of the model.
+- https://youtu.be/jWIJ7P1G9P4 Introduction to Ordinal Regression
+- https://youtu.be/n7zHXjuE6PE : An intuitive introduction to the Multinomial Logit
