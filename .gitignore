@@ -33,6 +33,8 @@ mldm/.ipynb_checkpoints/pytorch-2-checkpoint.ipynb
 ipcv/.ipynb_checkpoints/*
 esda/.ipynb_checkpoints/*
 esda/sr2/myworks/.ipynb_checkpoints/sr2_chap3_install_win10-checkpoint.ipynb
+esda/myworks/*.pdf
+esda/myworks/*.html
 esda/myworks/.ipynb_checkpoints/*
 esda/data_nbs/.ipynb_checkpoints/*
 bayesian/.ipynb_checkpoints/gp_pymc3-checkpoint.ipynb
