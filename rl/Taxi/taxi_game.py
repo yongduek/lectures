@@ -21,10 +21,10 @@ inkey = _Getch()  # linux
 inkey = msvcrt.getwch  # https://docs.python.org/3.7/library/msvcrt.html#console-i-o
 
 # OpenAI Gym에서 미리 정의되어 있는 action 매핑
-LEFT = 3
 DOWN = 0
-RIGHT = 2
 UP = 1
+RIGHT = 2
+LEFT = 3
 PICKUP = 4
 DROPOFF = 5
 
