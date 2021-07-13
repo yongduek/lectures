@@ -49,3 +49,5 @@ rl/.ipynb_checkpoints/*
 rl/runs/*
 rl/hands-on/*
 rl/pygame/Pong_101computing.net/__pycache__/*
+
+.ipynb_checkpoints
