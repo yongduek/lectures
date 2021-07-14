@@ -6,11 +6,14 @@ import gym
 rng = np.random.default_rng(202102)
 
 env = gym.make('FrozenLake-v0')
+# env = gym.make('FrozenLake8x8-v0')
+
 states = np.arange(env.observation_space.n)
+N = int(np.sqrt(env.observation_space.n))
 actions = np.arange(env.action_space.n)
 
 V = rng.normal(size=(env.observation_space.n))
-terminal_state = [15]
+terminal_state = [states[-1]]
 V[terminal_state] = 0
 
 policy = np.array([env.action_space.sample() for s in states]) ## initially randome action
@@ -78,24 +81,24 @@ def test_run(nrepeat=1000):
         g, n = run()
         glist.append(g)
         nlist.append(n)
-    nTimeOut = sum(np.array(nlist) == 100)
+    nTimeOut = sum(np.array(nlist) == env._max_episode_steps)
     print('$ test result: success cases: ', sum(glist), 'out of', nrepeat)
     print('$ nTimeOut: ', nTimeOut)
     print(f'$ Except for timeout, success rate = {sum(glist)/(nrepeat - nTimeOut):.2f}')
 
 if __name__ == "__main__":
     # env = gym.make('FrozenLake-v0')
-    print(env)
+    print(env, 'maximum_epsode_steps', env._max_episode_steps)
     scene = env.render(mode='human')
     print(scene, type(scene))
 
-    print('Initial: ', '\n', V.reshape(4,4), '\n', policy.reshape(4,4))
+    print('Initial: ', '\n', V.reshape(N,N), '\n', policy.reshape(N,N))
 
     policy_iteration()
 
     ActionMarker = ['<', '!', '>', '^']
-    print(V.reshape(4,4), '\n', policy.reshape(4,4))
-    for pr in policy.reshape(4,4):
+    print(V.reshape(N,N), '\n', policy.reshape(N,N))
+    for pr in policy.reshape(N,N):
         for c in pr:
             print(ActionMarker[c], end=' ')
         print()
