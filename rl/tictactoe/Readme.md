@@ -18,8 +18,7 @@ OX-
 OXX
 ---
 @+++++++++++++
-6 action_cand:  [6] [   -inf    -inf 0.15767    -inf    -inf    -inf 
-0.28145 0.19567 0.16274] 0.28145
+6 action_cand:  [6] [   -inf    -inf 0.15767    -inf    -inf    -inf 0.28145 0.19567 0.16274] 0.28145
 OX-
 OXX
 O--
