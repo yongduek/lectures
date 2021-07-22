@@ -1,0 +1,7 @@
+f = open('pride_and_prejudic.txt', mode='r', encoding='utf-8')
+book = f.readlines()
+print(book[-10:])
+print('------')
+print(book[:50])
+print(len(book), book[0][0], ord(book[0][0]), hex(ord(book[0][0])))
+f.close()
