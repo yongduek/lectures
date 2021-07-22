@@ -28,3 +28,4 @@ The winner is  O
 The Q value at action=6 is only .28, which must be 1 since it finishes the game right away.
 
 2. Game history may be reserved and q-learning backward after an episode will improve the performance and learning speed.
+    - See the code in https://github.com/sunbri/tictactoe, where an episode history is saved and learned backwards so that the update of the q table may be the most effective. But note that this is only possible for an episodic case like ttt game.

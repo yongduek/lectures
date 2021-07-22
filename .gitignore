@@ -51,3 +51,7 @@ rl/hands-on/*
 rl/pygame/Pong_101computing.net/__pycache__/*
 
 .ipynb_checkpoints
+*.zip
+*.bin
+rl/Atari_Roms/Roms/ROMS/ROMS/========  ROM HUNTER'S 1977-1992 VCS ROMS COLLECTION V16  ========.txt
+rl/MountainCar/tabular_q_learning/gym_monitor_output/*
