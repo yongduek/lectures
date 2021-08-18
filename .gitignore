@@ -55,3 +55,5 @@ rl/pygame/Pong_101computing.net/__pycache__/*
 *.bin
 rl/Atari_Roms/Roms/ROMS/ROMS/========  ROM HUNTER'S 1977-1992 VCS ROMS COLLECTION V16  ========.txt
 rl/MountainCar/tabular_q_learning/gym_monitor_output/*
+debug.log
+rl/MountainCar/tabular_q_learning/learned_policy.npy
