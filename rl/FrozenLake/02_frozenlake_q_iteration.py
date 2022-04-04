@@ -6,10 +6,10 @@ import gym
 import collections
 from tensorboardX import SummaryWriter
 
-ENV_NAME = "FrozenLake-v0"
+ENV_NAME = "FrozenLake-v1"
 #ENV_NAME = "FrozenLake8x8-v0"      # uncomment for larger version
 GAMMA = 0.9
-TEST_EPISODES = 20
+TEST_EPISODES = 100
 
 
 class Agent:
@@ -85,7 +85,7 @@ if __name__ == "__main__":
         reward /= TEST_EPISODES
         writer.add_scalar("reward", reward, iter_no)
         if reward > best_reward:
-            print("Best reward updated %.3f -> %.3f" % (best_reward, reward))
+            print("Best reward updated %.3f -> %.3f" % (best_reward, reward), "out of ", TEST_EPISODES)
             best_reward = reward
         if reward > 0.80:
             print("Solved in %d iterations!" % iter_no)

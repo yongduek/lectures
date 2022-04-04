@@ -47,7 +47,7 @@ register(
 )
 
 env = gym.make("FrozenLake-v3")
-env = gym.make("FrozenLake-v0")  # original slippery version. You will find how difficult it is.
+env = gym.make("FrozenLake-v1")  # original slippery version. You will find how difficult it is.
 
 state = env.reset()
 env.render()
