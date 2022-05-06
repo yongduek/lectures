@@ -78,3 +78,8 @@
 1. Pin-hole model
 2. intrinsic vs extrinsic
 3. How to calibrate the camera sensor.
+
+## Visual Effects
+1. Alpha Matting
+    - https://github.com/pymatting/pymatting 
+
