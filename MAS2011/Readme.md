@@ -80,6 +80,8 @@
 3. How to calibrate the camera sensor.
 
 ## Visual Effects
+- https://cvfxbook.com/
 1. Alpha Matting
     - https://github.com/pymatting/pymatting 
+
 
