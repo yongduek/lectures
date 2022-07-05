@@ -57,3 +57,11 @@ rl/Atari_Roms/Roms/ROMS/ROMS/========  ROM HUNTER'S 1977-1992 VCS ROMS COLLECTIO
 rl/MountainCar/tabular_q_learning/gym_monitor_output/*
 debug.log
 rl/MountainCar/tabular_q_learning/learned_policy.npy
+ipcv/eigen/1.simple-first
+studies/_configtest.o
+studies/_configtest.c
+studies/_configtest
+ipcv/eigen/.vscode/tasks.json
+.gitignore
+ipcv/eigen/.vscode/c_cpp_properties.json
+ipcv/eigen/.vscode/settings.json
