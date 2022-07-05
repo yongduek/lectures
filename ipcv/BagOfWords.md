@@ -9,7 +9,6 @@
     - https://introlab.3it.usherbrooke.ca/mediawiki-introlab/index.php/RTAB-Map
     - https://introlab.3it.usherbrooke.ca/mediawiki-introlab/images/e/eb/Labbe14-IROS.pdf
     - http://introlab.github.io/rtabmap/
-
 1. Fast Appearance-based SLAM for Multiple times of Day: https://ieeexplore.ieee.org/stamp/stamp.jsp?tp=&arnumber=5509547
     - https://github.com/kipr/opencv/blob/master/samples/cpp/fabmap_sample.cpp 
 1. Visual Bag of Words PPT:
@@ -19,3 +18,5 @@
     - https://www.hindawi.com/journals/mpe/2019/9658350/
     - https://courses.cs.washington.edu/courses/cse576/07sp/notes/CBIR_white.pdf
     - 
+1. TF-IDF (Term Frequency-Inverse Document Frequency)
+    - https://wikidocs.net/31698 (딥러닝을 이용한 자연어 처리 입문)
