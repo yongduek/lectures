@@ -32,7 +32,7 @@
 7. Image interpolation & Warping
     - Bilinear interpolation
     - forward / backward
-    - Music video warping on the virtual display pannel 
+    - video warping on the virtual display pannel 
 
 8. Feature detection
    - Harris corner detector
@@ -69,7 +69,7 @@
 
 ## Camera Pose Estimation
 1. PnP: Perspective n-Point Algorithms
-    - OpenGV by Kneip
+2. OpenGV by Kneip
 2. ICP Algorithm
 
 ## Triangulation
@@ -92,7 +92,8 @@
 
 
 ## Projects
-1. Music Video on the pannel 
+1. Video on the pannel 
 2. Automatic stitching of multiple views
 4. Virtual object display on your desk with opengl
-5. 3D reconstruction of a building or the whole school
+5. 3D reconstruction of an office, building or the whole school
+6. Self-designed.
