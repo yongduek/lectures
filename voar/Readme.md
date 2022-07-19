@@ -1,0 +1,98 @@
+# Computer Vision, Visual Odometry, Augmented Reality
+- Geometric approaches in Computer Vision
+
+## References
+2. Computer Vision: Algorithms and Applications, 2nd ed., Richard Szeliski, https://szeliski.org/Book/
+3. Multiple View Geometry in Computer Vision, Richard Hartley and Andrew Zisserman
+4. Computer Graphics Using OpenGL (2nd Ed.), Francis S. Hill 
+1. Slambook 2 https://github.com/gaoxiang12/slambook-en   
+1. Programming Computer Vision with Python: Tools and Algorithms for Analyzing Images, Erik Solem, http://programmingcomputervision.com/ 
+   
+
+## Basic Development libraries
+1. OpenCV
+2. Eigen 3
+3. g2o
+
+## Image Processing
+1. Image data structure
+2. RGB vs HSI
+3. Spatial Filtering - Window Operations
+    - Blurring, Gaussian smoothing
+    - Sobel, Derivative
+5. Tracking a chessboard pattern
+6. Geometric transformations
+    - Similarity
+    - Projective
+    - 2D projective transformation = 2D homography transformation
+      - perspective transformation of 2D planes
+      - purely rotating camera
+      - Experiment. Rectangle drawing on the chessboard
+  
+7. Image interpolation & Warping
+    - Bilinear interpolation
+    - forward / backward
+    - Music video warping on the virtual display pannel 
+
+8. Feature detection
+   - Harris corner detector
+   - Sparse optical flow (good features to detect)
+   - FAST corner
+   - ORB descriptor
+   - SIFT feature descriptor
+
+9. RANSAC & Homography Estimation
+    - outlier problem
+    - random sample consensus
+    - robust estimation of 2D homography; image mosaic
+
+## Camera Calibration
+1. Internal / External parameters
+2. Rigid motion model, homogeneous coordinate system
+3. Pin-hole model
+4. Calibration pattern design 
+5. Nonlinear optimization
+    - parametrization of rotation matrix
+    - initialization method
+6. Applications with a calibrated camera.
+   - How to virtually rotate the camera so that the viewing angle and the surface normal of chessboard is parallel.
+     - Can do with 2D homography. Find it.
+
+## Two View Reconstruction / Stereo Vision
+1. Epipolar geometry
+   - Eight point algorithm by Hartley
+2. Rectification of two views for scan-line matching
+3. block matching: CC, NCC
+4. stereo matching with random dot active illumination (Kinect, realsense stereo)
+5. Intermediate view generation
+
+
+## Camera Pose Estimation
+1. PnP: Perspective n-Point Algorithms
+    - OpenGV by Kneip
+2. ICP Algorithm
+
+## Triangulation
+
+## Structure From Motion
+- BA: Bundle-Adjustment
+
+## Loop Closure 
+1. Bag of Words Algorithm
+2. DBoW3
+
+## Stereo Visual Odometry
+- Project based on Slambook2
+
+## Planar Marker AR
+- Project based on ORBSlam 2/3
+
+## Long Video Sequence 3D Reconstruction
+- Project based on ORBSlam 2/3
+
+
+## Projects
+1. Music Video on the pannel 
+2. Automatic stitching of multiple views
+4. Virtual object display on your desk with opengl
+5. 3D reconstruction of a building or the whole school
