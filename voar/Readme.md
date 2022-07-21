@@ -1,13 +1,16 @@
-# Computer Vision, Visual Odometry, Augmented Reality
+# Visual Odometry, Augmented Reality, Computer Vision
 - Geometric approaches in Computer Vision
 
 ## References
-2. Computer Vision: Algorithms and Applications, 2nd ed., Richard Szeliski, https://szeliski.org/Book/
+1. Computer Vision: Algorithms and Applications, 2nd ed., Richard Szeliski, https://szeliski.org/Book/
 3. Multiple View Geometry in Computer Vision, Richard Hartley and Andrew Zisserman
 4. Computer Graphics Using OpenGL (2nd Ed.), Francis S. Hill 
 1. Slambook 2 https://github.com/gaoxiang12/slambook-en   
 1. Programming Computer Vision with Python: Tools and Algorithms for Analyzing Images, Erik Solem, http://programmingcomputervision.com/ 
-   
+2. Augmented Reality: Principle and Practice, Dieter Schmalstieg, Tobias Hollerer, 2016 https://arbook.icg.tugraz.at/ 
+3.   https://vnav.mit.edu/ MIT 16.485 - Visual Navigation for Autonomous Vehicles, 2022
+4.   https://rpg.ifi.uzh.ch/teaching.html Vision Algorithms for Mobile Robotics, 2021
+5.   
 
 ## Basic Development libraries
 1. OpenCV
@@ -21,7 +24,7 @@
     - Blurring, Gaussian smoothing
     - Sobel, Derivative
 5. Tracking a chessboard pattern
-6. Geometric transformations
+6. Geometric transformations & 3D motion
     - Similarity
     - Projective
     - 2D projective transformation = 2D homography transformation
@@ -85,11 +88,12 @@
 - Project based on Slambook2
 
 ## Planar Marker AR
+- based on OpenCV `findChessboardMarker` or similar.
 - Project based on ORBSlam 2/3
 
 ## Long Video Sequence 3D Reconstruction
-- Project based on ORBSlam 2/3
-
+- Motion & 3D map/environment
+- Project based on ORBSlam 2/3 or slambook2
 
 ## Projects
 1. Video on the pannel 
