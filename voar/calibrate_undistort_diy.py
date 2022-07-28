@@ -10,7 +10,7 @@ usage:
 default values:
     --debug:    ./output/
     --square_size: 1.0
-    <image mask> defaults to ../data/left*.jpg
+    <image mask> defaults to ./data/left*.jpg
 '''
 
 # Python 2/3 compatibility
@@ -36,7 +36,7 @@ def main():
     args.setdefault('--square_size', 1.0)
     args.setdefault('--threads', 4)
     if not img_mask:
-        img_mask = '../data/left??.jpg'  # default
+        img_mask = './data/left??.jpg'  # default
     else:
         img_mask = img_mask[0]
 
