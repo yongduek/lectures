@@ -1,6 +1,24 @@
 # Plan
 
+0. Introduction to Computer Vision & AR
+    - Demo: 
+        1. Marker-based: ARToolkit, ARSketchBook
+        2. Natural Marker-based
+        3. SFM/SLAM based
+            - `bundang.avi`
+        4. AR Foundation in Unity: 
+            - https://www.youtube.com/watch?v=FuKzngwzDYI 
+        5. Blender VFX: https://youtu.be/O67P0uzbQBk 
+        6. Google Maps AR: https://youtu.be/XWbY5jdJnHg 
+        7. In-Camera VFX in Unreal Engine: https://youtu.be/ebf1rRkYFmU 
+        9. AR and SLAM: https://youtu.be/50quWrNKB0w 
+        8. Work assistance or re-education: https://youtu.be/0m67O1Em7dY 
+    - What we will do mainly in the course:
+        - Fundamentals of linear algebra, geometry, computer vision, slam
 1. 2D geometry & transformations & image transform
+    - linear algebra revisted
+        - matrix, vector, inner product
+        - representation w.r.t a new basis (frame change)
     - reference frame, rotation, translation, basis change
     - project: rotate an image
         - understand R & t
@@ -53,7 +71,11 @@
 6. Two View Geometry
     - Epipolar geometry
     - Essential matrix / fundamental matrix
-    - 3D reconstruction from correspondences
+    - Project: 3D reconstruction from correspondences
+        1. collect correspondences
+        1. Compute `E`
+        2. compute $R$ and $t$
+        3. compute 3D coordinates of the correspondences
 
 6. Stereo Vision
     - Theory: Formulation for a well-aligned canonical stereo sytem.

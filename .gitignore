@@ -67,3 +67,5 @@ ipcv/eigen/.vscode/c_cpp_properties.json
 ipcv/eigen/.vscode/settings.json
 studies/AIE6002-final-exam.html
 studies/AIE6002 인공지능확률통계 기말시험.pdf
+voar/output 
+voar/__pycache__

@@ -10,7 +10,7 @@ usage:
 default values:
     --debug:    ./output/
     --square_size: 1.0
-    <image mask> defaults to ./data/left*.jpg
+    <image mask> defaults to ./data/left*.jpg and ./data/right*.jpg
 '''
 
 # Python 2/3 compatibility
@@ -24,23 +24,11 @@ from common import splitfn
 
 # built-in modules
 import os
+from glob import glob 
 
-def main():
-    import sys
-    import getopt
-    from glob import glob
-
-    args, img_mask = getopt.getopt(sys.argv[1:], '', ['debug=', 'square_size=', 'threads='])
-    args = dict(args)
-    args.setdefault('--debug', './output/')
-    args.setdefault('--square_size', 1.0)
-    args.setdefault('--threads', 4)
-    if not img_mask:
-        img_mask = './data/left??.jpg'  # default
-    else:
-        img_mask = img_mask[0]
-
+def calibrate_one(img_mask, args):
     img_names = glob(img_mask)
+    img_names.sort()
     debug_dir = args.get('--debug')
     if debug_dir and not os.path.isdir(debug_dir):
         os.mkdir(debug_dir)
@@ -105,6 +93,7 @@ def main():
 
     # undistort the image with the calibration
     print('')
+    uimgs = []
     for fn in img_names if debug_dir else []:
         _path, name, _ext = splitfn(fn)
         img_found = os.path.join(debug_dir, name + '_chess.png')
@@ -118,90 +107,53 @@ def main():
         newcameramtx, roi = cv.getOptimalNewCameraMatrix(camera_matrix, dist_coefs, (w, h), 1, (w, h))
 
         dst = cv.undistort(img, camera_matrix, dist_coefs, None, newcameramtx)
+        # print(newcameramtx, roi)
 
         # crop and save the image
         x, y, w, h = roi
         dst = dst[y:y+h, x:x+w]
+
+        uimgs.append(dst)
 
         print('Undistorted image written to: %s' % outfile)
         print('New K:', newcameramtx)
-        cv.imwrite(outfile, dst)
-
-## DIY undistort ---
-    def interp1d(f, I, J):  # 0 <= f <= 1
-        val = I * (1. - f) + J * f 
-        return val 
-
-    def interp2d(ud, vd, im):
-        ui = int(ud)
-        uf = ud - ui 
-        vi = int(vd)
-        vf = vd - vi
-        I0 = interp1d(uf, im[vi, ui], im[vi, ui+1])
-        I1 = interp1d(uf, im[vi+1, ui], im[vi+1, ui+1])
-        I = interp1d(vf, I0, I1);
-        I = np.clip(I, 0, 255).astype(np.uint8)
-        return I 
+        # cv.imwrite(outfile, dst)
+        print(outfile)
     #
 
-    def diy_undistort(im, K, dcoef, Knew):
-        k1, k2, p1, p2, k3 = dcoef[0] # distortion coeffs.
-        if len(im.shape) == 1: nchannels = 1
-        else:
-             if len(im.shape) == 3: nchannels = 3
-             else: print("Wrong channel number: ", len(im.shape), im.shape)
+    return {'K': newcameramtx, 'uimgs': uimgs, 'distcoef': dist_coefs, 'rvecs': _rvecs, 'tvecs': _tvecs}
 
-        oim = im.copy()
-        for r in range(oim.shape[0]):
-            for c in range(oim.shape[1]):
-                # new (x, y) is the point without distortion (imaginary)
-                xnew = (c - Knew[0,2]) / Knew[0,0]
-                ynew = (r - Knew[1,2]) / Knew[1,1]
-                #
-                r2 = xnew**2 + ynew**2
-                r4 = r2**2
-                r6 = r2 * r4
-                radial = (1 + k1 * r2 + k2 * r4 + k3 * r6)
-                xd = xnew * radial + 2 * p1 * xnew * ynew + p2 * (r2 + 2 * xnew**2)
-                yd = ynew * radial + p1 * (r2 + 2 * ynew**2) + 2 * p2 * xnew * ynew 
-                ud = xd * K[0,0] + K[0, 2]
-                vd = yd * K[1,1] + K[1, 2]
-                # print(c, r, ud, vd)
-                if ud < 0 or vd < 0 or vd >= im.shape[0]-1 or ud >= im.shape[1]-1:
-                    # print("Out of bound: ", c, r, " --> ", ud, vd)
-                    color = 0 if nchannels == 1 else np.array([0,0,0])
-                else:
-                    color = interp2d(ud, vd, im)   # get interpolated color
-                oim[r, c] = color 
-        return oim 
-    #
+def calibrate_both():
+    args = {'--debug': './output/',  '--square_size': 1.0, '--threads': 1 }
+    img_mask_left = './data/left??.jpg'  # default
+    img_mask_right = './data/right??.jpg'  # default
 
-    ## the same camera matrix will be used.
-
-    newcameramtx = camera_matrix.copy()
-    newcameramtx[0,0] *= 0.8 
-    newcameramtx[1,1] *= 0.8
+    print('@@@@  LEFT @@@@')
+    calleft = calibrate_one(img_mask_left, args)
+    print('@@@@  RIGHTT @@@@')
+    callright = calibrate_one(img_mask_right, args)
     
-    for fn in img_names if debug_dir else []:
-        _path, name, _ext = splitfn(fn)
-        img_found = os.path.join(debug_dir, name + '_chess.png')
-        outfile = os.path.join(debug_dir, name + '_undistorted_diy.png')
+    return {'l': calleft, 'r': callright}
 
-        img = cv.imread(img_found)
-        if img is None:
-            continue
+def main():
+    import sys
+    import getopt
+    from glob import glob
 
-        dst = diy_undistort(img, camera_matrix, dist_coefs, newcameramtx)
+    args, img_mask = getopt.getopt(sys.argv[1:], '', ['debug=', 'square_size=', 'threads='])
+    args = dict(args)
+    args.setdefault('--debug', './output/')
+    args.setdefault('--square_size', 1.0)
+    args.setdefault('--threads', 4)
+    if not img_mask:
+        img_mask_left = './data/left??.jpg'  # default
+        img_mask_right = './data/right??.jpg'  # default
 
-        # crop and save the image
-        x, y, w, h = roi
-        dst = dst[y:y+h, x:x+w]
-
-        print('Undistorted image written to: %s' % outfile)
-        cv.imwrite(outfile, dst)
-## DIY undistort ----------------------------------------------------------------------------------------
-
+    calleft = calibrate_one(img_mask_left, args)
+    callright = calibrate_one(img_mask_right, args)
+    
     print('Done')
+    return {'l': calleft, 'r': callright}
 
 
 if __name__ == '__main__':
