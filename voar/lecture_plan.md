@@ -15,6 +15,7 @@
         8. Work assistance or re-education: https://youtu.be/0m67O1Em7dY 
     - What we will do mainly in the course:
         - Fundamentals of linear algebra, geometry, computer vision, slam
+
 1. 2D geometry & transformations & image transform
     - linear algebra revisted
         - matrix, vector, inner product
@@ -54,21 +55,31 @@
         1. camera calibration with opencv
         2. DIY undistort by backward mapping
 
-4. 3D geometry and transformations
+5. 3D geometry and transformations
     - R, t, basis change
     - projection through a camera
         - Understand the meaning of the pose matrix from camera calibration
     - project: display all the camera poses in a graphic world 
         - understand where is the camera location and what is the camera direction and the meaning of the pose matrices.
 
-5. 2D projective transformation by camera rotation in 3D
+6. 2D projective transformation by camera rotation in 3D
     - Problem: Given an image in general, apply a 3D rotation to the camera and obtain a new image.
         - `K`, use a guessed version or use a calibrated camera.
     - Project: rotate the camera for rectification
         - $ H = K R K^{-1} $
         - Choose appropriate $R$ so that the view of the rectangle in the image may warp to a rectangle.
 
-6. Two View Geometry
+7. Image feature detection: Keypoints & Descriptors
+    - Corner features
+        - Harris, FAST
+    - Descriptors:
+        - BRIEF, ORB, SIFT 
+    - Automatic homography computation between two images of pure rotation or a planr scene
+        - Descriptor matching
+        - RANSAC
+    - project: automatic panorama image stitching
+
+8. Two View Geometry
     - Epipolar geometry
     - Essential matrix / fundamental matrix
     - Project: 3D reconstruction from correspondences
@@ -77,7 +88,7 @@
         2. compute $R$ and $t$
         3. compute 3D coordinates of the correspondences
 
-6. Stereo Vision
+9. Stereo Vision
     - Theory: Formulation for a well-aligned canonical stereo sytem.
     - $d = f T / Z $
     - stereo camera calibration
