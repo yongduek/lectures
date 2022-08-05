@@ -31,7 +31,7 @@
     - project: triangular texture mapping
         - H: {p0, p1, p2} -> {q0, q1, q2}
         - apply a sequence of transformations to obtain H
-        - specify 4 correspondences, compute H, and apply backward mapping to produce the result.
+        - specify 3 correspondences, compute H, and apply backward mapping to produce the result.
 
 3. 2D projective geometry & transformations:
     - H: 3x3
