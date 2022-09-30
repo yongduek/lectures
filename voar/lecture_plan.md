@@ -102,3 +102,9 @@
         - show that the views are rectified by displaying the two images in parallel and poinitng several correspondences lying on the same $y$ scan lines.
         - display the two rectified camera frames through Pangolin.
         - compare the result with the output of opencv
+
+
+
+
+
+
