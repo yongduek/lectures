@@ -69,3 +69,7 @@ studies/AIE6002-final-exam.html
 studies/AIE6002 인공지능확률통계 기말시험.pdf
 voar/output 
 voar/__pycache__
+cv4arslam/output/*
+cv4arslam/left/calibresult_undistort_12.png
+cv4arslam/__pycache__/common.cpython-38.pyc
+cv4arslam/left/calibresult_remap_12.png

@@ -130,8 +130,9 @@
   - https://learnopencv.com/camera-calibration-using-opencv/
   - https://learnopencv.com/understanding-lens-distortion/
 
-- https://github.com/kaustubh-sadekar/VirtualCam
-    - Virtual camera is created only using OpenCV and numpy. It simulates a camera where we can control all its parameters intrinsic and extrinsic to get a better understanding how each component in the camera projection matrix affects the final image of the object captured by the camera.
+- Virtual Cam w OpenCV Simulation
+  - https://github.com/kaustubh-sadekar/VirtualCam
+  - Virtual camera is created only using OpenCV and numpy. It simulates a camera where we can control all its parameters intrinsic and extrinsic to get a better understanding how each component in the camera projection matrix affects the final image of the object captured by the camera.
 
 
 ### Linear Algebra
