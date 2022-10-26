@@ -64,6 +64,11 @@
    - How to virtually rotate the camera so that the viewing angle and the surface normal of chessboard is parallel.
      - Can do with 2D homography. Find it.
 
+* `tutorial_py_calibration.py` for calibration procedure.
+* `calibrate_undistort.diy.py` for undistortion algorithm.
+
+* ppt: https://docs.google.com/presentation/d/19GpXaPTpkNcg5wdawXnGdPgSII9-pmuktKHtqeRun_g/edit?usp=sharing 
+  
 ## Two View Reconstruction / Stereo Vision
 1. Epipolar geometry
    - Eight point algorithm by Hartley

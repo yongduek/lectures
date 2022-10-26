@@ -176,8 +176,7 @@ def main():
         return oim 
     #
 
-    ## the same camera matrix will be used.
-
+    ## 
     newcameramtx = camera_matrix.copy()
     newcameramtx[0,0] *= 0.8 
     newcameramtx[1,1] *= 0.8
