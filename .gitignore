@@ -71,6 +71,7 @@ voar/output
 voar/__pycache__
 cv4arslam/output/*
 cv4arslam/left/calibresult_undistort_12.png
-cv4arslam/__pycache__/common.cpython-38.pyc
+cv4arslam/__pycache__/*
 cv4arslam/left/calibresult_remap_12.png
 cv4arslam/ar_with_calib/output/*
+cv4arslam/ar_with_calib/__pycache__/common.cpython-38.pyc
