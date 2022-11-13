@@ -90,7 +90,7 @@
 
 9. Stereo Vision
     - Theory: Formulation for a well-aligned canonical stereo sytem.
-    - $d = f T / Z $
+    - $ d = f T / Z $
     - stereo camera calibration
         1. internal/external calibration
         2. stereo rectification: aligning the two views into a canonical system
