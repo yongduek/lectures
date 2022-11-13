@@ -18,7 +18,7 @@ objpoints = [] # 3d point in real world space
 imgpoints = [] # 2d points in image plane.
 
 # must be in the directory of captured images of the chessboard whose size is 7x6
-images = glob.glob('*.jpg')  
+images = glob.glob('./left/*.jpg')  
 for fname in images:
     img = cv.imread(fname)
     gray = cv.cvtColor(img, cv.COLOR_BGR2GRAY)
@@ -33,7 +33,8 @@ for fname in images:
         cv.drawChessboardCorners(img, (7,6), corners2, ret)
         cv.imshow('img', img)
         cv.waitKey(500)
-cv.destroyAllWindows()
+        
+# cv.destroyAllWindows()
 
 #
 # Calibration
