@@ -26,3 +26,12 @@
 6. Stereo vision system
 7. Video processing for camera tracking
 8. 3D point cloud visualization
+
+## Applications
+1. OCR: `easyocr_test.ipynb`
+    - https://velog.io/@mminjg/TesseractOCR-EasyOCR-%EC%8B%A4%ED%96%89%EA%B3%BC-%ED%95%99%EC%8A%B5  
+2. Image Stitching: https://kornia.readthedocs.io/en/latest/applications/image_stitching.html 
+3. Fact detection: https://kornia.readthedocs.io/en/latest/applications/face_detection.html 
+    - https://kornia-tutorials.readthedocs.io/en/latest/face_detection.html 
+4. Deep Edge Detection: https://www.kaggle.com/code/venkatkumar001/hed-kornia-opencv-edge-detection-part-i 
+    - Holistically-Nested Edge Detection, 2015, embedded in OpenCV
