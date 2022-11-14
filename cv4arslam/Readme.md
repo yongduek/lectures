@@ -131,10 +131,11 @@
   - 
 
 3. Computer Vision Lectures
-  - 컴퓨터비전 특강: ORB SLAM, 한동대 황성수 (https://youtu.be/tDfAbqQQO0o)
-  - 컴퓨터비전 강의 by 경북대 정순기 (https://youtu.be/N0jD7RKIzVU)
-  - Georgia 6476 (https://omscs.gatech.edu/cs-6476-computer-vision-course-videos)
-  - Brown 1430(https://browncsci1430.github.io/webpage/index.html), python
+   - Optimization Inspired Neural Networks for Multiview 3D by Zachary Teed, Princeton Univ., https://youtu.be/ul6pXRGKmco  
+   - 컴퓨터비전 특강: ORB SLAM, 한동대 황성수 (https://youtu.be/tDfAbqQQO0o)
+   - 컴퓨터비전 강의 by 경북대 정순기 (https://youtu.be/N0jD7RKIzVU)
+   - Georgia 6476 (https://omscs.gatech.edu/cs-6476-computer-vision-course-videos)
+   - Brown 1430(https://browncsci1430.github.io/webpage/index.html), python
 
 
 
