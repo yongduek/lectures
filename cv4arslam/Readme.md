@@ -98,7 +98,8 @@
 ## Planar Marker AR
 - based on OpenCV `findChessboardMarker` or similar.
 - Project based on ORBSlam 2/3
-
+- see the python program in `ar_with_calib/`. 
+  - With OpenGL 1.x and the calibration result, a graphic view is generated.
 ## Long Video Sequence 3D Reconstruction
 - Motion & 3D map/environment
 - Project based on ORBSlam 2/3 or slambook2
@@ -110,7 +111,15 @@
 5. 3D reconstruction of an office, building or the whole school
 6. Self-designed.
 
+## Deep Learning for SFM
 
+1. SuperGlue Image Matching: https://huggingface.co/spaces/Pinwheel/SuperGlue-Image-Matching 
+2. Self-calibrating neural radiance fields, ICCV 2021, https://github.com/POSTECH-CVLab/SCNeRF 
+3. Bundle-Adjusting Nerual Radiance Fields: https://github.com/chenhsuanlin/bundle-adjusting-NeRF ICCV2021, https://chenhsuanlin.bitbucket.io/bundle-adjusting-NeRF/  
+4. DeepSFM: Structure from Motion via deep bundle adjustment ECCV2020 https://arxiv.org/abs/1912.09697 
+5. DiffPoseNet: Direct Differentiable Camera Pose Estimation, CVPR 2022
+6. DISN: Deep Implicit Surface Network for High-quality Single-view 3D reconstruction, NIPS 2019
+7. Deep two-view SFM revisited, CVPR 2021
 
 ## Reference Sites
 1. ETH Zurich, Vision algorithms for Mobile Robotics by David Scaramuzza.
@@ -142,3 +151,13 @@
 
 ### Linear Algebra
 1. Immersive Linear Algebra (http://immersivemath.com/ila/index.html)
+
+
+## Packages
+1. COLMAP, https://colmap.github.io/ 
+   - COLMAP is a general-purpose Structure-from-Motion (SfM) and Multi-View Stereo (MVS) pipeline with a graphical and command-line interface. It offers a wide range of features for reconstruction of ordered and unordered image collections. The software is licensed under the new BSD license.
+1. OpenMVG http://openmvg.readthedocs.io/en/latest/#
+1. libMV https://developer.blender.org/tag/libmv/
+1. VisualSFM http://ccwu.me/vsfm/
+1. Bundler http://www.cs.cornell.edu/~snavely/bundler/
+1. https://docs.opencv.org/4.x/de/d7c/tutorial_table_of_content_sfm.html 
