@@ -1,18 +1,20 @@
+# -*- coding: utf-8 -*- 
+
 import pygame
 import os
 
 # 게임 윈도우 크기
-WINDOW_WIDTH = 800
-WINDOW_HEIGHT = 600
+WINDOW_WIDTH = 640
+WINDOW_HEIGHT = 320
 
 # 색 정의
-GREEN = (100, 200, 100)
+LAND = (160, 120, 40)
 
 # Pygame 초기화
 pygame.init()
 
 # 윈도우 제목
-pygame.display.set_caption("Mouse")
+pygame.display.set_caption("Image")
 
 # 윈도우 생성
 screen = pygame.display.set_mode((WINDOW_WIDTH, WINDOW_HEIGHT))
@@ -24,13 +26,13 @@ clock = pygame.time.Clock()
 current_path = os.path.dirname(__file__)
 assets_path = os.path.join(current_path, 'assets')
 
-# 마우스 이미지 초기 설정
-mouse_image = pygame.image.load(os.path.join(assets_path, 'mouse.png'))
-mouse_x = int(WINDOW_WIDTH / 2)
-mouse_y = int(WINDOW_HEIGHT / 2)
+# 배경 이미지 로드
+background_image = pygame.image.load(os.path.join(assets_path, 'terrain.png'))
 
-# 마우스 커서 숨기기
-pygame.mouse.set_visible(False)
+# 이미지 로드
+mushroom_image_1 = pygame.image.load(os.path.join(assets_path, 'mushroom1.png'))
+mushroom_image_2 = pygame.image.load(os.path.join(assets_path, 'mushroom2.png'))
+mushroom_image_3 = pygame.image.load(os.path.join(assets_path, 'mushroom3.png'))
 
 # 게임 종료 전까지 반복
 done = False
@@ -43,18 +45,20 @@ while not done:
             done = True
 
     # 게임 로직 구간
-    
-    # 마우스 위치 값 가져오기
-    pos = pygame.mouse.get_pos()
-    mouse_x = pos[0]
-    mouse_y = pos[1]
+
+    # 화면 삭제 구간
 
     # 윈도우 화면 채우기
-    screen.fill(GREEN)
+    screen.fill(LAND)
 
     # 화면 그리기 구간
-    # 마우스 이미지 그리기
-    screen.blit(mouse_image, [mouse_x, mouse_y])
+    # 베경 이미지 그리기
+    screen.blit(background_image, background_image.get_rect())
+
+    # 버섯 이미지 그리기
+    screen.blit(mushroom_image_1, [100, 80])
+    screen.blit(mushroom_image_2, [300, 100])
+    screen.blit(mushroom_image_3, [450, 140])
 
     # 화면 업데이트
     pygame.display.flip()

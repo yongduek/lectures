@@ -1,18 +1,20 @@
+# -*- coding: utf-8 -*- 
+
 import pygame
+import os
 
 # 게임 윈도우 크기
 WINDOW_WIDTH = 800
 WINDOW_HEIGHT = 600
 
 # 색 정의
-WHITE = (255, 255, 255)
-BLUE = (0, 0, 255)
+GREEN = (100, 200, 100)
 
 # Pygame 초기화
 pygame.init()
 
 # 윈도우 제목
-pygame.display.set_caption("Ball")
+pygame.display.set_caption("Mouse")
 
 # 윈도우 생성
 screen = pygame.display.set_mode((WINDOW_WIDTH, WINDOW_HEIGHT))
@@ -20,12 +22,17 @@ screen = pygame.display.set_mode((WINDOW_WIDTH, WINDOW_HEIGHT))
 # 게임 화면 업데이트 속도
 clock = pygame.time.Clock()
 
-# 공 초기 위치, 크기, 속도
-ball_x = int(WINDOW_WIDTH / 2)
-ball_y = int(WINDOW_HEIGHT / 2)
-ball_dx = 4
-ball_dy = 4
-ball_size = 40
+# assets 경로 설정
+current_path = os.path.dirname(__file__)
+assets_path = os.path.join(current_path, 'assets')
+
+# 마우스 이미지 초기 설정
+mouse_image = pygame.image.load(os.path.join(assets_path, 'mouse.png'))
+mouse_x = int(WINDOW_WIDTH / 2)
+mouse_y = int(WINDOW_HEIGHT / 2)
+
+# 마우스 커서 숨기기
+pygame.mouse.set_visible(False)
 
 # 게임 종료 전까지 반복
 done = False
@@ -38,22 +45,18 @@ while not done:
             done = True
 
     # 게임 로직 구간
-    # 속도에 따라 원형 위치 변경
-    ball_x += ball_dx
-    ball_y += ball_dy
-
-    # 공이 윈도우를 벗어날 경우
-    if (ball_x + ball_size) > WINDOW_WIDTH or (ball_x - ball_size) < 0:
-        ball_dx = ball_dx * -1
-    if (ball_y + ball_size) > WINDOW_HEIGHT or (ball_y - ball_size) < 0:
-        ball_dy = ball_dy * -1
+    
+    # 마우스 위치 값 가져오기
+    pos = pygame.mouse.get_pos()
+    mouse_x = pos[0]
+    mouse_y = pos[1]
 
     # 윈도우 화면 채우기
-    screen.fill(WHITE)
+    screen.fill(GREEN)
 
     # 화면 그리기 구간
-    # 공 그리기
-    pygame.draw.circle(screen, BLUE, [ball_x, ball_y], ball_size, 0)
+    # 마우스 이미지 그리기
+    screen.blit(mouse_image, [mouse_x, mouse_y])
 
     # 화면 업데이트
     pygame.display.flip()

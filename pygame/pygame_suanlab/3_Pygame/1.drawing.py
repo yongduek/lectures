@@ -1,3 +1,5 @@
+# -*- coding: utf-8 -*- 
+
 import pygame
 
 # 게임 윈도우 크기
