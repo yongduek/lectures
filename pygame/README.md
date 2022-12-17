@@ -12,7 +12,12 @@
 5. 파이썬으로 만드는 나만의 게임: http://suanlab.com/book/ 
     - Source is available: Good enough if you understand python programs. The book is in Korean.
 
-## Game AI: Reinforcement Learning
+## Game AI: 
+### AI with PacMan
+1. Berkeley CS188: https://inst.eecs.berkeley.edu/~cs188/fa22/
+- Good examples to learn the first steps to AI
+
+### Reinforcement Learning
 1. RL Tutorial (DQN) with `gym`: https://pytorch.org/tutorials/intermediate/reinforcement_q_learning.html
 2. RL Agent Playing A Mario (Double DQN): https://pytorch.org/tutorials/intermediate/mario_rl_tutorial.html 
 
