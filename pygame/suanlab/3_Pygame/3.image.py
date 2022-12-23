@@ -60,6 +60,9 @@ while not done:
     screen.blit(mushroom_image_2, [300, 100])
     screen.blit(mushroom_image_3, [450, 140])
 
+    rect1 = mushroom_image_1.get_rect()
+    print(rect1.x, rect1.y, rect1.width, rect1.height)
+
     # 화면 업데이트
     pygame.display.flip()
 

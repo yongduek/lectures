@@ -33,6 +33,8 @@ keyboard_y = int(WINDOW_HEIGHT / 2)
 keyboard_dx = 0
 keyboard_dy = 0
 
+print(keyboard_image.get_width(), keyboard_image.get_height())
+
 # 게임 종료 전까지 반복
 done = False
 

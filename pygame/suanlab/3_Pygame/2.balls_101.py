@@ -34,8 +34,8 @@ class Ball:
         self.x = np.random.randint(low=100, high=200)
         self.y = np.random.randint(low=100, high=200)
         self.radius = np.random.randint(low=1, high=30)
-        self.dx = np.random.randint(-19, 20)
-        self.dy = np.random.randint(-20, 21)
+        self.dx = np.random.randint(-9, 10)
+        self.dy = np.random.randint(-10, 11)
         self.color = (np.random.randint(low=0, high=256), 
                         np.random.randint(low=0, high=256),
                         np.random.randint(low=0, high=256))
@@ -44,13 +44,13 @@ class Ball:
         self.period = np.random.uniform(1000, 6000)
 
     def update(self,):
-
-        current_time = pygame.time.get_ticks()
-        if current_time - self.time > self.period: # milisecond
-            self.dx = np.random.randint(-19, 20)
-            self.dy = np.random.randint(-20, 21)
-            self.time = current_time
-            pass
+        if 0:
+            current_time = pygame.time.get_ticks()
+            if current_time - self.time > self.period: # milisecond
+                self.dx = np.random.randint(-19, 20)
+                self.dy = np.random.randint(-20, 21)
+                self.time = current_time
+                pass
 
         self.x += self.dx 
         self.y += self.dy 
@@ -77,7 +77,7 @@ done = False
 ball = Ball()
 print(ball)
 listOfBalls = []
-for i in range(101):
+for i in range(20):
     ball = Ball()
     listOfBalls.append(ball)
 
