@@ -73,9 +73,9 @@ class Shoot:
         self.dir = dir # direction
         self.dirvec = np.array([np.cos(np.deg2rad(self.dir)), np.sin(np.deg2rad(self.dir))]) 
         self.vel = self.dirvec * vel
-        self.acc = np.array([0, 0.03]) # accelaration
+        self.acc = np.array([0, 600]) # accelaration
         # --- for drawing ---
-        self.radius = 7
+        self.radius = 3
         self.tick = pygame.time.get_ticks()
         self.color = (100, 20, 80)
         self.flag = False
@@ -87,14 +87,22 @@ class Shoot:
     def update(self):
         if self.flag:
             dt = 1 # ( pygame.time.get_ticks() - self.tick ) / 1000  # can be realistic by using pygame.time.get_ticks()
-            dt = ( pygame.time.get_ticks() - self.tick ) / 1000 
+            current_tick = pygame.time.get_ticks()
+            dt = ( current_tick - self.tick ) / 1000 
+            self.tick = current_tick
+            
             self.pos = self.pos + self.vel * dt + 0.5 * self.acc * dt * dt 
             self.vel = self.vel + self.acc * dt 
-            print(self.pos[1])            
+            # print(self.pos, self.vel, dt)
+                        
+            if self.pos[1] > WINDOW_HEIGHT + 100:
+                self.flag = False  # stop simulation
+                
     def draw(self, screen):
         if self.flag:
             pygame.draw.circle(screen, color=self.color, center=self.pos, radius=self.radius)
 #
+shooting_velocity = 1000
 shoot = Shoot()
 # --------------------------------------------------------------------
 # 게임 윈도우 크기
@@ -149,14 +157,15 @@ while not done:
         deg += 2
         if deg > 0: deg = 0 
     if keystate[pygame.K_SPACE]:
-        shoot = Shoot(pos=[center[0,0], center[1,0]], vel=105, dir=deg)
-        shoot.fire()
+        if shoot.flag == False:
+            shoot = Shoot(pos=[center[0,0], center[1,0]], vel=shooting_velocity, dir=deg)
+            shoot.fire()
     
     # update states
     shoot.update()
     #
     
-    screen.fill(WHITE)
+    # screen.fill(WHITE)
 
     # initial location of the cannon object
     poly.draw(screen, color=(20, 0, 200))
