@@ -12,6 +12,12 @@ def Rmat(deg):
     m[0,1] = -s 
     return m 
 
+def Tmat(tx, ty):
+    m = np.eye(3)
+    m[0,2] = tx 
+    m[1,2] = ty
+    return m 
+
 def getHomogeneous(p_aff):
     """ p_aff: N x 2 affine coordinates, each row being a 2D coordinate vector """
     ones = np.ones( (p_aff.shape[0], 1) )
@@ -41,16 +47,20 @@ class Polygon:
         
     def draw(self, screen):
         pygame.draw.polygon(screen, self.color, self.va, 4)
-        
+
+    def print(self,):
+        print(self.va)        
 #
 
 
 
 p = np.array([ [2, 2], [5, 2], [5, 5], [3, 5], [2, 3]]) * 200
-poly = Polygon(p + np.array([100, -150]))
+poly = Polygon(p + np.array([100, -150]), color=(0,255, 255))
+poly.print()
+
 poly2 = Polygon(p + np.array([-100, -150]), color=(255, 0, 0))
 
-H = np.eye(3)
+HTx = np.eye(3)
 deg = 0 
 
 
@@ -83,32 +93,49 @@ done = False
 
 # 게임 반복 구간
 while not done:
-    # 이벤트 반복 구간
+    # Event handling
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             done = True
-
-    # 게임 로직 구간
-
-    # 화면 삭제 구간
-
-    # 윈도우 화면 채우기
+        if event.type == pygame.KEYDOWN:
+            if event.key == pygame.K_ESCAPE:
+                done = True 
+    #
+    
     screen.fill(WHITE)
 
-    # 다각형 그리기
+    # A triangle
     pygame.draw.polygon(screen, GREEN, [[350, 200], [250, 350], [450, 350]], 4)
 
+    # A polygon
     pygame.draw.polygon(screen, BLUE, p, 5)
     
-    # translation
-    H[0,2] += 1  
-    poly.transform_ip(H)
-    poly.draw(screen)
     
-    # rotation
+    # translational motion
+    HTx[0,2] += 1
+    if HTx[0,2] > WINDOW_WIDTH: HTx[0,2] = 0
+    
+    poly_tx = poly.transform(HTx)
+    poly_tx.draw(screen)
+    
+    # rotation w.r.t (0,0)
     deg += 1
     poly2.transform_ip(Rmat(deg))
     poly2.draw(screen)
+    
+    # rotation w.r.t to (x0, y0)
+    if 1:
+        # 1. let's choose any rotation center
+        x0, y0 = WINDOW_WIDTH/2, WINDOW_HEIGHT/2
+        x0, y0 = 1100, 850 # one of the vertices of poly
+        # 2. compute transformation matrix
+        H = Tmat(x0, y0) @ Rmat(deg) @ Tmat(-x0, -y0)
+        # 3. apply transformation
+        poly_rot = poly.transform(H)
+        # 4. draw
+        poly_rot.draw(screen)
+        #
+        pygame.draw.circle(screen, RED, (x0, y0), 5) # center of rotation
     
     # 폰트 선택(폰트, 크기, 두껍게, 이탤릭)
     font = pygame.font.SysFont('FixedSys', 40, True, False)
