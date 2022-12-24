@@ -65,21 +65,42 @@ while running:
                 running = False
 
     m_r.center = (pg.mouse.get_pos())
-    in_x = m_r.left < p.right and m_r.right > p.left
-    in_y = m_r.top < p.bottom and m_r.bottom > p.top
-    if in_x and in_y:
-        # col = RED
-        m.fill(RED)
-        msg = "Colliding!"
-    elif in_x or in_y:
-        # col = CYAN
-        m.fill(CYAN)
-        msg = "Not colliding"
-    else:
-        # col = GREEN
-        m.fill(GREEN)
-        msg = "Not colliding"
 
+    if 1:
+        in_x = m_r.left < p.right and m_r.right > p.left
+        in_y = m_r.top < p.bottom and m_r.bottom > p.top
+        if in_x and in_y:
+            # col = RED
+            m.fill(RED)
+            msg = "Colliding!"
+        elif in_x or in_y:
+            # col = CYAN
+            m.fill(CYAN)
+            msg = "Not colliding"
+        else:
+            # col = GREEN
+            m.fill(GREEN)
+            msg = "Not colliding"
+    else:
+        if m_r.right < p.left or p.right < m_r.left or m_r.top < p.bottom or p.top < m_r.bottom:
+            m.fill(CYAN)
+            msg = "Not colliding"
+        else:
+            m.fill(RED)
+            msg = "Colliding"
+        
+        if m_r.right < p.left:
+            msg += " (1) m_r.right < p.left "
+        if p.right < m_r.left:
+            msg += " (2) p.right < m_r.left "
+        if m_r.top < p.bottom:
+            msg += " (3) m_r.top < p.bottom"
+            msg += f"({m_r.top} < {p.bottom})"
+        if p.top < m_r.bottom:
+            msg += " (4) p.top < m_r.bottom"
+            msg += f"({p.top} < {m_r.bottom})"
+        
+            
     screen.fill(DARKGRAY)
     pg.draw.line(screen, LIGHTGRAY, (p.left, p.bottom + 5), (p.left, HEIGHT), 2)
     pg.draw.line(screen, LIGHTGRAY, (p.right, p.bottom + 5), (p.right, HEIGHT), 2)
@@ -93,5 +114,7 @@ while running:
     draw_text("right", 18, WHITE, p.right + 5, HEIGHT - 5, align="sw")
     draw_text("top", 18, WHITE, WIDTH - 5, p.top - 5, align="se")
     draw_text("bottom", 18, WHITE, WIDTH - 5, p.bottom + 5, align="ne")
-    draw_text(str(m_r), 20, col, WIDTH / 2, 15, align="nw")
+    draw_text("m_r:" + str(m_r), 20, col, WIDTH / 2, 55, align="nw")
+    draw_text("  p:" + str(p), 20, col, WIDTH / 2 , 85, align="nw")
+    
     pg.display.flip()
