@@ -38,3 +38,9 @@
 1. https://kadable.itch.io/project-trunk 
     - download, play and appreciate those images of pygame sprites.
 
+## SFML
+1. https://www.sfml-dev.org/ 
+1. https://youtu.be/XxBZw2FEdK0 
+   1. https://github.com/xSnapi?tab=repositories
+1. http://www.cs.mun.ca/~dchurchill/ 
+2. 
