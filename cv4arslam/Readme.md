@@ -120,7 +120,7 @@
 5. DiffPoseNet: Direct Differentiable Camera Pose Estimation, CVPR 2022
 6. DISN: Deep Implicit Surface Network for High-quality Single-view 3D reconstruction, NIPS 2019
 7. Deep two-view SFM revisited, CVPR 2021
-
+8. Ian Reid, Visual SLAM in the era of deep learning, https://youtu.be/_UMNcNnyLiY 
 ## Reference Sites
 1. ETH Zurich, Vision algorithms for Mobile Robotics by David Scaramuzza.
   - https://rpg.ifi.uzh.ch/teaching.html
