@@ -45,12 +45,10 @@ class SearchProblem:
         """
           state: Search state
 
-        For a given state, this should return a list of triples, 
-        (successor, action, stepCost), 
-        where 
-        'successor' is a successor to the current state, 
-        'action' is the action required to get there, and 
-        'stepCost' is the incremental cost of expanding to that successor.
+        For a given state, this should return a list of triples, (successor,
+        action, stepCost), where 'successor' is a successor to the current
+        state, 'action' is the action required to get there, and 'stepCost' is
+        the incremental cost of expanding to that successor.
         """
         util.raiseNotDefined()
 
@@ -83,43 +81,12 @@ def depthFirstSearch(problem: SearchProblem):
 
     To get started, you might want to try some of these simple commands to
     understand the search problem that is being passed in:
+
+    print("Start:", problem.getStartState())
+    print("Is the start a goal?", problem.isGoalState(problem.getStartState()))
+    print("Start's successors:", problem.getSuccessors(problem.getStartState()))
     """
-    
-    # print("Start:", problem.getStartState())
-    # print("Is the start a goal?", problem.isGoalState(problem.getStartState()))
-    # print("Start's successors:", problem.getSuccessors(problem.getStartState()))
-    
     "*** YOUR CODE HERE ***"
-    visited = []
-    stack = util.Stack()
-    node = problem.getStartState() # start node, also the current node
-    stack.push(node)
-    visited.append(node)
-    while not stack.isEmpty():
-        if problem.isGoalState(node):
-            # reached at the Goal
-            # stack contains the path, reverse direction
-            break
-        noChildFlag = True
-        for child, dir, cost in problem.getSuccessors(node):
-            if child not in visited:
-                stack.push(child)
-                visited.append(child)
-                node = child # set current node
-                noChildFlag = False
-                break
-        if noChildFlag: # this node is a leaf node, not the goal
-            stack.pop() # remove the node
-            node = stack.list[-1]
-    #  
-    if stack.isEmpty():
-        # no goal found
-        pass 
-    else: 
-        # reverse the stack, return the list of actions
-        pass
-    
-    return listOfActions
     util.raiseNotDefined()
 
 def breadthFirstSearch(problem: SearchProblem):

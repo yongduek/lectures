@@ -76,3 +76,4 @@ cv4arslam/left/calibresult_remap_12.png
 cv4arslam/ar_with_calib/output/*
 cv4arslam/ar_with_calib/__pycache__/common.cpython-38.pyc
 pygame/kidscancode_pygame_tutorials/platform/working/__pycache__/*
+CS188/project1_search/__pycache__/*
