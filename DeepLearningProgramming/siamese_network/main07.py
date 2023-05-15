@@ -78,6 +78,9 @@ class SiameseNetwork(nn.Module):
         return output
 
 class APP_MATCHER(Dataset):
+    # to define Dataset for 0-7 only.
+    # the image for 8, 9 will be used for testing untrained pairs
+    
     def __init__(self, root, train, download=False):
         super(APP_MATCHER, self).__init__()
 
@@ -92,6 +95,10 @@ class APP_MATCHER(Dataset):
         # we add an additional dimension to corresponds to the number of channels.
         self.data = self.dataset.data.unsqueeze(1).clone()
 
+        self.label_limit = 9 # for testing
+        if train == True:
+            self.label_limit = 7
+    
         self.group_examples()
 
     def group_examples(self):
@@ -109,7 +116,7 @@ class APP_MATCHER(Dataset):
         
         # group examples based on class
         self.grouped_examples = {}
-        for i in range(0,10):
+        for i in range(0, self.label_limit + 1):
             self.grouped_examples[i] = np.where((np_arr==i))[0]
     
     def __len__(self):
@@ -131,8 +138,12 @@ class APP_MATCHER(Dataset):
         """
 
         # pick some random class for the first image
-        selected_class = random.randint(0, 9)
+        selected_class = random.randint(0, self.label_limit)  # self.label_limit is inclusive!
+        
+        self.selected_class = selected_class
 
+        selected_class_labels = [selected_class, selected_class]
+        
         # pick a random index for the first image in the grouped indices based of the label
         # of the class
         random_index_1 = random.randint(0, self.grouped_examples[selected_class].shape[0]-1)
@@ -164,11 +175,13 @@ class APP_MATCHER(Dataset):
         # different class
         else:
             # pick a random class
-            other_selected_class = random.randint(0, 9)
+            other_selected_class = random.randint(0, self.label_limit)
+
+            selected_class_labels[1] = other_selected_class
 
             # ensure that the class of the second image isn't the same as the first image
             while other_selected_class == selected_class:
-                other_selected_class = random.randint(0, 9)
+                other_selected_class = random.randint(0, self.label_limit)
 
             
             # pick a random index for the second image in the grouped indices based of the label
@@ -184,7 +197,8 @@ class APP_MATCHER(Dataset):
             # set the label for this example to be negative (0)
             target = torch.tensor(0, dtype=torch.float)
 
-        return image_1, image_2, target
+
+        return image_1, image_2, target, selected_class_labels
 
 
 def train(args, model, device, train_loader, optimizer, epoch):
@@ -193,7 +207,7 @@ def train(args, model, device, train_loader, optimizer, epoch):
     # we aren't using `TripletLoss` as the MNIST dataset is simple, so `BCELoss` can do the trick.
     criterion = nn.BCELoss() # model should return sigmoid, not logit
 
-    for batch_idx, (images_1, images_2, targets) in enumerate(train_loader):
+    for batch_idx, (images_1, images_2, targets, scl) in enumerate(train_loader):
         images_1, images_2, targets = images_1.to(device), images_2.to(device), targets.to(device)
         if batch_idx == 0:
             print(images_1.shape, images_1.max(), images_1.min(), type(images_1))
@@ -219,7 +233,7 @@ def test(model, device, test_loader):
     criterion = nn.BCELoss()
 
     with torch.no_grad():
-        for (images_1, images_2, targets) in test_loader:
+        for (images_1, images_2, targets, scl) in test_loader:
             images_1, images_2, targets = images_1.to(device), images_2.to(device), targets.to(device)
             outputs = model(images_1, images_2).squeeze()
             test_loss += criterion(outputs, targets).sum().item()  # sum up batch loss
@@ -288,6 +302,8 @@ def main():
 
     train_dataset = APP_MATCHER('../data', train=True, download=True)
     test_dataset = APP_MATCHER('../data', train=False)
+    print(f'label_limit: train {train_dataset.label_limit}  test {test_dataset.label_limit}')
+    
     train_loader = torch.utils.data.DataLoader(train_dataset,**train_kwargs)
     test_loader = torch.utils.data.DataLoader(test_dataset, **test_kwargs)
 
@@ -308,7 +324,7 @@ def main():
         scheduler.step()
 
     if args.save_model:
-        filename = "siamese_network.pt"
+        filename = "siamese_network_07.pt"
         torch.save(model.state_dict(), filename)
         print(f'best model saved: ', filename)
 
