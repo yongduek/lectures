@@ -16,7 +16,9 @@
 6. DIY Examples from Kaggle.com
 7. Siamease Network (pytorch/examples)
     1. pytorch/examples: https://github.com/pytorch/examples/tree/main/siamese_network
-    2. Similarity Learning Tutorial by Prof. Laura Leal-Taixe: https://youtu.be/6e65XfwmIWE
+    2. Similarity Learning Tutorial by Prof. Laura Leal-Taixe or Matthias Niessner
+        - https://youtu.be/6e65XfwmIWE from ADL4CV lectures (https://youtube.com/playlist?list=PLog3nOPCjKBl8s3Ia4ZtmOEniuYM3pVGQ)
+        - https://niessner.github.io/ADL4CV
 10. Reinforcement Learning for a Game Agent (kaggle.com)
     - Intro to Game AI and Reinforcement Learning (https://www.kaggle.com/learn/intro-to-game-ai-and-reinforcement-learning)
     - Connect-4 by N-step ahead (game tree) and by PPO (DNN)
