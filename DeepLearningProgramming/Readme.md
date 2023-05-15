@@ -19,9 +19,9 @@
     2. Similarity Learning Tutorial by Prof. Laura Leal-Taixe: https://youtu.be/6e65XfwmIWE
 10. Reinforcement Learning for a Game Agent (kaggle.com)
     - Intro to Game AI and Reinforcement Learning (https://www.kaggle.com/learn/intro-to-game-ai-and-reinforcement-learning)
-    - Connect 4 by N-step ahead (game tree) and by PPO (DNN)
+    - Connect-4 by N-step ahead (game tree) and by PPO (DNN)
 12. DNN Models for Sequence data
     1. Attention & Transformer model: nanoGPT by Kaparthy
         - https://github.com/karpathy/nanoGPT
         - Let's build GPT: from scratch, in code, spelled out. (https://www.youtube.com/watch?v=kCc8FmEb1nY)
-    2. Bert model
+    2. BERT model
